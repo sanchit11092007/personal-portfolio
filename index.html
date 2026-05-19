@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#05070d" />
+    <meta name="color-scheme" content="dark" />
+
+    <title>Sanchit Goyal | AI, Data Science & Software Engineering Portfolio</title>
+    <meta
+      name="description"
+      content="Sanchit Goyal is an aspiring AI Engineer and Data Science enthusiast focused on machine learning, analytics, first-principles problem-solving, and scalable intelligent systems."
+    />
+    <meta
+      name="keywords"
+      content="Sanchit Goyal, AI Engineer, Data Scientist, Machine Learning, Data Science, Software Engineering, Python, Pandas, Power BI, LPU, Internship Portfolio"
+    />
+    <meta name="author" content="Sanchit Goyal" />
+    <meta name="robots" content="index, follow" />
+
+    <meta property="og:title" content="Sanchit Goyal | AI & Data Science Portfolio" />
+    <meta
+      property="og:description"
+      content="A premium portfolio for AI, ML, Data Science, and Software Engineering internship opportunities."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sanchitgoyal.github.io/portfolio/" />
+    <meta property="og:image" content="https://sanchitgoyal.github.io/portfolio/assets/images/profile-placeholder.jpg" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Sanchit Goyal | AI & Data Science Portfolio" />
+    <meta
+      name="twitter:description"
+      content="Aspiring AI Engineer and Data Science Enthusiast building toward intelligent, data-driven products."
+    />
+    <meta name="twitter:image" content="https://sanchitgoyal.github.io/portfolio/assets/images/profile-placeholder.jpg" />
+
+    <link rel="canonical" href="https://sanchitgoyal.github.io/portfolio/" />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon/favicon.svg" />
+    <link rel="preload" href="css/style.css" as="style" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Sanchit Goyal",
+        "jobTitle": "Aspiring AI Engineer and Data Science Enthusiast",
+        "address": {
+          "@type": "PostalAddress",
+          "addressRegion": "Punjab",
+          "addressCountry": "India"
+        },
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "Lovely Professional University"
+        },
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "Machine Learning",
+          "Data Science",
+          "Exploratory Data Analysis",
+          "Python",
+          "Power BI",
+          "Recommendation Systems",
+          "NLP",
+          "Computer Vision"
+        ],
+        "url": "https://sanchitgoyal.github.io/portfolio/"
+      }
+    </script>
+  </head>
+
+  <body>
+    <div class="preloader" id="preloader" aria-hidden="true">
+      <div class="loader-core">
+        <div class="loader-orbit"></div>
+        <div class="loader-mark">SG</div>
+      </div>
+      <p>Initializing intelligent workspace</p>
+    </div>
+
+    <a class="skip-link" href="#main">Skip to content</a>
+    <canvas class="particle-canvas" id="particleCanvas" aria-hidden="true"></canvas>
+    <div class="page-noise" aria-hidden="true"></div>
+
+    <header class="site-header" id="siteHeader">
+      <nav class="navbar" aria-label="Primary navigation">
+        <a class="brand" href="#home" aria-label="Sanchit Goyal home">
+          <span class="brand-mark">SG</span>
+          <span class="brand-text">Sanchit Goyal</span>
+        </a>
+
+        <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-label="Open navigation menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <div class="nav-panel" id="navPanel">
+          <ul class="nav-links">
+            <li><a href="#home" class="nav-link active">Home</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#journey" class="nav-link">Journey</a></li>
+            <li><a href="#skills" class="nav-link">Skills</a></li>
+            <li><a href="#projects" class="nav-link">Projects</a></li>
+            <li><a href="#certifications" class="nav-link">Certifications</a></li>
+            <li><a href="#resume" class="nav-link">Resume</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+          </ul>
+          <span class="nav-indicator" id="navIndicator" aria-hidden="true"></span>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero section" id="home" data-section>
+        <div class="hero-backdrop" aria-hidden="true">
+          <div class="grid-plane"></div>
+          <div class="gradient-field"></div>
+        </div>
+
+        <div class="container hero-layout">
+          <div class="hero-copy">
+            <p class="eyebrow reveal" data-reveal>AI / ML / Data Science Portfolio</p>
+            <h1 class="hero-title reveal" data-reveal>
+              <span>Sanchit</span>
+              <span>Goyal</span>
+            </h1>
+            <p class="hero-subtitle reveal" data-reveal>
+              Aspiring AI Engineer and Data Science Enthusiast focused on building intelligent systems,
+              solving real-world problems, and understanding technology from first principles.
+            </p>
+
+            <div class="role-line reveal" data-reveal>
+              <span>Currently shaping into</span>
+              <strong id="roleSwitcher" aria-live="polite">AI Engineer</strong>
+            </div>
+
+            <p class="hero-summary reveal" data-reveal>
+              I bring structured problem-solving, analytical thinking, and a first-principles learning
+              mindset to data. My focus is simple: understand data deeply before modeling, then build
+              scalable AI products that can survive the real world.
+            </p>
+
+            <div class="hero-actions reveal" data-reveal>
+              <a class="button button-primary" href="assets/resume/Sanchit_Goyal_Resume.pdf" download>
+                <span>Download Resume</span>
+              </a>
+              <a class="button button-secondary" href="#projects">
+                <span>View Projects</span>
+              </a>
+              <a class="button button-ghost" href="#contact">
+                <span>Contact Me</span>
+              </a>
+            </div>
+
+            <ul class="social-links reveal" data-reveal aria-label="Social links">
+              <li><a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a></li>
+              <li><a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a></li>
+              <li><a href="mailto:sanchit.goyal@example.com">Email</a></li>
+              <li><a href="#home">Portfolio</a></li>
+            </ul>
+          </div>
+
+          <div class="hero-visual reveal" data-reveal>
+            <div class="profile-shell" data-tilt>
+              <div class="profile-rings" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <div class="profile-card">
+                <div class="profile-image" role="img" aria-label="Profile image placeholder for Sanchit Goyal">
+                  <span>SG</span>
+                </div>
+                <div class="profile-signal">
+                  <span></span>
+                  Available for internships
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section about-section" id="about" data-section>
+        <div class="container">
+          <div class="section-heading reveal" data-reveal>
+            <p class="eyebrow">About</p>
+            <h2>First-principles learner building toward intelligent systems.</h2>
+            <p>
+              I am pursuing B.Tech in Computer Science Engineering at Lovely Professional University,
+              specializing in Data Science, Artificial Intelligence, and Machine Learning.
+            </p>
+          </div>
+
+          <div class="about-grid">
+            <article class="glass-panel about-story reveal" data-reveal>
+              <h3>Professional Snapshot</h3>
+              <p>
+                I am an aspiring Data Scientist and ML Engineer with a strong interest in Exploratory
+                Data Analysis, Statistics, Machine Learning, Recommendation Systems, NLP, and Computer
+                Vision. I care about understanding systems from the inside out, then turning that
+                understanding into practical technology.
+              </p>
+              <p>
+                My core belief is that meaningful AI starts before the model. EDA, statistical thinking,
+                careful feature work, and clear problem framing matter as much as algorithms.
+              </p>
+              <blockquote>Understanding data deeply before modeling.</blockquote>
+            </article>
+
+            <div class="mindset-grid">
+              <article class="mindset-card reveal" data-reveal>
+                <span>01</span>
+                <h3>EDA Before ML</h3>
+                <p>Explore distributions, missingness, bias, and signal before choosing any model.</p>
+              </article>
+              <article class="mindset-card reveal" data-reveal>
+                <span>02</span>
+                <h3>Statistical Thinking</h3>
+                <p>Use evidence, assumptions, and uncertainty to guide technical decisions.</p>
+              </article>
+              <article class="mindset-card reveal" data-reveal>
+                <span>03</span>
+                <h3>Understanding Over Memorization</h3>
+                <p>Learn fundamentals deeply enough to rebuild concepts instead of merely recalling them.</p>
+              </article>
+              <article class="mindset-card reveal" data-reveal>
+                <span>04</span>
+                <h3>Engineering Mindset</h3>
+                <p>Build for clarity, iteration, maintainability, and long-term technical growth.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section journey-section" id="journey" data-section>
+        <div class="container">
+          <div class="section-heading reveal" data-reveal>
+            <p class="eyebrow">JOURNEY</p>
+            <h2>My growth in AI, data science, and development.</h2>
+          </div>
+
+          <div class="journey-timeline">
+            <!-- Point 1 -->
+            <div class="journey-card-wrapper reveal" data-reveal>
+              <div class="journey-dot" aria-hidden="true"></div>
+              <article class="cert-card glass-panel" data-tilt style="min-height: auto;">
+                <span class="cert-year">August 2025</span>
+                <h3>Started the Journey</h3>
+                <p>
+                  Began B.Tech in Computer Science Engineering at Lovely Professional University with a specialization in Data Science, Machine Learning, and Artificial Intelligence. Started exploring technology beyond academics with a strong focus on building real technical skills.
+                </p>
+              </article>
+            </div>
+
+            <!-- Point 2 -->
+            <div class="journey-card-wrapper reveal" data-reveal>
+              <div class="journey-dot" aria-hidden="true"></div>
+              <article class="cert-card glass-panel" data-tilt style="min-height: auto;">
+                <span class="cert-year">Late 2025</span>
+                <h3>Entered the World of Development</h3>
+                <p>
+                  Started learning programming, web development, and problem-solving. Built initial projects, explored frontend technologies, and developed interest in creating modern digital products and interactive user experiences.
+                </p>
+              </article>
+            </div>
+
+            <!-- Point 3 -->
+            <div class="journey-card-wrapper reveal" data-reveal>
+              <div class="journey-dot" aria-hidden="true"></div>
+              <article class="cert-card glass-panel" data-tilt style="min-height: auto;">
+                <span class="cert-year">Early 2026</span>
+                <h3>Focus Shift Towards AI & Data Science</h3>
+                <p>
+                  Focused deeply on Python, Data Science, Machine Learning, SQL, and AI fundamentals through self-learning, certifications, and practical implementation. Started understanding how intelligent systems are designed and deployed.
+                </p>
+              </article>
+            </div>
+
+            <!-- Point 4 -->
+            <div class="journey-card-wrapper reveal" data-reveal>
+              <div class="journey-dot" aria-hidden="true"></div>
+              <article class="cert-card glass-panel" data-tilt style="min-height: auto;">
+                <span class="cert-year">2026</span>
+                <h3>Building Projects & Personal Brand</h3>
+                <p>
+                  Worked on portfolio projects, AI-integrated applications, automation-based systems, and modern responsive websites. Began creating a strong online technical presence through GitHub, LinkedIn, certifications, and project showcases.
+                </p>
+              </article>
+            </div>
+
+            <!-- Point 5 -->
+            <div class="journey-card-wrapper reveal" data-reveal>
+              <div class="journey-dot" aria-hidden="true"></div>
+              <article class="cert-card glass-panel" data-tilt style="min-height: auto;">
+                <span class="cert-year">Present</span>
+                <h3>Continuous Learning & Growth</h3>
+                <p>
+                  Currently focused on strengthening expertise in Artificial Intelligence, Data Science, Machine Learning, and modern software development while building projects that reflect creativity, technical depth, and real-world problem solving.
+                </p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section skills-section" id="skills" data-section>
+        <div class="container">
+          <div class="section-heading reveal" data-reveal>
+            <p class="eyebrow">Skills</p>
+            <h2>A practical toolkit for data, models, analytics, and product thinking.</h2>
+            <p>Built around fundamentals, project work, and a bias toward clear reasoning.</p>
+          </div>
+
+          <div class="skills-grid">
+            <!-- 1. Programming -->
+            <article class="skill-group reveal" data-reveal data-tilt>
+              <div class="skill-head">
+                <span>01</span>
+                <h3>Programming</h3>
+              </div>
+              <div class="skill-progress-container">
+                <div class="skill-bar">
+                  <div class="skill-info"><span>Python</span><span>70%</span></div>
+                  <div class="progress-track"><div class="progress-fill" style="width: 70%;"></div></div>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-info"><span>SQL</span><span>50%</span></div>
+                  <div class="progress-track"><div class="progress-fill" style="width: 50%;"></div></div>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-info"><span>C & C++</span><span>50%</span></div>
+                  <div class="progress-track"><div class="progress-fill" style="width: 50%;"></div></div>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-info"><span>Java</span><span>10%</span></div>
+                  <div class="progress-track"><div class="progress-fill" style="width: 10%;"></div></div>
+                </div>
+              </div>
+            </article>
+
+            <!-- 2. Data Science & ML -->
+            <article class="skill-group reveal" data-reveal data-tilt>
+              <div class="skill-head">
+                <span>02</span>
+                <h3>Data Science & ML</h3>
+              </div>
+              <div class="skill-progress-container">
+                <div class="skill-bar">
+                  <div class="skill-info"><span>Pandas</span><span>70%</span></div>
+                  <div class="progress-track"><div class="progress-fill" style="width: 70%;"></div></div>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-info"><span>NumPy</span><span>60%</span></div>
+                  <div class="progress-track"><div class="progress-fill" style="width: 60%;"></div></div>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-info"><span>Data Cleaning</span><span>60%</span></div>
+                  <div class="progress-track"><div class="progress-fill" style="width: 60%;"></div></div>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-info"><span>EDA</span><span>10%</span></div>
+                  <div class="progress-track"><div class="progress-fill" style="width: 10%;"></div></div>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-info"><span>Regression</span><span>10%</span></div>
+                  <div class="progress-track"><div class="progress-fill" style="width: 10%;"></div></div>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-info"><span>Scikit-learn</span><span>5%</span></div>
+                  <div class="progress-track"><div class="progress-fill" style="width: 5%;"></div></div>
+                </div>
+              </div>
+            </article>
+
+            <!-- 3. Visualization & Analytics -->
+            <article class="skill-group reveal" data-reveal data-tilt>
+              <div class="skill-head">
+                <span>03</span>
+                <h3>Visualization & Analytics</h3>
+              </div>
+              <div class="skill-progress-container">
+                <div class="skill-bar">
+                  <div class="skill-info"><span>Matplotlib</span><span>50%</span></div>
+                  <div class="progress-track"><div class="progress-fill" style="width: 50%;"></div></div>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-info"><span>Seaborn</span><span>50%</span></div>
+                  <div class="progress-track"><div class="progress-fill" style="width: 50%;"></div></div>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-info"><span>Plotly</span><span>10%</span></div>
+                  <div class="progress-track"><div class="progress-fill" style="width: 10%;"></div></div>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-info"><span>Power BI</span><span>10%</span></div>
+                  <div class="progress-track"><div class="progress-fill" style="width: 10%;"></div></div>
+                </div>
+              </div>
+            </article>
+
+            <!-- 4. Tools & Platforms (Marquee) -->
+            <div class="tools-marquee-wrapper reveal" data-reveal>
+              <div class="tools-marquee">
+                <!-- Group 1 -->
+                <div class="tool-badge">Git</div><div class="tool-badge">GitHub</div><div class="tool-badge">VS Code</div>
+                <div class="tool-badge">Jupyter Notebook</div><div class="tool-badge">Google Colab</div><div class="tool-badge">Docker</div>
+                <div class="tool-badge">Linux</div><div class="tool-badge">Postman</div><div class="tool-badge">Anaconda</div>
+                <div class="tool-badge">MySQL</div><div class="tool-badge">MongoDB</div><div class="tool-badge">Firebase</div>
+                <div class="tool-badge">Netlify</div><div class="tool-badge">Vercel</div><div class="tool-badge">Canva</div>
+                <div class="tool-badge">Figma</div><div class="tool-badge">Hugging Face</div><div class="tool-badge">Kaggle</div>
+                <div class="tool-badge">Streamlit</div><div class="tool-badge">Flask</div>
+                
+                <!-- Group 2 (Duplicate for infinite scroll) -->
+                <div class="tool-badge" aria-hidden="true">Git</div><div class="tool-badge" aria-hidden="true">GitHub</div><div class="tool-badge" aria-hidden="true">VS Code</div>
+                <div class="tool-badge" aria-hidden="true">Jupyter Notebook</div><div class="tool-badge" aria-hidden="true">Google Colab</div><div class="tool-badge" aria-hidden="true">Docker</div>
+                <div class="tool-badge" aria-hidden="true">Linux</div><div class="tool-badge" aria-hidden="true">Postman</div><div class="tool-badge" aria-hidden="true">Anaconda</div>
+                <div class="tool-badge" aria-hidden="true">MySQL</div><div class="tool-badge" aria-hidden="true">MongoDB</div><div class="tool-badge" aria-hidden="true">Firebase</div>
+                <div class="tool-badge" aria-hidden="true">Netlify</div><div class="tool-badge" aria-hidden="true">Vercel</div><div class="tool-badge" aria-hidden="true">Canva</div>
+                <div class="tool-badge" aria-hidden="true">Figma</div><div class="tool-badge" aria-hidden="true">Hugging Face</div><div class="tool-badge" aria-hidden="true">Kaggle</div>
+                <div class="tool-badge" aria-hidden="true">Streamlit</div><div class="tool-badge" aria-hidden="true">Flask</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section stats-section" id="stats">
+        <div class="container stats-grid">
+          <article class="stat-card reveal" data-reveal>
+            <span class="counter" data-count="100" data-suffix="+">0</span>
+            <p>Coding Hours</p>
+          </article>
+          <article class="stat-card reveal" data-reveal>
+            <span class="counter" data-count="10">0</span>
+            <p>LeetCode Problems Solved</p>
+          </article>
+          <article class="stat-card reveal" data-reveal>
+            <span class="counter" data-count="4">0</span>
+            <p>Projects Completed</p>
+          </article>
+          <article class="stat-card reveal" data-reveal>
+            <span class="counter" data-count="9">0</span>
+            <p>CGPA Average</p>
+          </article>
+          <article class="stat-card reveal" data-reveal>
+            <span class="counter" data-count="3" data-suffix="+">0</span>
+            <p>Certifications</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section projects-section" id="projects" data-section>
+        <div class="container">
+          <div class="section-heading reveal" data-reveal>
+            <p class="eyebrow">Projects</p>
+            <h2>Project work focused on analysis, fundamentals, and business value.</h2>
+          </div>
+
+          <div class="project-grid">
+            <article class="project-card reveal" data-reveal data-tilt>
+              <div class="project-media project-media-one" aria-hidden="true">
+                <span>EDA</span>
+              </div>
+              <div class="project-content">
+                <div class="project-topline">
+                  <h3>Credit Card Transaction EDA & Customer Segmentation</h3>
+                  <span>Python</span>
+                </div>
+                <p class="project-problem">
+                  Analyzed transaction behavior to uncover spending patterns, repayment behavior, and
+                  risk-oriented customer segments.
+                </p>
+                <ul>
+                  <li>Performed end-to-end EDA on 10,000+ transaction records.</li>
+                  <li>Engineered features for high-risk customer analysis.</li>
+                  <li>Created actionable business insights from behavioral patterns.</li>
+                </ul>
+                <div class="tech-stack">
+                  <span>Python</span>
+                  <span>Pandas</span>
+                  <span>NumPy</span>
+                  <span>Matplotlib</span>
+                </div>
+                <div class="project-actions">
+                  <a href="https://github.com/" target="_blank" rel="noreferrer">View Code</a>
+                  <a href="#" aria-disabled="true" tabindex="-1">Live Demo</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card reveal" data-reveal data-tilt>
+              <div class="project-media project-media-two" aria-hidden="true">
+                <span>REC</span>
+              </div>
+              <div class="project-content">
+                <div class="project-topline">
+                  <h3>Recommendation Engine & Data Cleaning Pipeline</h3>
+                  <span>Core Python</span>
+                </div>
+                <p class="project-problem">
+                  Built a recommendation system from scratch with a modular cleaning pipeline and manual
+                  cosine similarity implementation.
+                </p>
+                <ul>
+                  <li>Used no external ML libraries for the core algorithm.</li>
+                  <li>Designed reusable cleaning steps for noisy input data.</li>
+                  <li>Focused on algorithmic fundamentals and explainability.</li>
+                </ul>
+                <div class="tech-stack">
+                  <span>Core Python</span>
+                  <span>Cosine Similarity</span>
+                  <span>Data Cleaning</span>
+                </div>
+                <div class="project-actions">
+                  <a href="https://github.com/" target="_blank" rel="noreferrer">View Code</a>
+                  <a href="#" aria-disabled="true" tabindex="-1">Live Demo</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card reveal" data-reveal data-tilt>
+              <div class="project-media project-media-three" aria-hidden="true">
+                <span>BI</span>
+              </div>
+              <div class="project-content">
+                <div class="project-topline">
+                  <h3>Power BI Analytics Dashboard</h3>
+                  <span>Analytics</span>
+                </div>
+                <p class="project-problem">
+                  Designed an interactive reporting experience for KPI monitoring, business intelligence,
+                  and decision support.
+                </p>
+                <ul>
+                  <li>Built KPI visualizations for fast executive scanning.</li>
+                  <li>Modeled multi-source business data.</li>
+                  <li>Used DAX to support analytical reporting.</li>
+                </ul>
+                <div class="tech-stack">
+                  <span>Power BI</span>
+                  <span>DAX</span>
+                  <span>Data Modeling</span>
+                </div>
+                <div class="project-actions">
+                  <a href="https://github.com/" target="_blank" rel="noreferrer">View Code</a>
+                  <a href="#" aria-disabled="true" tabindex="-1">Live Demo</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card project-placeholder reveal" data-reveal data-tilt>
+              <div class="project-media project-media-four" aria-hidden="true">
+                <span>AI</span>
+              </div>
+              <div class="project-content">
+                <div class="project-topline">
+                  <h3>Future AI Product Experiment</h3>
+                  <span>Editable</span>
+                </div>
+                <p class="project-problem">
+                  Placeholder for the next project. Replace this card with a deployed model, AI workflow,
+                  data product, or research prototype.
+                </p>
+                <ul>
+                  <li>Add the problem statement and measurable outcomes.</li>
+                  <li>Document the system design and model decisions.</li>
+                  <li>Link code, demo, notebooks, or case study assets.</li>
+                </ul>
+                <div class="tech-stack">
+                  <span>Python</span>
+                  <span>ML</span>
+                  <span>Product Thinking</span>
+                </div>
+                <div class="project-actions">
+                  <a href="https://github.com/" target="_blank" rel="noreferrer">View Code</a>
+                  <a href="#" aria-disabled="true" tabindex="-1">Live Demo</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section certifications-section" id="certifications" data-section>
+        <div class="container">
+          <div class="section-heading reveal" data-reveal>
+            <p class="eyebrow">Certifications</p>
+            <h2>Focused learning across analytics, AI foundations, and BI workflows.</h2>
+          </div>
+
+          <div class="cert-grid">
+            <article class="cert-card reveal" data-reveal>
+              <span class="cert-year">2025</span>
+              <h3>Pandas</h3>
+              <p>Kaggle</p>
+              <div class="cert-skills">
+                <span>DataFrames</span>
+                <span>Cleaning</span>
+                <span>Analysis</span>
+              </div>
+              <button class="text-button cert-open" type="button" data-certificate="Pandas - Kaggle (2025)">
+                View Certificate
+              </button>
+            </article>
+
+            <article class="cert-card reveal" data-reveal>
+              <span class="cert-year">2025</span>
+              <h3>Generative AI Foundations</h3>
+              <p>upGrad / Microsoft</p>
+              <div class="cert-skills">
+                <span>GenAI</span>
+                <span>Prompting</span>
+                <span>AI Concepts</span>
+              </div>
+              <button class="text-button cert-open" type="button" data-certificate="Generative AI Foundations - upGrad / Microsoft (2025)">
+                View Certificate
+              </button>
+            </article>
+
+            <article class="cert-card reveal" data-reveal>
+              <span class="cert-year">2025</span>
+              <h3>Advanced Power BI Workshop</h3>
+              <p>Lovely Professional University</p>
+              <div class="cert-skills">
+                <span>Power BI</span>
+                <span>DAX</span>
+                <span>Dashboards</span>
+              </div>
+              <button class="text-button cert-open" type="button" data-certificate="Advanced Power BI Workshop - LPU (2025)">
+                View Certificate
+              </button>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section philosophy-section" id="philosophy">
+        <div class="container philosophy-layout">
+          <div class="section-heading reveal" data-reveal>
+            <p class="eyebrow">Mindset</p>
+            <h2>Fundamentals first. Abstractions second. Useful systems always.</h2>
+          </div>
+
+          <div class="quote-grid">
+            <article class="quote-card reveal" data-reveal>
+              <p>First-principles thinking turns unfamiliar problems into solvable systems.</p>
+            </article>
+            <article class="quote-card reveal" data-reveal>
+              <p>Good models start with good questions, clean data, and honest evaluation.</p>
+            </article>
+            <article class="quote-card reveal" data-reveal>
+              <p>Consistency compounds when learning is tied to projects, reflection, and fundamentals.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section resume-section" id="resume" data-section>
+        <div class="container resume-card reveal" data-reveal data-tilt>
+          <div>
+            <p class="eyebrow">Resume</p>
+            <h2>Recruiter-ready snapshot of skills, projects, and learning trajectory.</h2>
+            <p>
+              Download the latest resume placeholder now. Replace the file in
+              <strong>assets/resume</strong> when the final PDF is ready.
+            </p>
+            <p class="resume-updated">Last updated: 2026 placeholder</p>
+          </div>
+          <a class="button button-primary" href="assets/resume/Sanchit_Goyal_Resume.pdf" download>
+            Download Resume
+          </a>
+        </div>
+      </section>
+
+      <section class="section contact-section" id="contact" data-section>
+        <div class="container contact-layout">
+          <div class="contact-copy reveal" data-reveal>
+            <p class="eyebrow">Contact</p>
+            <h2>Open to internships, collaborations, and research opportunities.</h2>
+            <p>
+              If you are hiring for AI, ML, Data Science, Software Engineering, or analytics-focused
+              roles, I would be glad to connect.
+            </p>
+
+            <div class="contact-info">
+              <a href="mailto:sanchit.goyal@example.com">sanchit.goyal@example.com</a>
+              <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+              <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+              <span>Punjab, India</span>
+            </div>
+          </div>
+
+          <form class="contact-form reveal" id="contactForm" data-reveal data-form-endpoint="" novalidate>
+            <div class="form-row">
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" autocomplete="name" required />
+              <small class="field-error"></small>
+            </div>
+            <div class="form-row">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required />
+              <small class="field-error"></small>
+            </div>
+            <div class="form-row">
+              <label for="subject">Subject</label>
+              <input id="subject" name="subject" type="text" required />
+              <small class="field-error"></small>
+            </div>
+            <div class="form-row">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" required></textarea>
+              <small class="field-error"></small>
+            </div>
+            <button class="button button-primary form-submit" type="submit">
+              <span class="submit-label">Send Message</span>
+              <span class="submit-loader" aria-hidden="true"></span>
+            </button>
+            <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-layout">
+        <div>
+          <a class="brand" href="#home" aria-label="Sanchit Goyal home">
+            <span class="brand-mark">SG</span>
+            <span class="brand-text">Sanchit Goyal</span>
+          </a>
+          <p>Made with passion, precision, and a deep love for problem-solving.</p>
+        </div>
+
+        <div class="footer-links">
+          <a href="#about">About</a>
+          <a href="#journey">Journey</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#resume">Resume</a>
+          <a href="#contact">Contact</a>
+        </div>
+
+        <div class="footer-links">
+          <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a href="mailto:sanchit.goyal@example.com">Email</a>
+          <a href="assets/resume/Sanchit_Goyal_Resume.pdf" download>Resume</a>
+        </div>
+      </div>
+      <div class="container copyright">
+        <p>&copy; <span id="year"></span> Sanchit Goyal. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <div class="modal" id="certificateModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-backdrop" data-modal-close></div>
+      <div class="modal-panel" role="document">
+        <button class="modal-close" type="button" aria-label="Close certificate viewer" data-modal-close>&times;</button>
+        <p class="eyebrow">Certificate Preview</p>
+        <h2 id="modalTitle">Certificate</h2>
+        <div class="certificate-preview">
+          <span>Certificate asset placeholder</span>
+          <p>Add certificate images or PDFs inside assets/images/certificates.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chatbot UI -->
+    <button class="chat-toggle-btn" id="chatToggleBtn" aria-label="Open AI Assistant">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+      </svg>
+    </button>
+    
+    <div class="chat-window glass-panel" id="chatWindow" aria-hidden="true">
+      <div class="chat-header">
+        <div class="chat-title">
+          <span class="online-dot"></span>
+          <h3>Sanchit's AI</h3>
+        </div>
+        <button class="chat-close-btn" id="chatCloseBtn" aria-label="Close Chat">&times;</button>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="chat-message bot-message">
+          <p>Hi! I'm Sanchit's AI assistant. Ask me anything about his skills, projects, or background!</p>
+        </div>
+      </div>
+      <div class="chat-input-area">
+        <form id="chatForm">
+          <input type="text" id="chatInput" placeholder="Ask a question..." autocomplete="off" required>
+          <button type="submit" aria-label="Send message">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <script src="js/particles.js" defer></script>
+    <script src="js/animations.js" defer></script>
+    <script src="js/form-handler.js" defer></script>
+    <script src="js/chatbot-brain.js" defer></script>
+    <script src="js/main.js" defer></script>
+  </body>
+</html>

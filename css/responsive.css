@@ -1,0 +1,331 @@
+@media (min-width: 1440px) {
+  :root {
+    --container: 1280px;
+  }
+
+  .hero-title {
+    font-size: 6.2rem;
+  }
+
+  .hero-layout {
+    gap: 86px;
+  }
+}
+
+@media (max-width: 1120px) {
+  .nav-link {
+    padding: 0 10px;
+    font-size: 0.82rem;
+  }
+
+  .hero-title {
+    font-size: 4.7rem;
+  }
+
+  .hero-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 0.72fr);
+    gap: 38px;
+  }
+
+  .profile-shell {
+    width: min(100%, 360px);
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .skill-group,
+  .skill-group:nth-child(1),
+  .skill-group:nth-child(3),
+  .skill-group:nth-child(4),
+  .skill-group:nth-child(5) {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 920px) {
+  :root {
+    --header-height: 74px;
+  }
+
+  .section {
+    padding: 88px 0;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-panel {
+    position: fixed;
+    top: 74px;
+    right: 20px;
+    left: 20px;
+    transform: translateY(-14px);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 220ms ease,
+      transform 220ms var(--ease),
+      visibility 220ms ease;
+  }
+
+  .nav-panel.open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-links {
+    display: grid;
+    gap: 6px;
+    padding: 12px;
+    background: rgba(5, 7, 13, 0.92);
+    box-shadow: var(--shadow);
+  }
+
+  .nav-link {
+    justify-content: center;
+    min-height: 46px;
+    font-size: 0.94rem;
+  }
+
+  .nav-indicator {
+    display: none;
+  }
+
+  .hero {
+    padding: 122px 0 76px;
+  }
+
+  .hero-layout,
+  .about-grid,
+  .philosophy-layout,
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-copy {
+    max-width: 100%;
+  }
+
+  .hero-visual {
+    min-height: auto;
+  }
+
+  .profile-shell {
+    width: min(100%, 330px);
+  }
+
+  .project-grid,
+  .cert-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .resume-card {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-layout {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-layout > div:first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 720px) {
+  .container,
+  .navbar {
+    width: min(100% - 28px, var(--container));
+  }
+
+  .brand-text {
+    max-width: 170px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .hero-title {
+    font-size: 3.45rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.08rem;
+  }
+
+  .section-heading h2,
+  .resume-card h2,
+  .contact-copy h2 {
+    font-size: 2rem;
+  }
+
+  .mindset-grid,
+  .skills-grid,
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline {
+    padding-left: 18px;
+  }
+
+  .timeline-card {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline-dot {
+    left: -24px;
+  }
+
+  .academic-stat {
+    width: 118px;
+    height: 118px;
+  }
+
+  .project-media {
+    min-height: 190px;
+  }
+
+  .project-media span {
+    font-size: 3rem;
+  }
+
+  .project-topline {
+    display: grid;
+  }
+
+  .contact-form,
+  .resume-card,
+  .about-story,
+  .project-content,
+  .cert-card,
+  .quote-card,
+  .mindset-card,
+  .skill-group,
+  .timeline-card {
+    padding: 22px;
+  }
+
+  .journey-timeline::before {
+    left: 20px;
+    transform: none;
+  }
+  .journey-card-wrapper,
+  .journey-card-wrapper:nth-child(odd),
+  .journey-card-wrapper:nth-child(even) {
+    width: 100%;
+    padding: 24px 20px 24px 52px;
+    left: 0 !important;
+    justify-content: flex-start;
+  }
+  .journey-card-wrapper:nth-child(odd) .journey-dot,
+  .journey-card-wrapper:nth-child(even) .journey-dot {
+    left: 12px;
+    right: auto;
+  }
+}
+
+@media (max-width: 520px) {
+  html {
+    scroll-padding-top: 82px;
+  }
+
+  .preloader p {
+    max-width: 260px;
+    text-align: center;
+  }
+
+  .hero {
+    min-height: auto;
+    padding-top: 112px;
+  }
+
+  .hero-title {
+    font-size: 2.84rem;
+  }
+
+  .role-line {
+    align-items: flex-start;
+  }
+
+  .role-line strong {
+    min-width: 100%;
+  }
+
+  .hero-actions,
+  .project-actions {
+    display: grid;
+  }
+
+  .button,
+  .project-actions a {
+    width: 100%;
+  }
+
+  .social-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .profile-shell {
+    width: min(100%, 286px);
+  }
+
+  .profile-signal {
+    right: 4px;
+    bottom: 16px;
+    max-width: 172px;
+    font-size: 0.72rem;
+  }
+
+  .profile-image span {
+    font-size: 3.35rem;
+  }
+
+  .stats-section {
+    padding: 40px 0;
+  }
+
+  .stat-card {
+    min-height: 136px;
+  }
+
+  .cert-card {
+    min-height: auto;
+  }
+
+  .footer-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-panel {
+    padding: 24px;
+  }
+
+  .certificate-preview {
+    min-height: 240px;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero-title {
+    font-size: 2.45rem;
+  }
+
+  .section-heading h2,
+  .resume-card h2,
+  .contact-copy h2 {
+    font-size: 1.72rem;
+  }
+
+  .brand-text {
+    display: none;
+  }
+}

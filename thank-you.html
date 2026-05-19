@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#05070d" />
+    <meta name="color-scheme" content="dark" />
+    <title>Thank You | Sanchit Goyal</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon/favicon.svg" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <style>
+      .thank-you-section {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+      .thank-you-content {
+        max-width: 600px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        z-index: 2;
+      }
+      .thank-you-subtitle {
+        margin-top: 1.5rem;
+        margin-bottom: 2.5rem;
+      }
+      .return-nav {
+        display: flex;
+        gap: 2rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="page-noise" aria-hidden="true"></div>
+
+    <header class="site-header" id="siteHeader">
+      <nav class="navbar" aria-label="Primary navigation">
+        <a class="brand" href="index.html" aria-label="Sanchit Goyal home">
+          <span class="brand-mark">SG</span>
+          <span class="brand-text">Sanchit Goyal</span>
+        </a>
+        <div class="return-nav">
+          <a href="index.html" class="nav-link">Return to Portfolio</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero section thank-you-section">
+        <div class="hero-backdrop" aria-hidden="true">
+          <div class="grid-plane"></div>
+          <div class="gradient-field"></div>
+        </div>
+
+        <div class="container">
+          <div class="thank-you-content">
+            <p class="eyebrow reveal" data-reveal>Message Sent</p>
+            <h1 class="hero-title reveal" data-reveal>
+              <span>Thank</span>
+              <span>You!</span>
+            </h1>
+            <p class="hero-subtitle thank-you-subtitle reveal" data-reveal>
+              Your message has been successfully sent. I appreciate you taking the time to reach out and will get back to you as soon as possible.
+            </p>
+
+            <div class="hero-actions reveal" data-reveal>
+              <a class="button button-primary" href="index.html">
+                <span>Return to Home</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="js/animations.js" defer></script>
+    <script src="js/main.js" defer></script>
+  </body>
+</html>
