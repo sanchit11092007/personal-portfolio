@@ -126,8 +126,26 @@ function initCertificateModal() {
   const buttons = document.querySelectorAll(SELECTORS.certificateButtons);
   if (!modal || !modalTitle) return;
 
-  const openModal = (title) => {
-    modalTitle.textContent = title;
+  const modalImage = document.querySelector("#modalImage");
+  const modalVerifyBtn = document.querySelector("#modalVerifyBtn");
+
+  const openModal = (btn) => {
+    modalTitle.textContent = btn.dataset.certificate || "Certificate";
+    
+    if (modalImage && btn.dataset.fullImage) {
+      modalImage.src = btn.dataset.fullImage;
+      modalImage.style.display = "block";
+    } else if (modalImage) {
+      modalImage.style.display = "none";
+    }
+
+    if (modalVerifyBtn && btn.dataset.verificationLink) {
+      modalVerifyBtn.href = btn.dataset.verificationLink;
+      modalVerifyBtn.style.display = "inline-flex";
+    } else if (modalVerifyBtn) {
+      modalVerifyBtn.style.display = "none";
+    }
+
     modal.classList.add("open");
     modal.setAttribute("aria-hidden", "false");
     document.body.classList.add("menu-open");
@@ -138,10 +156,15 @@ function initCertificateModal() {
     modal.classList.remove("open");
     modal.setAttribute("aria-hidden", "true");
     document.body.classList.remove("menu-open");
+    
+    // Clear out to prevent flashing old images on next open
+    setTimeout(() => {
+      if (modalImage) modalImage.src = "";
+    }, 300);
   };
 
   buttons.forEach((button) => {
-    button.addEventListener("click", () => openModal(button.dataset.certificate || "Certificate"));
+    button.addEventListener("click", () => openModal(button));
   });
 
   modal.addEventListener("click", (event) => {
