@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sanchit11092007.github.io/personal-portfolio/sitemap.xml

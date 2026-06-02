@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sanchit Goyal | AI Engineer Portfolio</title>
+    <meta
+      name="description"
+      content="Premium AI Engineer portfolio for Sanchit Goyal, focused on machine learning, data science, AI research, cybersecurity, blockchain, and cloud computing."
+    >
+    <meta name="theme-color" content="#030712">
+    <meta name="color-scheme" content="dark">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Sanchit Goyal | AI Engineer Portfolio">
+    <meta
+      property="og:description"
+      content="Explore Sanchit Goyal's AI engineering journey, skills, projects, certifications, developer activity, and SAE AI assistant."
+    >
+    <meta property="og:image" content="assets/hero-ai-lab.png">
+    <meta property="og:url" content="https://sanchit11092007.github.io/personal-portfolio/">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://sanchit11092007.github.io/personal-portfolio/">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="preload" href="assets/hero-ai-lab.png" as="image">
+    <link rel="stylesheet" href="styles.css">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Sanchit Goyal",
+        "url": "https://sanchit11092007.github.io/personal-portfolio/",
+        "email": "mailto:sanchitgoyal11092007@gmail.com",
+        "jobTitle": ["AI Engineer", "Machine Learning Engineer", "Aspiring Data Scientist"],
+        "sameAs": [
+          "https://github.com/sanchit11092007",
+          "https://www.linkedin.com/in/the-sanchit-goyal",
+          "https://leetcode.com/u/sanchit11092007/",
+          "https://codeforces.com/profile/sanchit11092007",
+          "https://www.hackerrank.com/profile/Sanchit11092007",
+          "https://www.kaggle.com/sanchitgoyal2007",
+          "https://medium.com/@sanchitgoyal11092007",
+          "https://dev.to/sanchit_goyal",
+          "https://x.com/iamsanchitgoyal"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "Machine Learning",
+          "Data Science",
+          "Cyber Security",
+          "Blockchain Technology",
+          "Cloud Computing"
+        ]
+      }
+    </script>
+    <script defer src="data/portfolio-data.js"></script>
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+    <svg class="svg-sprite" aria-hidden="true">
+      <symbol id="icon-arrow" viewBox="0 0 24 24">
+        <path d="M5 12h14m-6-6 6 6-6 6"></path>
+      </symbol>
+      <symbol id="icon-download" viewBox="0 0 24 24">
+        <path d="M12 3v11m0 0 4-4m-4 4-4-4M5 17v3h14v-3"></path>
+      </symbol>
+      <symbol id="icon-chat" viewBox="0 0 24 24">
+        <path d="M4 5h16v10H8l-4 4V5Z"></path>
+      </symbol>
+      <symbol id="icon-print" viewBox="0 0 24 24">
+        <path d="M7 8V4h10v4M7 17H5v-6h14v6h-2M7 14h10v6H7v-6Z"></path>
+      </symbol>
+      <symbol id="icon-send" viewBox="0 0 24 24">
+        <path d="m4 12 16-8-6 16-3-7-7-1Z"></path>
+      </symbol>
+      <symbol id="icon-mic" viewBox="0 0 24 24">
+        <path d="M12 14a4 4 0 0 0 4-4V6a4 4 0 0 0-8 0v4a4 4 0 0 0 4 4Zm7-4a7 7 0 0 1-14 0m7 7v4m-4 0h8"></path>
+      </symbol>
+      <symbol id="icon-volume" viewBox="0 0 24 24">
+        <path d="M4 10v4h4l5 4V6L8 10H4Zm12-1a4 4 0 0 1 0 6m2-9a8 8 0 0 1 0 12"></path>
+      </symbol>
+      <symbol id="icon-x" viewBox="0 0 24 24">
+        <path d="M6 6l12 12M18 6 6 18"></path>
+      </symbol>
+      <symbol id="icon-top" viewBox="0 0 24 24">
+        <path d="M12 19V5m0 0-6 6m6-6 6 6"></path>
+      </symbol>
+    </svg>
+
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div class="preloader" id="preloader" role="status" aria-live="polite">
+      <div class="preloader-card">
+        <div class="preloader-logo">SG</div>
+        <div class="preloader-track" aria-hidden="true">
+          <span></span>
+        </div>
+        <p>Initializing Intelligence...</p>
+      </div>
+    </div>
+
+    <canvas id="particle-canvas" class="particle-canvas" aria-hidden="true"></canvas>
+
+    <header class="site-header" id="siteHeader">
+      <nav class="nav-shell" aria-label="Primary navigation">
+        <a class="brand" href="#home" aria-label="Sanchit Goyal home">
+          <span class="brand-mark">SG</span>
+          <span class="brand-copy">
+            <strong>Sanchit Goyal</strong>
+            <span>AI Engineer Portfolio</span>
+          </span>
+        </a>
+        <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <div class="nav-links" id="navLinks">
+          <a href="#about">About</a>
+          <a href="#journey">Journey</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#certifications">Certifications</a>
+          <a href="#activity">Activity</a>
+          <a href="#assistant">SAE AI</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero section" id="home" aria-labelledby="hero-title">
+        <img class="hero-image" src="assets/hero-ai-lab.png" width="1536" height="1024" alt="" decoding="async">
+        <div class="hero-overlay"></div>
+        <div class="container hero-grid">
+          <div class="hero-copy reveal">
+            <div class="eyebrow-row">
+              <span class="status-badge">Open to Internships</span>
+              <span class="signal-text">AI systems, ML foundations, and data-driven engineering</span>
+            </div>
+            <h1 id="hero-title">Sanchit Goyal</h1>
+            <p class="hero-role">
+              <span>AI Engineer</span>
+              <span>Machine Learning Engineer</span>
+              <span>Data Scientist</span>
+            </p>
+            <p class="hero-headline">
+              Building intelligent systems, exploring machine learning, and developing data-driven solutions through
+              continuous learning, research, and practical innovation.
+            </p>
+            <p class="typewriter-line" aria-live="polite">
+              Currently sharpening <span data-typewriter></span>
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#projects">
+                <span>View Projects</span>
+                <svg class="icon"><use href="#icon-arrow"></use></svg>
+              </a>
+              <button class="button button-secondary" type="button" data-download-resume>
+                <span>Download Resume</span>
+                <svg class="icon"><use href="#icon-download"></use></svg>
+              </button>
+              <a class="button button-ghost" href="#assistant">
+                <span>Talk with SAE AI</span>
+                <svg class="icon"><use href="#icon-chat"></use></svg>
+              </a>
+            </div>
+            <div class="social-dashboard" id="socialDashboard" aria-label="Professional profiles"></div>
+          </div>
+          <aside class="hero-system reveal" aria-label="AI engineering snapshot">
+            <div class="system-header">
+              <span class="system-dot"></span>
+              <span>Portfolio Intelligence Layer</span>
+            </div>
+            <dl class="system-metrics">
+              <div>
+                <dt>Focus</dt>
+                <dd>AI + Data Science</dd>
+              </div>
+              <div>
+                <dt>Direction</dt>
+                <dd>Research-minded engineering</dd>
+              </div>
+              <div>
+                <dt>Stack</dt>
+                <dd>Python, ML, analytics</dd>
+              </div>
+            </dl>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section about-section" id="about" aria-labelledby="about-title">
+        <div class="container split-layout">
+          <div class="section-heading reveal">
+            <span class="section-kicker">About</span>
+            <h2 id="about-title">An AI engineering path built with curiosity, structure, and practice.</h2>
+          </div>
+          <div class="story-stack reveal">
+            <p>
+              Sanchit Goyal is a Computer Science Engineering student specializing in Data Science and Machine
+              Learning, building toward a career at the intersection of artificial intelligence, software engineering,
+              and applied research.
+            </p>
+            <p>
+              He chose Artificial Intelligence because it rewards both mathematical discipline and engineering taste:
+              the ability to understand data, design models, reason about systems, and convert research ideas into
+              reliable products. His current focus is to turn foundations into implementation depth through coding,
+              analysis, experimentation, and project work.
+            </p>
+            <p>
+              His engineering mindset is practical and future-facing. Machine learning gives him the core direction,
+              while cyber security, blockchain technology, and cloud computing expand the systems perspective needed to
+              build intelligent products that are useful, secure, scalable, and trustworthy.
+            </p>
+            <p>
+              The long-term vision is clear: become an AI Engineer who can learn quickly, ship thoughtfully, contribute
+              to meaningful research-driven work, and grow into the kind of technologist teams want in the room when
+              complex problems need careful thinking.
+            </p>
+            <div class="interest-grid" aria-label="Areas of interest">
+              <span>Artificial Intelligence</span>
+              <span>Machine Learning</span>
+              <span>Data Science</span>
+              <span>Cyber Security</span>
+              <span>Blockchain Technology</span>
+              <span>Cloud Computing</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section timeline-section" id="journey" aria-labelledby="journey-title">
+        <div class="container">
+          <div class="section-heading centered reveal">
+            <span class="section-kicker">Journey</span>
+            <h2 id="journey-title">A focused roadmap from foundations to advanced AI development.</h2>
+          </div>
+          <ol class="timeline" aria-label="Professional learning timeline">
+            <li class="timeline-item reveal">
+              <time>August 2025</time>
+              <h3>Joined Lovely Professional University</h3>
+              <p>Started B.Tech Computer Science Engineering with a specialization in Data Science and Machine Learning.</p>
+            </li>
+            <li class="timeline-item reveal">
+              <time>August 2025 - October 2025</time>
+              <h3>Built programming and data foundations</h3>
+              <p>Developed the early base for programming logic, analytical thinking, and data science workflows.</p>
+            </li>
+            <li class="timeline-item reveal">
+              <time>October 2025 - December 2025</time>
+              <h3>Worked extensively with NumPy and Pandas</h3>
+              <p>Practiced array operations, tabular analysis, cleaning, transformations, and exploratory data work.</p>
+            </li>
+            <li class="timeline-item reveal">
+              <time>January 2026 - May 2026</time>
+              <h3>Strengthened practical AI foundations</h3>
+              <p>Reinforced programming, data science, and machine learning fundamentals through hands-on project work.</p>
+            </li>
+            <li class="timeline-item reveal">
+              <time>Current Stage</time>
+              <h3>Advancing DSA and machine learning depth</h3>
+              <p>Exploring data structures and algorithms while actively learning machine learning and preparing for advanced AI development.</p>
+            </li>
+            <li class="timeline-item reveal">
+              <time>Future Goal</time>
+              <h3>AI Engineer, Machine Learning Engineer, Data Scientist</h3>
+              <p>Move from strong foundations to applied intelligent systems, research exploration, and production-minded ML work.</p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section skills-section" id="skills" aria-labelledby="skills-title">
+        <div class="container">
+          <div class="section-heading reveal">
+            <span class="section-kicker">Skills</span>
+            <h2 id="skills-title">A transparent skills map for recruiters and engineering teams.</h2>
+            <p>
+              Current proficiency is intentionally honest and growth-oriented, showing where Sanchit is strong today
+              and where he is actively building depth.
+            </p>
+          </div>
+          <div class="skills-grid" id="skillsGrid"></div>
+        </div>
+      </section>
+
+      <section class="section projects-section" id="projects" aria-labelledby="projects-title">
+        <div class="container">
+          <div class="section-heading reveal">
+            <span class="section-kicker">Projects</span>
+            <h2 id="projects-title">Project categories designed for scalable portfolio growth.</h2>
+            <p>
+              Each category is ready for code links, live demos, project images, descriptions, and technology stacks as
+              new work is published.
+            </p>
+          </div>
+          <div class="filter-bar" id="projectFilters" aria-label="Project filters"></div>
+          <div class="project-grid" id="projectGrid" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section class="section certifications-section" id="certifications" aria-labelledby="certifications-title">
+        <div class="container">
+          <div class="section-heading reveal">
+            <span class="section-kicker">Certifications</span>
+            <h2 id="certifications-title">Certificate system ready for verified proof of learning.</h2>
+            <p>
+              Future certificates can be added through the data structure with issuer, issue date, skills, verification
+              link, and a full-screen preview image.
+            </p>
+          </div>
+          <div class="filter-bar" id="certificateFilters" aria-label="Certification filters"></div>
+          <div class="certificate-grid" id="certificateGrid" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section class="section activity-section" id="activity" aria-labelledby="activity-title">
+        <div class="container">
+          <div class="section-heading centered reveal">
+            <span class="section-kicker">Developer Activity Hub</span>
+            <h2 id="activity-title">A professional dashboard for coding, data, writing, and public learning.</h2>
+          </div>
+          <div class="activity-grid" id="activityGrid"></div>
+        </div>
+      </section>
+
+      <section class="section assistant-section" id="assistant" aria-labelledby="assistant-title">
+        <div class="container assistant-layout">
+          <div class="section-heading reveal">
+            <span class="section-kicker">SAE AI Assistant</span>
+            <h2 id="assistant-title">Hey, I'm SAE AI</h2>
+            <p>
+              Your interactive guide to Sanchit Goyal's world of AI, software engineering, machine learning, projects,
+              and technology. Ask about his work, skills, journey, coding, ideas, or simply start a conversation.
+            </p>
+          </div>
+          <div class="assistant-shell reveal">
+            <div class="assistant-toolbar">
+              <div>
+                <strong>SAE AI</strong>
+                <span>Portfolio, technical, and general conversation</span>
+              </div>
+              <div class="assistant-controls">
+                <button class="icon-button" type="button" id="voiceOutput" aria-pressed="false" aria-label="Toggle voice output">
+                  <svg class="icon"><use href="#icon-volume"></use></svg>
+                </button>
+                <button class="icon-button" type="button" id="clearChat" aria-label="Clear conversation">
+                  <svg class="icon"><use href="#icon-x"></use></svg>
+                </button>
+              </div>
+            </div>
+            <div class="quick-prompts" id="quickPrompts" aria-label="Suggested questions"></div>
+            <div class="chat-window" id="chatMessages" role="log" aria-live="polite" aria-label="SAE AI conversation"></div>
+            <form class="chat-form" id="chatForm">
+              <button class="icon-button mic-button" type="button" id="voiceInput" aria-label="Start voice input">
+                <svg class="icon"><use href="#icon-mic"></use></svg>
+              </button>
+              <label class="sr-only" for="chatInput">Message SAE AI</label>
+              <textarea id="chatInput" name="message" rows="1" placeholder="Ask SAE AI about Sanchit's skills, journey, projects, or tech." required></textarea>
+              <button class="icon-button send-button" type="submit" aria-label="Send message">
+                <svg class="icon"><use href="#icon-send"></use></svg>
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section class="section resume-section" id="resume" aria-labelledby="resume-title">
+        <div class="container resume-layout">
+          <div class="section-heading reveal">
+            <span class="section-kicker">Resume</span>
+            <h2 id="resume-title">Recruiter-ready snapshot.</h2>
+            <p>
+              A concise resume preview covering education, direction, skills, and public profiles. The download button
+              generates a clean text resume from this live portfolio data.
+            </p>
+            <div class="resume-actions">
+              <button class="button button-primary" type="button" data-download-resume>
+                <span>Download Resume</span>
+                <svg class="icon"><use href="#icon-download"></use></svg>
+              </button>
+              <button class="button button-secondary" type="button" id="printResume">
+                <span>Print Resume</span>
+                <svg class="icon"><use href="#icon-print"></use></svg>
+              </button>
+            </div>
+          </div>
+          <article class="resume-preview reveal" aria-label="Resume preview">
+            <header>
+              <h3>Sanchit Goyal</h3>
+              <p>AI Engineer | Machine Learning Engineer | Data Scientist</p>
+              <a href="mailto:sanchitgoyal11092007@gmail.com">sanchitgoyal11092007@gmail.com</a>
+            </header>
+            <div class="resume-block">
+              <h4>Education</h4>
+              <p>B.Tech Computer Science Engineering, specialization in Data Science and Machine Learning.</p>
+            </div>
+            <div class="resume-block">
+              <h4>Core Direction</h4>
+              <p>Artificial Intelligence, Machine Learning, Data Science, Cyber Security, Blockchain Technology, and Cloud Computing.</p>
+            </div>
+            <div class="resume-block">
+              <h4>Current Focus</h4>
+              <p>Data Structures and Algorithms, machine learning foundations, data science practice, and practical project development.</p>
+            </div>
+            <div class="resume-block">
+              <h4>Selected Stack</h4>
+              <p>Python, C, C++, Java, NumPy, Pandas, Scikit-Learn, TensorFlow, PyTorch, MySQL, Git, GitHub, Jupyter Notebook, Google Colab, Power BI.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section contact-section" id="contact" aria-labelledby="contact-title">
+        <div class="container">
+          <div class="section-heading centered reveal">
+            <span class="section-kicker">Contact</span>
+            <h2 id="contact-title">Professional channels for collaboration and interviews.</h2>
+          </div>
+          <div class="contact-grid reveal">
+            <a class="contact-card" href="https://www.linkedin.com/in/the-sanchit-goyal" target="_blank" rel="noreferrer">
+              <span class="contact-icon">in</span>
+              <strong>LinkedIn</strong>
+              <span>Professional profile</span>
+            </a>
+            <a class="contact-card" href="https://github.com/sanchit11092007" target="_blank" rel="noreferrer">
+              <span class="contact-icon">GH</span>
+              <strong>GitHub</strong>
+              <span>Code and repositories</span>
+            </a>
+            <a class="contact-card" href="mailto:sanchitgoyal11092007@gmail.com">
+              <span class="contact-icon">@</span>
+              <strong>Email</strong>
+              <span>sanchitgoyal11092007@gmail.com</span>
+            </a>
+            <a class="contact-card" href="https://leetcode.com/u/sanchit11092007/" target="_blank" rel="noreferrer">
+              <span class="contact-icon">LC</span>
+              <strong>LeetCode</strong>
+              <span>Problem solving</span>
+            </a>
+            <a class="contact-card" href="https://www.kaggle.com/sanchitgoyal2007" target="_blank" rel="noreferrer">
+              <span class="contact-icon">KG</span>
+              <strong>Kaggle</strong>
+              <span>Data science profile</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <a class="brand footer-brand" href="#home" aria-label="Sanchit Goyal home">
+            <span class="brand-mark">SG</span>
+            <span class="brand-copy">
+              <strong>Sanchit Goyal</strong>
+              <span>AI Engineer Portfolio</span>
+            </span>
+          </a>
+          <p>Premium AI portfolio for learning, engineering growth, and recruiter discovery.</p>
+        </div>
+        <div>
+          <h2>Quick Links</h2>
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#assistant">SAE AI</a>
+        </div>
+        <div>
+          <h2>Social Links</h2>
+          <a href="https://github.com/sanchit11092007" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/in/the-sanchit-goyal" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a href="https://www.kaggle.com/sanchitgoyal2007" target="_blank" rel="noreferrer">Kaggle</a>
+          <a href="https://x.com/iamsanchitgoyal" target="_blank" rel="noreferrer">X</a>
+        </div>
+        <div class="footer-final">
+          <p>&copy; <span id="year"></span> Sanchit Goyal. All rights reserved.</p>
+          <a class="back-to-top" href="#home" aria-label="Back to top">
+            <svg class="icon"><use href="#icon-top"></use></svg>
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <dialog class="certificate-dialog" id="certificateDialog" aria-labelledby="certificateDialogTitle">
+      <button class="icon-button dialog-close" type="button" aria-label="Close certificate preview">
+        <svg class="icon"><use href="#icon-x"></use></svg>
+      </button>
+      <div class="dialog-body">
+        <img id="certificateDialogImage" src="" alt="">
+        <div>
+          <h2 id="certificateDialogTitle"></h2>
+          <p id="certificateDialogMeta"></p>
+          <a class="button button-primary" id="certificateDialogLink" href="#" target="_blank" rel="noreferrer">
+            <span>Verify Certificate</span>
+            <svg class="icon"><use href="#icon-arrow"></use></svg>
+          </a>
+        </div>
+      </div>
+    </dialog>
+  </body>
+</html>
