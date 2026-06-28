@@ -21,9 +21,9 @@
   })();
 
   const CFG = {
-    name: 'MIKASA',
-    subtitle: 'Intelligence Assistant',
-    logoPath: 'assets/images/pankrix-ai-logo.png',
+    name: 'MIKASA AI',
+    subtitle: 'Portfolio Intelligence',
+    logoPath: 'assets/images/mikasa-ai-logo.png',
     defaultModel: 'gemini-2.5-flash',
     apiBase: 'https://generativelanguage.googleapis.com/v1beta/models',
     maxOutputTokens: 4096,
@@ -36,14 +36,14 @@
     MAX_CONVS: 30,
     FALLBACK_MODELS: ['gemini-2.5-flash', 'gemini-2.5-pro', 'gemini-2.0-flash', 'gemini-2.0-flash-lite'],
     SUGGESTIONS: [
-      { icon: '🚀', label: "Who is Sanchit?", desc: "Meet the portfolio owner", q: "Give me an impressive introduction to Sanchit Goyal and what makes him stand out as an aspiring data scientist." },
-      { icon: '💻', label: "Show his projects", desc: "Explore real-world work", q: "Tell me about all of Sanchit's projects in detail — what they do, the tech stack, and the skills they demonstrate." },
-      { icon: '🎓', label: "Skills & certifications", desc: "Technical expertise overview", q: "What are Sanchit's strongest technical skills and which certifications has he earned so far?" },
-      { icon: '🤝', label: "Can I hire him?", desc: "For recruiters & collaborators", q: "I'm a recruiter. What makes Sanchit Goyal a strong candidate? What roles would suit him best right now?" },
+      { icon: 'AI', label: "Who is Sanchit?", desc: "Meet the portfolio owner", q: "Give me an impressive introduction to Sanchit Goyal and what makes him stand out as an aspiring data scientist." },
+      { icon: '</>', label: "Show his projects", desc: "Explore real-world work", q: "Tell me about all of Sanchit's projects in detail - what they do, the tech stack, and the skills they demonstrate." },
+      { icon: 'DS', label: "Skills & certifications", desc: "Technical expertise overview", q: "What are Sanchit's strongest technical skills and which certifications has he earned so far?" },
+      { icon: 'HR', label: "Can I hire him?", desc: "For recruiters & collaborators", q: "I'm a recruiter. What makes Sanchit Goyal a strong candidate? What roles would suit him best right now?" },
     ],
     CAPABILITIES: [
-      '🧠 ML & AI Expert', '📊 Data Analysis', '💬 Career Guide',
-      '🔍 Portfolio Q&A', '💻 Code Helper', '📄 Resume Review'
+      'ML & AI Expert', 'Data Analysis', 'Career Guide',
+      'Portfolio Q&A', 'Code Helper', 'Resume Review'
     ],
   };
 
@@ -52,57 +52,57 @@
      ============================================================ */
   const AI_MODES = {
     default: {
-      emoji: '✨', name: 'Portfolio Assistant', shortName: 'Portfolio',
+      emoji: 'AI', name: 'Portfolio Assistant', shortName: 'Portfolio',
       desc: 'Friendly, smart portfolio guide',
       prompt: 'You are a friendly, intelligent portfolio assistant. Be warm, engaging, and concise.'
     },
     recruiter: {
-      emoji: '💼', name: 'Recruiter Mode', shortName: 'Recruiter',
+      emoji: 'HR', name: 'Recruiter Mode', shortName: 'Recruiter',
       desc: 'Formal guide for hiring managers',
       prompt: 'You are in RECRUITER MODE. Be formal, metrics-focused, and professional. Highlight Sanchit\'s strengths clearly for hiring managers. Use structured bullet points. Speak like a top-tier career advisor.'
     },
     teacher: {
-      emoji: '📚', name: 'Teacher Mode', shortName: 'Teacher',
+      emoji: 'EDU', name: 'Teacher Mode', shortName: 'Teacher',
       desc: 'Patient educator breaking things down',
       prompt: 'You are in TEACHER MODE. Be patient, clear, and thorough. Break down complex concepts step by step. Use analogies, examples, and simple language. Encourage questions and learning.'
     },
     mentor: {
-      emoji: '🎯', name: 'Mentor Mode', shortName: 'Mentor',
+      emoji: 'MEN', name: 'Mentor Mode', shortName: 'Mentor',
       desc: 'Experienced career mentor',
       prompt: 'You are in MENTOR MODE. Act like a senior engineer with 10+ years of experience guiding a junior developer. Give honest, constructive advice. Focus on career growth, learning paths, and practical wisdom.'
     },
     interviewer: {
-      emoji: '🎤', name: 'Interviewer Mode', shortName: 'Interviewer',
+      emoji: 'INT', name: 'Interviewer Mode', shortName: 'Interviewer',
       desc: 'Conducts mock technical interviews',
       prompt: 'You are in INTERVIEWER MODE. Conduct mock technical and behavioral interviews. Ask one question at a time. Give detailed feedback after each answer. Be constructive but challenging. Cover DSA, ML concepts, and behavioral questions.'
     },
     coding: {
-      emoji: '💻', name: 'Coding Assistant', shortName: 'Coder',
+      emoji: 'DEV', name: 'Coding Assistant', shortName: 'Coder',
       desc: 'Expert coder with detailed explanations',
       prompt: 'You are in CODING ASSISTANT MODE. Provide expert-level code with detailed explanations. Always show working code examples. Explain time/space complexity. Suggest best practices and optimizations. Use proper syntax highlighting.'
     },
     research: {
-      emoji: '🔬', name: 'Research Mode', shortName: 'Research',
+      emoji: 'RES', name: 'Research Mode', shortName: 'Research',
       desc: 'Deep-dive academic research style',
       prompt: 'You are in RESEARCH MODE. Be thorough, academic, and citation-aware. Deep-dive into topics. Explain underlying mechanisms. Reference relevant papers or concepts where applicable. Be precise and comprehensive.'
     },
     motivational: {
-      emoji: '🔥', name: 'Motivational Coach', shortName: 'Coach',
+      emoji: 'MOT', name: 'Motivational Coach', shortName: 'Coach',
       desc: 'High-energy encouragement & guidance',
       prompt: 'You are in MOTIVATIONAL COACH MODE. Be high-energy, enthusiastic, and deeply encouraging. Inspire action, celebrate progress, and help overcome self-doubt. Use dynamic language. Make every response feel empowering!'
     },
     casual: {
-      emoji: '😎', name: 'Casual Chat', shortName: 'Casual',
+      emoji: 'CHAT', name: 'Casual Chat', shortName: 'Casual',
       desc: 'Chill conversational companion',
       prompt: 'You are in CASUAL CHAT MODE. Be super chill, friendly, and conversational. Use natural language, emojis where appropriate, and keep things light and fun. Feel like a knowledgeable friend having a normal conversation.'
     },
     technical: {
-      emoji: '⚙️', name: 'Technical Expert', shortName: 'Technical',
+      emoji: 'TECH', name: 'Technical Expert', shortName: 'Technical',
       desc: 'Terse, precision-focused expert',
       prompt: 'You are in TECHNICAL EXPERT MODE. Be precise, terse, and highly technical. Skip fluff. Use proper terminology. Assume high technical knowledge. Focus on accuracy and depth over accessibility.'
     },
     business: {
-      emoji: '📈', name: 'Business Consultant', shortName: 'Business',
+      emoji: 'BIZ', name: 'Business Consultant', shortName: 'Business',
       desc: 'ROI-focused, business strategy lens',
       prompt: 'You are in BUSINESS CONSULTANT MODE. Analyze everything through a business lens. Focus on ROI, impact, strategy, and scalability. Use business frameworks. Speak like a McKinsey consultant advising a tech startup.'
     },
@@ -876,6 +876,7 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
 
     /* ── Event Binding ── */
     bindEvents() {
+      // Use delegated event handling for message actions to prevent duplicate bindings
       const r = this.root;
 
       // FAB
@@ -1663,11 +1664,7 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
         const divider = this._shouldShowDateDivider(msgs, i) ? this._dateDividerHTML(m.time) : '';
         return divider + this._msgHTML(m);
       }).join('');
-      // Bind message events
-      ct.querySelectorAll('.px-copy-msg').forEach(btn => btn.addEventListener('click', () => this._copyMsg(btn.dataset.id)));
-      ct.querySelectorAll('.px-speak-btn').forEach(btn => btn.addEventListener('click', () => this._toggleSpeak(btn.dataset.id, btn)));
-      ct.querySelectorAll('.px-reaction-btn').forEach(btn => btn.addEventListener('click', () => this._handleReaction(btn)));
-      ct.querySelectorAll('.px-followup-chip').forEach(btn => btn.addEventListener('click', () => this.sendMessage(btn.dataset.q)));
+      // Bind message events via delegation (avoids duplicate handlers)
       setTimeout(() => attachCodeCopyHandlers(), 80);
       requestAnimationFrame(() => {
         this._scrollBottom(true);
@@ -1679,11 +1676,13 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
       const suggs = CFG.SUGGESTIONS.map(s => `
         <button class="px-sugg-card" type="button" data-q="${safeEscAttr(s.q)}" aria-label="Suggest: ${safeEsc(s.label)}">
           <span class="px-sugg-icon">${s.icon}</span>
-          <span class="px-sugg-title">${safeEsc(s.label)}</span>
-          <span class="px-sugg-desc">${safeEsc(s.desc)}</span>
+          <span class="px-sugg-label-wrap">
+            <span class="px-sugg-title">${safeEsc(s.label)}</span>
+            <span class="px-sugg-desc">${safeEsc(s.desc)}</span>
+          </span>
         </button>`).join('');
 
-      const caps = CFG.CAPABILITIES.map(c => `<span class="px-welcome-chip">${c}</span>`).join('');
+      const caps = CFG.CAPABILITIES.map(c => `<span class="px-welcome-chip">✦ ${c}</span>`).join('');
 
       return `
 <div class="pankrix-welcome" role="region" aria-label="Welcome to ${CFG.name}">
@@ -1691,10 +1690,10 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
     ${this._aiAvatarHTML()}
     <div class="px-welcome-bubble">
       <p class="px-welcome-greeting">Hey! I'm <strong>${CFG.name}</strong> 👋</p>
-      <p class="px-welcome-body">Sanchit's portfolio assistant — ask about projects, skills, experience, or anything tech-related. I'm online and ready to chat.</p>
+      <p class="px-welcome-body">Your intelligent portfolio assistant for Sanchit Goyal — ask me about his projects, skills, career goals, or anything ML &amp; AI related. I'm powered by Gemini and ready to help!</p>
     </div>
   </div>
-  <p class="px-welcome-prompt">Try asking:</p>
+  <p class="px-welcome-prompt">Quick questions to get started:</p>
   <div class="px-welcome-grid" role="list" aria-label="Suggested conversations">${suggs}</div>
   <div class="px-welcome-chips" aria-label="Capabilities">${caps}</div>
 </div>`;
@@ -1829,6 +1828,7 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
   function init() {
     const ai = new PankrixAI();
     ai.init();
+    if (!window.pankrixAI) ai.exposePublicAPI();
     document.querySelectorAll('[data-open-pankrix-ai]').forEach(btn => {
       btn.addEventListener('click', () => ai.setOpen(true));
     });

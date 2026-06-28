@@ -4466,4 +4466,521 @@ body {
   border-bottom: 1px solid rgba(56, 189, 248, 0.12) !important;
 }
 
+/* ==========================================================================
+   UX POLISH LAYER - Cleaner portfolio system
+   ========================================================================== */
+:root {
+  --surface-1: rgba(12, 18, 30, 0.72);
+  --surface-2: rgba(15, 23, 42, 0.58);
+  --surface-3: rgba(255, 255, 255, 0.035);
+  --line-clean: rgba(148, 163, 184, 0.16);
+  --line-accent-clean: rgba(125, 211, 252, 0.28);
+  --text-strong: #f8fafc;
+  --text-soft: #d7e2f2;
+  --focus-ring: 0 0 0 4px rgba(56, 189, 248, 0.16);
+}
+
+html {
+  scroll-padding-top: calc(var(--header-height) + 18px);
+}
+
+body {
+  text-rendering: geometricPrecision;
+  background:
+    linear-gradient(180deg, #05070c 0%, #080d17 28%, #07111a 56%, #05070c 100%) !important;
+}
+
+h1 {
+  font-size: 5.9rem;
+  line-height: 0.95;
+}
+
+h2 {
+  font-size: 3.15rem;
+  line-height: 1.05;
+}
+
+h3 {
+  letter-spacing: 0;
+}
+
+.container {
+  width: min(100% - 40px, 1160px);
+}
+
+.section {
+  padding: 92px 0;
+}
+
+.section-heading {
+  margin-bottom: 30px;
+}
+
+.section-intro,
+.about-copy p,
+.project-desc-new,
+#certifications .certificate-desc,
+.contact-status-card p {
+  color: var(--text-soft);
+}
+
+.section-kicker {
+  min-height: 28px;
+  padding: 0.28rem 0.64rem;
+  color: #9ee7ff;
+  background: rgba(56, 189, 248, 0.075);
+  border: 1px solid rgba(125, 211, 252, 0.16);
+  border-radius: 999px;
+}
+
+.section-kicker::before {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: currentColor;
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.42);
+}
+
+.site-header {
+  min-height: 68px;
+  background: rgba(5, 9, 16, 0.72) !important;
+  border-bottom-color: rgba(148, 163, 184, 0.12) !important;
+  backdrop-filter: blur(20px) saturate(145%) !important;
+}
+
+.nav-shell {
+  min-height: 68px;
+}
+
+.brand-mark {
+  width: 40px;
+  height: 40px;
+  color: #051016;
+  background:
+    linear-gradient(135deg, #7dd3fc, #34d399 72%, #fbbf24) padding-box,
+    linear-gradient(135deg, rgba(255,255,255,0.7), rgba(125,211,252,0.32)) border-box;
+  border-radius: 10px;
+}
+
+.brand-copy span {
+  color: #a9b7cb;
+}
+
+.nav-links {
+  gap: 0.18rem;
+  padding: 0.28rem;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(148, 163, 184, 0.08);
+  border-radius: 999px;
+}
+
+.nav-links a {
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 0.76rem;
+  border-radius: 999px;
+}
+
+.nav-links a:hover,
+.nav-links a.is-active {
+  color: #ffffff;
+  background: rgba(125, 211, 252, 0.1);
+}
+
+.nav-links a::after {
+  display: none;
+}
+
+.hero {
+  min-height: calc(100svh - 68px);
+  padding: 74px 0 58px;
+}
+
+.hero-grid {
+  grid-template-columns: minmax(0, 1.18fr) minmax(310px, 0.82fr);
+  min-height: auto;
+  gap: 42px;
+}
+
+.eyebrow-row {
+  gap: 0.55rem;
+  margin-bottom: 1rem;
+}
+
+.status-badge,
+.signal-text {
+  min-height: 36px;
+  border-radius: 999px;
+}
+
+.status-badge {
+  position: relative;
+  padding-left: 0.88rem;
+  color: #9ee7ff;
+}
+
+.status-badge::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  margin-right: 0.5rem;
+  background: #34d399;
+  border-radius: 50%;
+  box-shadow: 0 0 0 5px rgba(52, 211, 153, 0.12);
+}
+
+.hero-role {
+  color: #99f6e4;
+  font-size: 1.28rem;
+}
+
+.hero-role span:not(:last-child)::after {
+  color: rgba(148, 163, 184, 0.42);
+}
+
+.hero-headline {
+  max-width: 720px;
+  color: #d7e2f2;
+  font-size: 1.08rem;
+}
+
+.typewriter-line {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  align-items: center;
+  min-height: 40px;
+  padding: 0.56rem 0.78rem;
+  margin-bottom: 1.5rem;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  border-radius: 12px;
+}
+
+.hero-actions {
+  gap: 0.7rem;
+}
+
+.button,
+.btn-project-code,
+.btn-project-demo,
+.btn-cert-view,
+.btn-cert-verify,
+.project-tab-btn {
+  min-height: 44px;
+  border-radius: 12px;
+}
+
+.button-primary {
+  color: #03141a;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.42), transparent 42%) padding-box,
+    linear-gradient(135deg, #7dd3fc 0%, #34d399 72%, #fbbf24 100%) border-box !important;
+  border-color: transparent !important;
+  box-shadow: 0 16px 36px rgba(20, 184, 166, 0.18);
+}
+
+.button-secondary,
+.button-ghost {
+  background: rgba(15, 23, 42, 0.62);
+  border-color: var(--line-clean);
+}
+
+.social-dashboard {
+  gap: 0.62rem;
+  margin-top: 1.35rem;
+}
+
+.social-link,
+.icon-button {
+  width: 46px;
+  height: 46px;
+  background: rgba(255, 255, 255, 0.035);
+  border-color: rgba(148, 163, 184, 0.13);
+  border-radius: 12px;
+}
+
+.social-link:hover,
+.icon-button:hover,
+.social-link:focus-visible,
+.icon-button:focus-visible {
+  color: #ffffff;
+  border-color: rgba(125, 211, 252, 0.42);
+  background: rgba(125, 211, 252, 0.09);
+  box-shadow: var(--focus-ring);
+}
+
+.hero-system {
+  position: relative;
+  overflow: hidden;
+  padding: 22px;
+  background: linear-gradient(145deg, rgba(14, 21, 34, 0.84), rgba(8, 14, 24, 0.68)) !important;
+  border-color: rgba(148, 163, 184, 0.16) !important;
+  border-radius: 18px !important;
+}
+
+.hero-system::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(125, 211, 252, 0.1), transparent 34%),
+    linear-gradient(180deg, rgba(52, 211, 153, 0.055), transparent 46%);
+}
+
+.hero-system > * {
+  position: relative;
+  z-index: 1;
+}
+
+.system-header {
+  color: #b6efff;
+  border-bottom-color: rgba(148, 163, 184, 0.13);
+}
+
+.system-metrics {
+  gap: 10px;
+}
+
+.system-metrics div {
+  display: grid;
+  gap: 0.28rem;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.035);
+  border-color: rgba(148, 163, 184, 0.12);
+  border-radius: 14px;
+}
+
+.about-grid,
+.contact-layout {
+  align-items: start;
+}
+
+.about-copy,
+.feature-card,
+.timeline-item,
+.skill-card,
+.project-card-new,
+#certifications .certificate-card,
+.glass-card,
+.footer-panel,
+.pankrix-ai-home-card {
+  border-radius: 16px !important;
+}
+
+.feature-card,
+.timeline-item,
+.skill-card,
+.project-card-new,
+#certifications .certificate-card,
+.glass-card {
+  background: var(--surface-1) !important;
+  border-color: var(--line-clean) !important;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.045) !important;
+}
+
+.feature-card:hover,
+.timeline-item:hover,
+.skill-card:hover,
+.project-card-new:hover,
+#certifications .certificate-card:hover,
+.glass-card:hover {
+  transform: translateY(-4px) !important;
+  border-color: var(--line-accent-clean) !important;
+  background: rgba(16, 25, 40, 0.82) !important;
+  box-shadow: 0 22px 54px rgba(0, 0, 0, 0.38), 0 0 0 1px rgba(125, 211, 252, 0.08) inset !important;
+}
+
+.about-pill-list span,
+.skill-tags span,
+.project-tech-badge,
+.project-future-badge,
+#certifications .certificate-skills span,
+.pankrix-ai-home-chips span,
+.learning-badge {
+  border-radius: 999px !important;
+  background: rgba(255, 255, 255, 0.045) !important;
+  border-color: rgba(148, 163, 184, 0.14) !important;
+}
+
+.project-tabs-bar {
+  padding: 0.35rem;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  border-radius: 16px;
+}
+
+.project-tab-btn {
+  border-radius: 12px;
+}
+
+.project-tab-btn.is-active {
+  color: #051016;
+  background:
+    linear-gradient(135deg, #7dd3fc, #34d399 78%) !important;
+  box-shadow: 0 12px 28px rgba(20, 184, 166, 0.18);
+}
+
+.project-grid-new {
+  gap: 22px;
+}
+
+.project-img-wrap {
+  border-radius: 14px 14px 0 0;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.project-title-new {
+  color: #ffffff;
+}
+
+.project-actions-new {
+  gap: 0.65rem;
+}
+
+.contact-form-card input,
+.contact-form-card textarea {
+  min-height: 48px;
+  background: rgba(2, 6, 14, 0.42);
+  border-color: rgba(148, 163, 184, 0.15);
+  border-radius: 12px;
+}
+
+.contact-form-card textarea {
+  min-height: 136px;
+}
+
+.contact-form-card input:focus,
+.contact-form-card textarea:focus {
+  border-color: rgba(125, 211, 252, 0.56);
+  box-shadow: var(--focus-ring);
+}
+
+.contact-info-item {
+  border-radius: 14px;
+}
+
+.contact-icon-wrapper {
+  border-radius: 12px;
+}
+
+.pankrix-ai-home-section {
+  padding-top: 86px;
+}
+
+.pankrix-ai-home-card {
+  background:
+    linear-gradient(145deg, rgba(16, 24, 40, 0.88), rgba(8, 13, 24, 0.74)) padding-box,
+    linear-gradient(135deg, rgba(125, 211, 252, 0.28), rgba(52, 211, 153, 0.2), rgba(251, 191, 36, 0.14)) border-box !important;
+  border: 1px solid transparent !important;
+}
+
+.pankrix-ai-home-logo-wrap {
+  border-radius: 18px;
+}
+
+.footer-panel {
+  background: rgba(12, 18, 30, 0.62);
+  border-color: rgba(148, 163, 184, 0.12);
+}
+
+:focus-visible {
+  outline: 0;
+  box-shadow: var(--focus-ring);
+}
+
+@media (max-width: 1050px) {
+  h1 {
+    font-size: 4.7rem;
+  }
+
+  h2 {
+    font-size: 2.62rem;
+  }
+
+  .hero {
+    min-height: auto;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-system {
+    max-width: 760px;
+  }
+}
+
+@media (max-width: 860px) {
+  .nav-links {
+    border-radius: 18px;
+  }
+
+  .nav-links a {
+    width: 100%;
+    justify-content: center;
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 680px) {
+  .container {
+    width: min(100% - 28px, 1160px);
+  }
+
+  .section {
+    padding: 68px 0;
+  }
+
+  h1 {
+    font-size: 3.3rem;
+  }
+
+  h2 {
+    font-size: 2.2rem;
+  }
+
+  .hero {
+    padding-top: 48px;
+  }
+
+  .hero-role {
+    display: grid;
+    gap: 0.34rem;
+    font-size: 1.04rem;
+  }
+
+  .hero-role span:not(:last-child)::after {
+    display: none;
+  }
+
+  .typewriter-line {
+    display: block;
+    width: 100%;
+  }
+
+  .hero-actions .button,
+  .pankrix-ai-home-actions .button,
+  .contact-submit-btn {
+    width: 100%;
+  }
+
+  .social-link,
+  .icon-button {
+    width: 44px;
+    height: 44px;
+  }
+
+  .project-tabs-bar {
+    justify-content: flex-start;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .project-tabs-bar::-webkit-scrollbar {
+    display: none;
+  }
+}
 
