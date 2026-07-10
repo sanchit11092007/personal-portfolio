@@ -1,11 +1,11 @@
 /**
- * MIKASA v7.0 — Premium Portfolio Intelligence Assistant
+ * MIKASA v7.0  Premium Portfolio Intelligence Assistant
  * Google Gemini-powered | Streaming | Multimodal | Sidebar | AI Modes
  * ===================================================================
  * Author  : Built for Sanchit Goyal's Portfolio
  * Engine  : Google Gemini 2.5 Flash (with auto-fallback)
- * Features: Streaming · Sidebar · 11 AI Modes · File Upload · Voice
- *           Follow-up Chips · Conversation History · Dark/Light Mode
+ * Features: Streaming  Sidebar  11 AI Modes  File Upload  Voice
+ *           Follow-up Chips  Conversation History  Dark/Light Mode
  * ===================================================================
  */
 
@@ -26,12 +26,12 @@
     logoPath: 'assets/images/mikasa-ai-logo.png',
     defaultModel: 'gemini-2.5-flash',
     apiBase: 'https://generativelanguage.googleapis.com/v1beta/models',
-    maxOutputTokens: 4096,
-    temperature: 0.75,
-    topP: 0.92,
+    maxOutputTokens: 3072,
+    temperature: 0.35,
+    topP: 0.82,
     topK: 40,
-    HIST_KEY: 'pankrix-ai:convs:v7',
-    UI_STORE: 'pankrix-ai:ui:v7',
+    HIST_KEY: 'mikasa-ai:convs:v8',
+    UI_STORE: 'mikasa-ai:ui:v8',
     MAX_HIST: 40,
     MAX_CONVS: 30,
     FALLBACK_MODELS: ['gemini-2.5-flash', 'gemini-2.5-pro', 'gemini-2.0-flash', 'gemini-2.0-flash-lite'],
@@ -111,85 +111,96 @@
   /* ============================================================
      SYSTEM PROMPT BUILDER
      ============================================================ */
+  function buildPortfolioGrounding() {
+    const data = window.PORTFOLIO_DATA || {};
+    const legacy = window.portfolioData || {};
+    const owner = data.owner || {};
+    const contact = legacy.contact || {};
+
+    const skills = (data.skills || []).map((group) => ({
+      category: group.category,
+      description: group.description,
+      items: (group.items || []).map((item) => (
+        typeof item === 'string' ? item : `${item.name} (${item.proficiency}%)`
+      ))
+    }));
+
+    const projects = (data.projects || []).map((project) => ({
+      title: project.title,
+      category: project.category,
+      description: project.description,
+      techStack: project.techStack || [],
+      features: project.features || [],
+      codeUrl: project.codeUrl || null,
+      demoUrl: project.demoUrl || null
+    }));
+
+    const certifications = (data.certifications || []).map((cert) => ({
+      name: cert.name,
+      issuer: cert.issuer,
+      issueDate: cert.issueDate,
+      category: cert.category,
+      description: cert.description,
+      skills: cert.skills || [],
+      verificationUrl: cert.verificationUrl || null
+    }));
+
+    return JSON.stringify({
+      owner: {
+        name: owner.name || legacy.about?.name || 'Sanchit Goyal',
+        roles: owner.roles || legacy.about?.identity || [],
+        email: owner.email || contact.email || null,
+        location: owner.location || contact.location || null,
+        education: owner.education || null,
+        availability: contact.availability || null
+      },
+      profile: {
+        headline: legacy.about?.headline || null,
+        summary: legacy.about?.summary || null,
+        strengths: legacy.about?.strengths || [],
+        interests: legacy.about?.interests || []
+      },
+      education: legacy.education || {},
+      verifiedSkills: skills,
+      verifiedProjects: projects,
+      plannedProjectAreas: data.plannedProjectAreas || [],
+      verifiedCertifications: certifications,
+      goals: data.goals || legacy.goals || {},
+      socialLinks: data.socialLinks || contact.links || []
+    }, null, 2);
+  }
+
   function buildSystemPrompt(modeKey) {
     const mode = AI_MODES[modeKey] || AI_MODES.default;
-    return `You are MIKASA, the official intelligent portfolio assistant for Sanchit Goyal — named after Mikasa Ackerman from Attack on Titan. You are powered by Google Gemini 2.5 Flash and embedded in his personal portfolio website. Embody loyalty, sharp focus, and reliability while staying professional and helpful.
+    const portfolioGrounding = buildPortfolioGrounding();
+    return `You are MIKASA, the official intelligent portfolio assistant for Sanchit Goyal, embedded in his personal portfolio website. Stay professional, helpful, and precise.
 
 ## CURRENT MODE
 ${mode.prompt}
 
 ## CORE PERSONALITY
 - Be professional, highly intelligent, friendly, and naturally conversational.
-- Use emojis naturally (🚀 💻 🎓 ✨ 😊 👍) to make responses feel engaging — not excessively.
+- Use a clean, polished tone. Avoid excessive emojis or hype.
 - Match the user's language (English, Hindi, Spanish, etc.).
 - Retain full context across the conversation.
 - When the user asks to switch modes (e.g., "switch to recruiter mode", "act like a teacher"), acknowledge the switch warmly and continue in that style.
 
+## ACCURACY RULES
+- Treat the VERIFIED PORTFOLIO DATA below as the source of truth for Sanchit's profile.
+- Do not invent CGPA, rankings, awards, internships, jobs, publications, dates, metrics, or achievements that are not listed.
+- If information is missing, say that the portfolio does not list it yet and offer a useful next step.
+- Clearly distinguish verified projects/certifications from planned or future project areas.
+- Use exact project names, certification names, dates, issuers, and links from the verified data.
+- For recruiter questions, be positive but honest about Sanchit's current learning stage.
+- For technical questions not about Sanchit, answer normally as a mentor and do not pretend the answer came from the portfolio.
+
 ## INTERACTIVE FEATURES
-- **Sanchit Trivia Quiz**: If user says "quiz", "trivia", or "play quiz" — host a game-show style quiz with A/B/C/D options about Sanchit's profile. One question at a time.
+- **Sanchit Trivia Quiz**: If user says "quiz", "trivia", or "play quiz", host a game-show style quiz with A/B/C/D options about Sanchit's profile. One question at a time.
 - **Resume Review**: If asked to review or critique a resume, provide detailed, actionable feedback.
 - **Mock Interview**: In interviewer mode, conduct structured interviews with feedback.
 
-## SANCHIT GOYAL — COMPLETE PROFILE
-
-### Personal Information
-- **Full Name**: Sanchit Goyal
-- **Location**: India
-- **Primary Email**: sanchitgoyal11092007@gmail.com
-- **Contact Email**: iamsanchitgoyal@gmail.com
-- **LinkedIn**: https://www.linkedin.com/in/the-sanchit-goyal
-- **GitHub**: https://github.com/sanchit11092007
-- **Portfolio**: https://sanchit11092007.github.io/personal-portfolio/
-- **Kaggle**: https://www.kaggle.com/sanchitgoyal2007
-- **LeetCode**: https://leetcode.com/u/sanchit11092007/
-- **HackerRank**: https://www.hackerrank.com/profile/Sanchit11092007
-- **Codeforces**: https://codeforces.com/profile/sanchit11092007
-- **Medium**: https://medium.com/@sanchitgoyal11092007
-- **X (Twitter)**: https://x.com/iamsanchitgoyal
-- **DEV Community**: https://dev.to/sanchit_goyal
-
-### Education
-- **Degree**: B.Tech Computer Science Engineering
-- **Specialization**: Data Science and Machine Learning
-- **Institution**: Lovely Professional University (LPU), India
-- **Status**: Currently enrolled — First Year (started August 2025)
-- **CGPA**: 9+ (ongoing)
-- **Expected Graduation**: 2029
-
-### Professional Summary
-Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast pursuing B.Tech CSE with a Data Science & ML specialization at LPU. He combines analytical thinking, strong research curiosity, and hands-on project experience to build real-world data solutions. He is passionate about building impactful AI products and contributing to the AI/ML research community.
-
-### Technical Skills
-**Programming**: Python (50%), SQL (50%), JavaScript (35%), C++ (25%), Java (15%), R (basic)
-**Data Science**: NumPy (60%), Pandas (60%), Matplotlib (35%), Seaborn (30%), Excel (45%), Power BI (20%), EDA (60%), Data Cleaning (60%)
-**ML & AI**: Scikit-learn (25%), ML fundamentals (18%), Deep Learning basics (12%), Generative AI (15%), Prompt Engineering (20%), NLP basics (10%)
-**Tools**: Git/GitHub (45%), VS Code (45%), Jupyter (35%), Google Colab (35%), Kaggle (25%), Streamlit (basic), FastAPI (basic), Docker (basic)
-**Learning Now**: DSA, Scikit-learn in depth, ML Pipelines, Model Deployment, Deep Learning (TensorFlow/Keras)
-
-### Projects
-1. **Pure Python Data Cleaning Recommendation Engine**
-   - GitHub: https://github.com/sanchit11092007/Pure-Python-Data-Cleaning-Recommendation-Engine
-   - Description: Recommendation engine built in pure Python (no heavy ML libraries) that analyzes dataset characteristics and recommends data cleaning strategies — handles missing values, duplicates, inconsistent formatting, and outliers.
-   - Tech: Python, Data Cleaning, Preprocessing, Recommendation Logic, CSV Processing
-
-2. **Credit Banking Customer Analysis**
-   - GitHub: https://github.com/sanchit11092007/Credit-Banking-Analysis
-   - Description: Exploratory data analysis on banking customer data to uncover behavior patterns, financial trends, and segmented business insights.
-   - Tech: Python, Pandas, NumPy, Matplotlib, Seaborn, EDA, Statistical Analysis
-
-### Certifications
-1. Generative AI Foundation — upGrad (2025)
-2. Power BI — upGrad (2025)
-3. Web Scraping — upGrad (2026)
-4. Ultimate Job Ready Data Science Course — Code with Harry (2026)
-5. Python Bootcamp Course — Code with Harry (2025)
-6. Web Development Course — Code with Harry (2026)
-
-### Career Goals
-- Become a successful Data Scientist
-- Build impactful AI products
-- Contribute to AI/ML research
-- Target: AI/ML internships, data science roles, research collaborations
+## VERIFIED PORTFOLIO DATA
+${portfolioGrounding}
 
 ## RESPONSE GUIDELINES
 - **Portfolio Questions**: Be specific, cite projects with GitHub links, represent Sanchit with high energy and professionalism.
@@ -200,7 +211,7 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
   }
 
   /* ============================================================
-     GEMINI API CLIENT — STREAMING WITH AUTO-FALLBACK
+     GEMINI API CLIENT  STREAMING WITH AUTO-FALLBACK
      ============================================================ */
   async function streamGemini(model, messages, pendingFiles, onChunk, onDone, onError, _tried = []) {
     const url = `${CFG.apiBase}/${model}:streamGenerateContent?alt=sse&key=${encodeURIComponent(_K)}`;
@@ -257,7 +268,7 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
         if (recoverable && CFG.FALLBACK_MODELS) {
           const tried = [..._tried, model];
           const next = CFG.FALLBACK_MODELS.find(m => !tried.includes(m));
-          if (next) { console.log(`[MIKASA] Switching from ${model} → ${next}`); return streamGemini(next, messages, pendingFiles, onChunk, onDone, onError, tried); }
+          if (next) { console.log(`[MIKASA] Switching from ${model} -> ${next}`); return streamGemini(next, messages, pendingFiles, onChunk, onDone, onError, tried); }
         }
         onError(errMsg); return;
       }
@@ -540,22 +551,22 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
   function generateFollowUps(text) {
     const t = text.toLowerCase();
     const sugs = [];
-    if (t.includes('project') || t.includes('github')) sugs.push('📂 Show more project details');
-    if (t.includes('skill') || t.includes('python') || t.includes('machine learning')) sugs.push('📈 What is Sanchit\'s strongest skill?');
-    if (t.includes('certif')) sugs.push('🏆 Which certification is most impressive?');
-    if (t.includes('data') || t.includes('analysis')) sugs.push('📊 Tell me about his data science approach');
-    if (t.includes('learn') || t.includes('studying')) sugs.push('🎯 What should he learn next?');
-    if (t.includes('intern') || t.includes('job') || t.includes('hire')) sugs.push('📋 What roles suit him?');
-    if (t.includes('ai') || t.includes('generative') || t.includes('llm')) sugs.push('🤖 How does MIKASA work?');
+    if (t.includes('project') || t.includes('github')) sugs.push('Show more project details');
+    if (t.includes('skill') || t.includes('python') || t.includes('machine learning')) sugs.push('What is Sanchit\'s strongest skill?');
+    if (t.includes('certif')) sugs.push('Which certification is most impressive?');
+    if (t.includes('data') || t.includes('analysis')) sugs.push('Tell me about his data science approach');
+    if (t.includes('learn') || t.includes('studying')) sugs.push('What should he learn next?');
+    if (t.includes('intern') || t.includes('job') || t.includes('hire')) sugs.push('What roles suit him?');
+    if (t.includes('ai') || t.includes('generative') || t.includes('llm')) sugs.push('How does MIKASA work?');
     if (sugs.length === 0) {
-      sugs.push('🚀 Tell me something impressive about Sanchit');
-      sugs.push('💡 What makes him unique?');
+      sugs.push('Tell me something impressive about Sanchit');
+      sugs.push('What makes him unique?');
     }
     return sugs.slice(0, 3);
   }
 
   /* ============================================================
-     MIKASA CLASS — MAIN ENGINE
+     MIKASA CLASS  MAIN ENGINE
      ============================================================ */
   class PankrixAI {
     constructor() {
@@ -584,7 +595,7 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
     }
     get messages() { return this.activeConv?.messages || []; }
 
-    /* ── Storage ── */
+    /*  Storage  */
     _ls(k) { try { return localStorage.getItem(k) || ''; } catch { return ''; } }
     _lsSet(k, v) { try { localStorage.setItem(k, v); } catch { } }
 
@@ -648,7 +659,7 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
 
     autoNameConversation(text) {
       if (this.activeConv && this.activeConv.name === 'New Chat') {
-        this.activeConv.name = text.slice(0, 36) + (text.length > 36 ? '…' : '');
+        this.activeConv.name = text.slice(0, 36) + (text.length > 36 ? '' : '');
         this.saveConversations();
         this._renderSidebar();
       }
@@ -666,9 +677,9 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
       } catch { }
     }
 
-    /* ── Init ── */
+    /*  Init  */
     init() {
-      document.getElementById('pankrixAiAssistant')?.remove();
+      document.getElementById('MIKASAAiAssistant')?.remove();
       this.loadConversations();
 
       // Restore UI state
@@ -708,11 +719,11 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
       };
     }
 
-    /* ── UI Build ── */
+    /*  UI Build  */
     createUI() {
       const el = document.createElement('div');
-      el.id = 'pankrixAiAssistant';
-      el.className = 'pankrix-ai';
+      el.id = 'MIKASAAiAssistant';
+      el.className = 'MIKASA-ai';
       el.dataset.open = 'false';
       el.dataset.busy = 'false';
       el.dataset.minimized = 'false';
@@ -725,26 +736,26 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
     _buildHTML() {
       const mode = AI_MODES[this.currentMode] || AI_MODES.default;
       return `
-<!-- ── Overlay ── -->
-<div class="pankrix-overlay" id="pankrixOverlay" aria-hidden="true"></div>
+<!--  Overlay  -->
+<div class="MIKASA-overlay" id="pankrixOverlay" aria-hidden="true"></div>
 
-<!-- ── FAB ── -->
-<button class="pankrix-fab" type="button" aria-label="Open ${CFG.name}" aria-expanded="false" aria-controls="pankrixPanel">
-  <span class="pankrix-fab-rings" aria-hidden="true">
-    <span class="pankrix-fab-ring"></span>
-    <span class="pankrix-fab-ring"></span>
+<!--  FAB  -->
+<button class="MIKASA-fab" type="button" aria-label="Open ${CFG.name}" aria-expanded="false" aria-controls="pankrixPanel">
+  <span class="MIKASA-fab-rings" aria-hidden="true">
+    <span class="MIKASA-fab-ring"></span>
+    <span class="MIKASA-fab-ring"></span>
   </span>
-  <span class="pankrix-fab-glow" aria-hidden="true"></span>
-  <span class="pankrix-fab-logo"><img src="${CFG.logoPath}" alt="" width="40" height="40" loading="lazy"></span>
-  <span class="pankrix-fab-label">${CFG.name}</span>
-  <span class="pankrix-fab-badge" id="pankrixUnreadBadge" aria-hidden="true"></span>
+  <span class="MIKASA-fab-glow" aria-hidden="true"></span>
+  <span class="MIKASA-fab-logo"><img src="${CFG.logoPath}" alt="" width="40" height="40" loading="lazy"></span>
+  <span class="MIKASA-fab-label">${CFG.name}</span>
+  <span class="MIKASA-fab-badge" id="pankrixUnreadBadge" aria-hidden="true"></span>
 </button>
 
-<!-- ── Chat Panel ── -->
-<div class="pankrix-panel" id="pankrixPanel" role="dialog" aria-modal="false" aria-label="${CFG.name} Assistant">
+<!--  Chat Panel  -->
+<div class="MIKASA-panel" id="pankrixPanel" role="dialog" aria-modal="false" aria-label="${CFG.name} Assistant">
 
   <!-- Sidebar -->
-  <nav class="pankrix-sidebar${this.sidebarOpen ? ' px-sidebar-open' : ''}" id="pankrixSidebar" aria-label="Conversation sidebar">
+  <nav class="MIKASA-sidebar${this.sidebarOpen ? ' px-sidebar-open' : ''}" id="pankrixSidebar" aria-label="Conversation sidebar">
     <div class="px-sidebar-head">
       <div class="px-sidebar-logo">
         <img src="${CFG.logoPath}" alt="${CFG.name}" width="24" height="24" loading="lazy">
@@ -753,7 +764,7 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
       <button class="px-new-chat-btn" type="button" id="pxNewChatBtn" title="New chat" aria-label="Start new conversation">+</button>
     </div>
     <div class="px-sidebar-search">
-      <input type="search" id="pxSidebarSearch" placeholder="🔍 Search chats…" aria-label="Search conversations">
+      <input type="search" id="pxSidebarSearch" placeholder="Search chats" aria-label="Search conversations">
     </div>
     <div class="px-sidebar-body" id="pxSidebarBody"></div>
     <div style="padding:10px 12px; border-top:1px solid var(--px-border); flex-shrink:0;">
@@ -778,24 +789,24 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
   </nav>
 
   <!-- Main area -->
-  <div class="pankrix-main">
+  <div class="MIKASA-main">
 
     <!-- Header -->
-    <header class="pankrix-header" id="pankrixHeader">
-      <button class="px-sidebar-toggle pankrix-icon-btn" type="button" id="pxSidebarToggle" title="Toggle sidebar" aria-label="Toggle conversation sidebar">
+    <header class="MIKASA-header" id="pankrixHeader">
+      <button class="px-sidebar-toggle MIKASA-icon-btn" type="button" id="pxSidebarToggle" title="Toggle sidebar" aria-label="Toggle conversation sidebar">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" aria-hidden="true">
           <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
         </svg>
       </button>
 
-      <div class="pankrix-header-brand">
-        <div class="pankrix-header-logo-wrap">
+      <div class="MIKASA-header-brand">
+        <div class="MIKASA-header-logo-wrap">
           <img src="${CFG.logoPath}" alt="${CFG.name}" width="32" height="32" loading="lazy">
-          <span class="pankrix-online-dot" title="Online"></span>
+          <span class="MIKASA-online-dot" title="Online"></span>
         </div>
-        <div class="pankrix-header-info">
-          <span class="pankrix-header-name">${CFG.name}</span>
-          <span class="pankrix-header-sub"><span class="px-status-online">● Online</span> &nbsp;·&nbsp; <span class="px-gemini-badge">✦ Gemini</span></span>
+        <div class="MIKASA-header-info">
+          <span class="MIKASA-header-name">${CFG.name}</span>
+          <span class="MIKASA-header-sub"><span class="px-status-online">Online</span> &nbsp;|&nbsp; <span class="px-gemini-badge">Gemini</span></span>
         </div>
       </div>
 
@@ -805,52 +816,52 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="10" height="10" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
 
-      <div class="pankrix-header-btns">
-        <button class="pankrix-icon-btn" type="button" id="pxThemeBtn" title="Toggle theme" aria-label="Toggle dark/light mode">
+      <div class="MIKASA-header-btns">
+        <button class="MIKASA-icon-btn" type="button" id="pxThemeBtn" title="Toggle theme" aria-label="Toggle dark/light mode">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
         </button>
-        <button class="pankrix-icon-btn" type="button" data-act="summary" title="Summarize conversation" aria-label="Summarize conversation">
+        <button class="MIKASA-icon-btn" type="button" data-act="summary" title="Summarize conversation" aria-label="Summarize conversation">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="15" height="15" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
         </button>
-        <button class="pankrix-icon-btn" type="button" data-act="export" title="Export chat" aria-label="Export conversation">
+        <button class="MIKASA-icon-btn" type="button" data-act="export" title="Export chat" aria-label="Export conversation">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="15" height="15" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         </button>
-        <button class="pankrix-icon-btn" type="button" data-act="clear" title="Clear chat" aria-label="Clear conversation">
+        <button class="MIKASA-icon-btn" type="button" data-act="clear" title="Clear chat" aria-label="Clear conversation">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="15" height="15" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg>
         </button>
-        <button class="pankrix-icon-btn" type="button" data-act="minimize" title="Minimize" aria-label="Minimize">
+        <button class="MIKASA-icon-btn" type="button" data-act="minimize" title="Minimize" aria-label="Minimize">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </button>
-        <button class="pankrix-icon-btn" type="button" data-act="close" title="Close" aria-label="Close ${CFG.name}">
+        <button class="MIKASA-icon-btn" type="button" data-act="close" title="Close" aria-label="Close ${CFG.name}">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
       </div>
     </header>
 
     <!-- Messages -->
-    <div class="pankrix-messages-wrap">
-      <div class="pankrix-messages" id="pankrixMessages" aria-live="polite" aria-label="Conversation" role="log"></div>
+    <div class="MIKASA-messages-wrap">
+      <div class="MIKASA-messages" id="pankrixMessages" aria-live="polite" aria-label="Conversation" role="log"></div>
       <button class="px-scroll-bottom" type="button" id="pxScrollBottom" hidden aria-label="Scroll to latest message">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="16" height="16" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
     </div>
 
     <!-- File attachment area (hidden unless files pending) -->
-    <div class="pankrix-compose" id="pankrixCompose">
+    <div class="MIKASA-compose" id="pankrixCompose">
       <div class="px-edit-strip" id="pxEditStrip" style="display:none;">
-        <span class="px-edit-label">✏️ Editing message</span>
+        <span class="px-edit-label">Editing message</span>
         <button class="px-edit-cancel" id="pxEditCancel" type="button">Cancel</button>
       </div>
       <div class="px-file-strip" id="pxFileStrip" style="display:none;"></div>
-      <div class="pankrix-compose-inner" id="pankrixComposeInner">
+      <div class="MIKASA-compose-inner" id="pankrixComposeInner">
         <div class="px-compose-left">
           <button class="px-icon-compose-btn" type="button" id="pxAttachBtn" title="Attach file or image" aria-label="Attach file">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" aria-hidden="true"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
           </button>
           <input type="file" id="pxFileInput" accept="image/*,.pdf,.txt,.csv,.json,.py,.js,.md" multiple style="display:none;" aria-label="Upload file">
         </div>
-        <textarea class="pankrix-textarea" id="pankrixInput" rows="1" maxlength="8000"
-          placeholder="Message ${CFG.name}…" aria-label="Chat input" autocomplete="off" autocorrect="off" spellcheck="true"></textarea>
+        <textarea class="MIKASA-textarea" id="pankrixInput" rows="1" maxlength="8000"
+          placeholder="Message ${CFG.name}" aria-label="Chat input" autocomplete="off" autocorrect="off" spellcheck="true"></textarea>
         <button class="px-icon-compose-btn px-mic-btn" type="button" id="pxMicBtn" title="Voice input" aria-label="Voice input">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" aria-hidden="true">
             <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
@@ -859,28 +870,28 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
             <line x1="8" y1="23" x2="16" y2="23"/>
           </svg>
         </button>
-        <button class="pankrix-send-btn" type="button" id="pankrixSendBtn" aria-label="Send message" title="Send (Enter)">
+        <button class="MIKASA-send-btn" type="button" id="pankrixSendBtn" aria-label="Send message" title="Send (Enter)">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="16" height="16" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
         </button>
       </div>
-      <div class="pankrix-compose-foot">
+      <div class="MIKASA-compose-foot">
         <span class="px-char-count" id="pxCharCount">0 / 8000</span>
-        <span class="px-powered">✦ Powered by Google Gemini</span>
+        <span class="px-powered">Powered by Google Gemini</span>
       </div>
     </div>
 
-  </div><!-- end .pankrix-main -->
+  </div><!-- end .MIKASA-main -->
 
-</div><!-- end .pankrix-panel -->`;
+</div><!-- end .MIKASA-panel -->`;
     }
 
-    /* ── Event Binding ── */
+    /*  Event Binding  */
     bindEvents() {
       // Use delegated event handling for message actions to prevent duplicate bindings
       const r = this.root;
 
       // FAB
-      r.querySelector('.pankrix-fab').addEventListener('click', () => this.setOpen(!this.isOpen));
+      r.querySelector('.MIKASA-fab').addEventListener('click', () => this.setOpen(!this.isOpen));
 
       // Overlay
       r.querySelector('#pankrixOverlay')?.addEventListener('click', () => this.setOpen(false));
@@ -968,7 +979,7 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
         const sb = r.querySelector('#pankrixSendBtn');
         if (sb) {
           const hasContent = ta.value.trim().length > 0 || this.pendingFiles.length > 0;
-          sb.classList.toggle('pankrix-send-active', hasContent);
+          sb.classList.toggle('MIKASA-send-active', hasContent);
         }
       });
       ta.addEventListener('keydown', e => {
@@ -981,7 +992,7 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
         this._hideEditIndicator();
         this._autoResize(ta);
         r.querySelector('#pxCharCount').textContent = '0 / 8000';
-        r.querySelector('#pankrixSendBtn')?.classList.remove('pankrix-send-active');
+        r.querySelector('#pankrixSendBtn')?.classList.remove('MIKASA-send-active');
       });
 
       // File attach
@@ -1026,7 +1037,7 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
       if (act === 'summary') this._summarizeChat();
     }
 
-    /* ── Sidebar ── */
+    /*  Sidebar  */
     _toggleSidebar() {
       this.sidebarOpen = !this.sidebarOpen;
       const sb = this.root.querySelector('#pankrixSidebar');
@@ -1048,7 +1059,7 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
 
       let html = '';
       if (pinned.length > 0) {
-        html += `<p class="px-sidebar-section-label">📌 Pinned</p>`;
+        html += `<p class="px-sidebar-section-label">Pinned</p>`;
         html += pinned.map(c => this._convItemHTML(c)).join('');
       }
       if (recent.length > 0) {
@@ -1063,20 +1074,20 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
 
     _convItemHTML(conv) {
       const active = conv.id === this.activeConvId;
-      const icon = conv.pinned ? '📌' : (conv.messages.length === 0 ? '💬' : '🗨️');
+      const icon = conv.pinned ? '' : (conv.messages.length === 0 ? '' : '');
       const pinTitle = conv.pinned ? 'Unpin conversation' : 'Pin conversation';
       const pinClass = conv.pinned ? 'px-conv-pin active' : 'px-conv-pin';
-      const pinText = conv.pinned ? '★' : '☆';
+      const pinText = conv.pinned ? '' : '';
       return `
         <div class="px-conv-item${active ? ' active' : ''}" data-id="${safeEscAttr(conv.id)}" role="button" tabindex="0" aria-label="Switch to conversation: ${safeEsc(conv.name)}">
           <span class="px-conv-icon">${icon}</span>
           <span class="px-conv-name" title="${safeEsc(conv.name)}">${safeEsc(conv.name)}</span>
           <span class="${pinClass}" data-id="${safeEscAttr(conv.id)}" title="${pinTitle}" role="button" aria-label="${pinTitle}">${pinText}</span>
-          <span class="px-conv-del" data-id="${safeEscAttr(conv.id)}" title="Delete conversation" role="button" aria-label="Delete conversation">✕</span>
+          <span class="px-conv-del" data-id="${safeEscAttr(conv.id)}" title="Delete conversation" role="button" aria-label="Delete conversation"></span>
         </div>`;
     }
 
-    /* ── AI Mode ── */
+    /*  AI Mode  */
     _openModeModal() {
       this._closeModeModal();
       this.modeModalOpen = true;
@@ -1128,20 +1139,20 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
       this._toast(`${mode.emoji} ${mode.name} activated!`);
     }
 
-    /* ── Theme ── */
+    /*  Theme  */
     _toggleTheme() {
       this.theme = this.theme === 'dark' ? 'light' : 'dark';
       this.root.dataset.theme = this.theme;
       this._saveUIState();
-      this._toast(this.theme === 'light' ? '☀️ Light mode' : '🌙 Dark mode');
+      this._toast(this.theme === 'light' ? ' Light mode' : ' Dark mode');
     }
 
-    /* ── Toast ── */
+    /*  Toast  */
     _toast(msg, type = 'info') {
-      const existing = document.querySelector('.pankrix-toast');
+      const existing = document.querySelector('.MIKASA-toast');
       if (existing) existing.remove();
       const t = document.createElement('div');
-      t.className = 'pankrix-toast';
+      t.className = 'MIKASA-toast';
       t.setAttribute('role', 'status');
       t.textContent = msg;
       document.body.appendChild(t);
@@ -1152,13 +1163,13 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
       }, 2500);
     }
 
-    /* ── State ── */
+    /*  State  */
     setOpen(open, persist = true) {
       this.isOpen = !!open;
       this.isMinimized = false;
       this.root.dataset.open = String(this.isOpen);
       this.root.dataset.minimized = 'false';
-      this.root.querySelector('.pankrix-fab')?.setAttribute('aria-expanded', String(this.isOpen));
+      this.root.querySelector('.MIKASA-fab')?.setAttribute('aria-expanded', String(this.isOpen));
 
       if (!this.isOpen && window.speechSynthesis) {
         window.speechSynthesis.cancel();
@@ -1193,30 +1204,30 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
       const mic = this.root.querySelector('#pxMicBtn');
       const attach = this.root.querySelector('#pxAttachBtn');
       if (ta) ta.disabled = this.busy;
-      if (sb) { sb.disabled = this.busy; if (this.busy) sb.classList.remove('pankrix-send-active'); }
+      if (sb) { sb.disabled = this.busy; if (this.busy) sb.classList.remove('MIKASA-send-active'); }
       if (mic) mic.disabled = this.busy;
       if (attach) attach.disabled = this.busy;
     }
 
-    /* ── File Handling ── */
+    /*  File Handling  */
     async _handleFiles(fileList) {
       if (!fileList || fileList.length === 0) return;
       const strip = this.root.querySelector('#pxFileStrip');
 
       for (const file of Array.from(fileList)) {
-        if (file.size > 10 * 1024 * 1024) { this._toast(`⚠️ ${file.name} is too large (max 10MB)`); continue; }
+        if (file.size > 10 * 1024 * 1024) { this._toast(` ${file.name} is too large (max 10MB)`); continue; }
         try {
           const data = await fileToBase64(file);
           const previewUrl = file.type.startsWith('image/') ? URL.createObjectURL(file) : null;
           this.pendingFiles.push({ name: file.name, mimeType: file.type, data, previewUrl });
         } catch (e) {
-          this._toast(`⚠️ Failed to read ${file.name}`);
+          this._toast(` Failed to read ${file.name}`);
         }
       }
       this._renderFileStrip();
       // Activate send button
       const sb = this.root.querySelector('#pankrixSendBtn');
-      if (sb && this.pendingFiles.length > 0) sb.classList.add('pankrix-send-active');
+      if (sb && this.pendingFiles.length > 0) sb.classList.add('MIKASA-send-active');
     }
 
     _renderFileStrip() {
@@ -1228,7 +1239,7 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
         <div class="px-file-preview">
           ${f.previewUrl ? `<img src="${safeEscAttr(f.previewUrl)}" alt="">` : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>`}
           <span class="px-file-preview-name">${safeEsc(f.name)}</span>
-          <span class="px-file-remove" data-idx="${idx}" role="button" title="Remove file" aria-label="Remove ${safeEsc(f.name)}">✕</span>
+          <span class="px-file-remove" data-idx="${idx}" role="button" title="Remove file" aria-label="Remove ${safeEsc(f.name)}"></span>
         </div>`).join('');
 
       strip.querySelectorAll('.px-file-remove').forEach(btn => {
@@ -1239,19 +1250,19 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
           this._renderFileStrip();
           const sb = this.root.querySelector('#pankrixSendBtn');
           const ta = this.root.querySelector('#pankrixInput');
-          if (sb && !ta?.value.trim() && this.pendingFiles.length === 0) sb.classList.remove('pankrix-send-active');
+          if (sb && !ta?.value.trim() && this.pendingFiles.length === 0) sb.classList.remove('MIKASA-send-active');
         });
       });
     }
 
-    /* ── Export ── */
+    /*  Export  */
     _exportChat() {
       if (!this.messages.length) { this._toast('No conversation to export'); return; }
-      const lines = [`${CFG.name} — Export`, `Conversation: ${this.activeConv?.name || 'Chat'}`, `Date: ${new Date().toLocaleString()}`, `${'─'.repeat(60)}\n`];
+      const lines = [`${CFG.name} - Export`, `Conversation: ${this.activeConv?.name || 'Chat'}`, `Date: ${new Date().toLocaleString()}`, `${'-'.repeat(60)}\n`];
       this.messages.forEach(m => {
         if (m.role === 'user') lines.push(`You [${timeFmt(m.time)}]:\n${m.content}\n`);
         else if (m.role === 'assistant') lines.push(`${CFG.name} [${timeFmt(m.time)}]:\n${m.content}\n`);
-        lines.push('─'.repeat(40));
+        lines.push('-'.repeat(40));
       });
       const blob = new Blob([lines.join('\n')], { type: 'text/plain' });
       const a = document.createElement('a');
@@ -1259,10 +1270,10 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
       a.download = `mikasa-chat-${Date.now()}.txt`;
       a.click();
       URL.revokeObjectURL(a.href);
-      this._toast('💾 Chat exported');
+      this._toast(' Chat exported');
     }
 
-    /* ── Summary & Edit ── */
+    /*  Summary & Edit  */
     _summarizeChat() {
       if (!this.messages.length) { this._toast('No conversation to summarize'); return; }
       this.sendMessage("Please provide a concise summary of our conversation so far.");
@@ -1278,7 +1289,7 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
         ta.focus();
         this.editingMsgId = id;
         this._showEditIndicator();
-        this.root.querySelector('#pankrixSendBtn')?.classList.add('pankrix-send-active');
+        this.root.querySelector('#pankrixSendBtn')?.classList.add('MIKASA-send-active');
       }
     }
 
@@ -1293,11 +1304,11 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
       if (strip) strip.style.display = 'none';
     }
 
-    /* ── Voice Input ── */
+    /*  Voice Input  */
     _toggleMic() {
       const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
       const btn = this.root.querySelector('#pxMicBtn');
-      if (!SR) { this._toast('🎙 Voice typing not supported in this browser'); return; }
+      if (!SR) { this._toast(' Voice typing not supported in this browser'); return; }
       if (this.isListening) { this.recognition?.stop(); return; }
       try {
         if (!this.recognition) {
@@ -1305,12 +1316,12 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
           this.recognition.continuous = false;
           this.recognition.interimResults = false;
           this.recognition.lang = navigator.language || 'en-US';
-          this.recognition.onstart = () => { this.isListening = true; btn?.classList.add('px-listening'); this._toast('🎙 Listening…'); };
+          this.recognition.onstart = () => { this.isListening = true; btn?.classList.add('px-listening'); this._toast(' Listening'); };
           this.recognition.onend = () => { this.isListening = false; btn?.classList.remove('px-listening'); };
           this.recognition.onerror = (e) => {
             this.isListening = false;
             btn?.classList.remove('px-listening');
-            if (e.error === 'not-allowed') this._toast('🛑 Microphone permission denied');
+            if (e.error === 'not-allowed') this._toast(' Microphone permission denied');
             else this._toast('Speech recognition failed. Try again.');
           };
           this.recognition.onresult = (e) => {
@@ -1320,7 +1331,7 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
               ta.value = (ta.value + ' ' + transcript).trim();
               this._autoResize(ta);
               this.root.querySelector('#pxCharCount').textContent = `${ta.value.length} / 8000`;
-              this.root.querySelector('#pankrixSendBtn')?.classList.add('pankrix-send-active');
+              this.root.querySelector('#pankrixSendBtn')?.classList.add('MIKASA-send-active');
               ta.focus();
             }
           };
@@ -1329,7 +1340,7 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
       } catch (err) { this._toast('Could not start microphone'); }
     }
 
-    /* ── Voice Output ── */
+    /*  Voice Output  */
     _getCleanText(raw) {
       if (!raw) return '';
       return raw
@@ -1342,10 +1353,10 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
     }
 
     _toggleSpeak(id, btn) {
-      if (!('speechSynthesis' in window)) { this._toast('🔊 Text-to-speech not supported'); return; }
+      if (!('speechSynthesis' in window)) { this._toast(' Text-to-speech not supported'); return; }
       if (window.speechSynthesis.speaking) {
         window.speechSynthesis.cancel();
-        if (this.speakingMsgId === id) { this.speakingMsgId = null; btn?.classList.remove('active'); this._toast('⏹ Speech stopped'); return; }
+        if (this.speakingMsgId === id) { this.speakingMsgId = null; btn?.classList.remove('active'); this._toast(' Speech stopped'); return; }
       }
       const msg = this.messages.find(m => m.id === id);
       if (!msg) return;
@@ -1359,7 +1370,7 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
       window.speechSynthesis.speak(utterance);
     }
 
-    /* ── Chat layout helpers ── */
+    /*  Chat layout helpers  */
     _aiAvatarHTML() {
       return `<div class="px-msg-avatar" aria-hidden="true"><img src="${CFG.logoPath}" alt="" width="32" height="32" loading="lazy"></div>`;
     }
@@ -1387,8 +1398,8 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
         <button class="px-action-btn px-regen-btn" title="Regenerate" type="button" aria-label="Regenerate response">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.48"/></svg>
         </button>
-        <button class="px-action-btn px-reaction-btn" data-reaction="like" data-id="${safeEscAttr(id)}" title="Good response" type="button" aria-label="Good response">👍</button>
-        <button class="px-action-btn px-reaction-btn" data-reaction="dislike" data-id="${safeEscAttr(id)}" title="Bad response" type="button" aria-label="Bad response">👎</button>
+        <button class="px-action-btn px-reaction-btn" data-reaction="like" data-id="${safeEscAttr(id)}" title="Good response" type="button" aria-label="Good response"></button>
+        <button class="px-action-btn px-reaction-btn" data-reaction="dislike" data-id="${safeEscAttr(id)}" title="Bad response" type="button" aria-label="Bad response"></button>
       </div>`;
     }
 
@@ -1407,22 +1418,22 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
       btn.hidden = near || ct.scrollHeight <= ct.clientHeight + 20;
     }
 
-    /* ── Skeleton / typing ── */
+    /*  Skeleton / typing  */
     _showSkeleton() {
       const ct = this.root.querySelector('#pankrixMessages');
-      if (!ct || ct.querySelector('.pankrix-skeleton')) return;
-      const welcome = ct.querySelector('.pankrix-welcome');
+      if (!ct || ct.querySelector('.MIKASA-skeleton')) return;
+      const welcome = ct.querySelector('.MIKASA-welcome');
       if (welcome) welcome.remove();
       const div = document.createElement('div');
-      div.className = 'pankrix-msg pankrix-ai pankrix-skeleton';
+      div.className = 'MIKASA-msg MIKASA-ai MIKASA-skeleton';
       div.innerHTML = `
         ${this._aiAvatarHTML()}
-        <div class="pankrix-msg-body">
+        <div class="MIKASA-msg-body">
           <div class="px-msg-meta">
             <span class="px-msg-sender">${CFG.name}</span>
             <span class="px-msg-typing-label">typing</span>
           </div>
-          <div class="pankrix-ai-bubble px-typing-bubble">
+          <div class="MIKASA-ai-bubble px-typing-bubble">
             <div class="px-typing-indicator" aria-label="${CFG.name} is typing">
               <div class="px-typing-dot"></div>
               <div class="px-typing-dot"></div>
@@ -1434,9 +1445,9 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
       this._scrollBottom(true);
     }
 
-    _hideSkeleton() { this.root.querySelector('.pankrix-skeleton')?.remove(); }
+    _hideSkeleton() { this.root.querySelector('.MIKASA-skeleton')?.remove(); }
 
-    /* ── Submit ── */
+    /*  Submit  */
     _submitInput() {
       const ta = this.root.querySelector('#pankrixInput');
       const text = (ta?.value || '').trim();
@@ -1444,7 +1455,7 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
       const finalText = text || (this.pendingFiles.length > 0 ? 'Please analyze the attached file(s).' : '');
       ta.value = '';
       this.root.querySelector('#pxCharCount').textContent = '0 / 8000';
-      this.root.querySelector('#pankrixSendBtn')?.classList.remove('pankrix-send-active');
+      this.root.querySelector('#pankrixSendBtn')?.classList.remove('MIKASA-send-active');
       this._autoResize(ta);
       this.sendMessage(finalText);
     }
@@ -1459,7 +1470,7 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
       this.root.querySelector('#pankrixInput')?.focus();
     }
 
-    /* ── Send Message ── */
+    /*  Send Message  */
     async sendMessage(text) {
       if (!text && this.pendingFiles.length === 0) return;
       if (this.busy) return;
@@ -1526,8 +1537,8 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
             streamEl = this._appendStreamEl(aiMsg);
           }
           streamText = full;
-          const ct = streamEl?.querySelector('.pankrix-ai-text');
-          if (ct) ct.innerHTML = `${renderMarkdown(closeIncompleteTags(full))}<span class="pankrix-cursor" aria-hidden="true">▋</span>`;
+          const ct = streamEl?.querySelector('.MIKASA-ai-text');
+          if (ct) ct.innerHTML = `${renderMarkdown(closeIncompleteTags(full))}<span class="MIKASA-cursor" aria-hidden="true"></span>`;
           this._updateSourcesGrid(streamEl, full);
           this._scrollBottom();
         },
@@ -1536,13 +1547,13 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
           const last = [...(this.activeConv?.messages || [])].reverse().find(m => m.role === 'assistant' && !m.content);
           if (last) { last.content = full; this.saveConversations(); }
           if (streamEl) {
-            const ct = streamEl.querySelector('.pankrix-ai-text');
+            const ct = streamEl.querySelector('.MIKASA-ai-text');
             if (ct) ct.innerHTML = renderMarkdown(full);
             this._updateSourcesGrid(streamEl, full);
-            streamEl.classList.remove('pankrix-streaming');
+            streamEl.classList.remove('MIKASA-streaming');
             // Add action bar
             const actionsEl = this._buildActions(last?.id || uid());
-            const bubble = streamEl.querySelector('.pankrix-ai-bubble');
+            const bubble = streamEl.querySelector('.MIKASA-ai-bubble');
             if (bubble) bubble.appendChild(actionsEl);
             // Add follow-up chips
             const followUps = generateFollowUps(full);
@@ -1550,7 +1561,7 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
               const chipEl = document.createElement('div');
               chipEl.className = 'px-followups';
               chipEl.innerHTML = followUps.map(f => `<button class="px-followup-chip" type="button" data-q="${safeEscAttr(f)}">${safeEsc(f)}</button>`).join('');
-              streamEl.querySelector('.pankrix-msg-body')?.appendChild(chipEl);
+              streamEl.querySelector('.MIKASA-msg-body')?.appendChild(chipEl);
             }
           }
           this.setBusy(false);
@@ -1575,7 +1586,7 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
     _updateSourcesGrid(streamEl, full) {
       if (!streamEl) return;
       const sources = extractSources(full);
-      const bubble = streamEl.querySelector('.pankrix-ai-bubble');
+      const bubble = streamEl.querySelector('.MIKASA-ai-bubble');
       if (!bubble) return;
       let grid = bubble.querySelector('.px-sources-grid');
       if (sources.length > 0) {
@@ -1589,7 +1600,7 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
           grid = document.createElement('div');
           grid.className = 'px-sources-grid';
           grid.innerHTML = html;
-          const textEl = bubble.querySelector('.pankrix-ai-text');
+          const textEl = bubble.querySelector('.MIKASA-ai-text');
           if (textEl) bubble.insertBefore(grid, textEl);
           else bubble.appendChild(grid);
         }
@@ -1625,7 +1636,7 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
       const m = this.messages.find(msg => msg.id === id);
       if (!m) return;
       navigator.clipboard.writeText(m.content)
-        .then(() => this._toast('📋 Copied to clipboard'))
+        .then(() => this._toast('Copied to clipboard'))
         .catch(() => this._toast('Copy failed'));
     }
 
@@ -1634,7 +1645,7 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
       const parent = btn.closest('.px-msg-actions');
       parent?.querySelectorAll('.px-reaction-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      this._toast(type === 'like' ? '👍 Thanks for the feedback!' : '👎 We\'ll work on improving!');
+      this._toast(type === 'like' ? ' Thanks for the feedback!' : ' We\'ll work on improving!');
     }
 
     clearChat() {
@@ -1650,7 +1661,7 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
       if (window.speechSynthesis) { window.speechSynthesis.cancel(); this.speakingMsgId = null; }
     }
 
-    /* ── Render ── */
+    /*  Render  */
     _renderMessages() {
       const ct = this.root.querySelector('#pankrixMessages');
       if (!ct) return;
@@ -1682,15 +1693,15 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
           </span>
         </button>`).join('');
 
-      const caps = CFG.CAPABILITIES.map(c => `<span class="px-welcome-chip">✦ ${c}</span>`).join('');
+      const caps = CFG.CAPABILITIES.map(c => `<span class="px-welcome-chip"> ${c}</span>`).join('');
 
       return `
-<div class="pankrix-welcome" role="region" aria-label="Welcome to ${CFG.name}">
+<div class="MIKASA-welcome" role="region" aria-label="Welcome to ${CFG.name}">
   <div class="px-welcome-chat-intro">
     ${this._aiAvatarHTML()}
     <div class="px-welcome-bubble">
-      <p class="px-welcome-greeting">Hey! I'm <strong>${CFG.name}</strong> 👋</p>
-      <p class="px-welcome-body">Your intelligent portfolio assistant for Sanchit Goyal — ask me about his projects, skills, career goals, or anything ML &amp; AI related. I'm powered by Gemini and ready to help!</p>
+      <p class="px-welcome-greeting">Hey! I'm <strong>${CFG.name}</strong> </p>
+      <p class="px-welcome-body">Your intelligent portfolio assistant for Sanchit Goyal. Ask me about his projects, skills, career goals, or anything ML &amp; AI related. I'm powered by Gemini and ready to help.</p>
     </div>
   </div>
   <p class="px-welcome-prompt">Quick questions to get started:</p>
@@ -1701,11 +1712,11 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
 
     _msgHTML(msg) {
       if (msg.role === 'error') {
-        return `<div class="pankrix-error-msg" role="alert">
-          <span class="px-error-icon">⚠️</span>
+        return `<div class="MIKASA-error-msg" role="alert">
+          <span class="px-error-icon"></span>
           <div class="px-error-body">
-            <p>Connection issue. This is usually a temporary API rate limit. Please retry in a moment! ⚡</p>
-            <button class="px-retry-btn" type="button">↺ Retry</button>
+            <p>Connection issue. This is usually a temporary API rate limit. Please retry in a moment! </p>
+            <button class="px-retry-btn" type="button"> Retry</button>
           </div>
         </div>`;
       }
@@ -1714,16 +1725,16 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
           `<img src="${safeEscAttr(f.previewUrl)}" alt="${safeEsc(f.name)}" class="px-attach-thumb">`
         ).join('');
         return `
-<div class="pankrix-msg pankrix-user" data-id="${safeEscAttr(msg.id)}">
-  <div class="pankrix-msg-body">
+<div class="MIKASA-msg MIKASA-user" data-id="${safeEscAttr(msg.id)}">
+  <div class="MIKASA-msg-body">
     <div class="px-msg-meta px-msg-meta-user">
       <span class="px-msg-time">${timeFmt(msg.time)}</span>
       <span class="px-msg-sender">You</span>
     </div>
-    <div class="pankrix-user-bubble-wrap">
-      <div class="pankrix-user-bubble">
-        <div class="pankrix-user-text">${safeEsc(msg.content)}</div>
-        ${fileAttachments ? `<div class="pankrix-user-attachments">${fileAttachments}</div>` : ''}
+    <div class="MIKASA-user-bubble-wrap">
+      <div class="MIKASA-user-bubble">
+        <div class="MIKASA-user-text">${safeEsc(msg.content)}</div>
+        ${fileAttachments ? `<div class="MIKASA-user-attachments">${fileAttachments}</div>` : ''}
       </div>
       <button class="px-user-edit-btn" data-id="${safeEscAttr(msg.id)}" title="Edit message" type="button" aria-label="Edit message">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
@@ -1751,16 +1762,16 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
         </div>` : '';
 
       return `
-<div class="pankrix-msg pankrix-ai" data-id="${safeEscAttr(msg.id)}">
+<div class="MIKASA-msg MIKASA-ai" data-id="${safeEscAttr(msg.id)}">
   ${this._aiAvatarHTML()}
-  <div class="pankrix-msg-body">
+  <div class="MIKASA-msg-body">
     <div class="px-msg-meta">
       <span class="px-msg-sender">${CFG.name}</span>
       <span class="px-msg-time">${timeFmt(msg.time)}</span>
     </div>
-    <div class="pankrix-ai-bubble">
+    <div class="MIKASA-ai-bubble">
       ${sourcesHTML}
-      <div class="pankrix-ai-text">${renderMarkdown(msg.content)}</div>
+      <div class="MIKASA-ai-text">${renderMarkdown(msg.content)}</div>
       ${this._actionsHTML(msg.id, this.speakingMsgId === msg.id)}
     </div>
     ${followHTML}
@@ -1783,17 +1794,17 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
       const ct = this.root.querySelector('#pankrixMessages');
       if (!ct) return null;
       const div = document.createElement('div');
-      div.className = 'pankrix-msg pankrix-ai pankrix-streaming';
+      div.className = 'MIKASA-msg MIKASA-ai MIKASA-streaming';
       div.dataset.id = msg.id;
       div.innerHTML = `
         ${this._aiAvatarHTML()}
-        <div class="pankrix-msg-body">
+        <div class="MIKASA-msg-body">
           <div class="px-msg-meta">
             <span class="px-msg-sender">${CFG.name}</span>
             <span class="px-msg-time">${timeFmt(msg.time)}</span>
           </div>
-          <div class="pankrix-ai-bubble">
-            <div class="pankrix-ai-text"></div>
+          <div class="MIKASA-ai-bubble">
+            <div class="MIKASA-ai-text"></div>
           </div>
         </div>`;
       ct.appendChild(div);
@@ -1841,3 +1852,4 @@ Sanchit Goyal is an aspiring Data Scientist and Machine Learning enthusiast purs
   }
 
 })();
+

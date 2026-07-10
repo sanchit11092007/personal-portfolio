@@ -6,8 +6,8 @@
   --line: rgba(255, 255, 255, 0.07);
   --line-strong: rgba(59, 130, 246, 0.25);
   --text: #f8fafc;
-  --muted: #cbd5e1;
-  --subtle: #94a3b8;
+  --muted: #e2e8f0;
+  --subtle: #cbd5e1;
   --cyan: #38bdf8;
   --blue: #2563eb;
   --purple: #818cf8;
@@ -28,6 +28,24 @@
 html {
   scroll-behavior: smooth;
   scrollbar-color: rgba(255, 255, 255, 0.2) #090b10;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #090b10;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
 
 body {
@@ -132,7 +150,7 @@ img {
 
 .section {
   position: relative;
-  padding: 104px 0;
+  padding: clamp(60px, 10vw, 104px) 0;
 }
 
 .section-heading {
@@ -570,6 +588,11 @@ p {
   color: #001018;
   background: linear-gradient(135deg, var(--cyan), #7dd3fc);
   box-shadow: 0 4px 12px rgba(56, 189, 248, 0.15);
+}
+
+.button-primary:hover {
+  box-shadow: 0 8px 24px rgba(56, 189, 248, 0.35);
+  background: linear-gradient(135deg, #7dd3fc, var(--cyan));
 }
 
 .button-secondary {
@@ -2029,9 +2052,16 @@ p {
               box-shadow 300ms ease;
 }
 
+@supports not (backdrop-filter: blur(1px)) {
+  .glass-card {
+    background: #1a2130;
+  }
+}
+
 .glass-card:hover {
+  transform: translateY(-2px);
   border-color: var(--line-strong);
-  box-shadow: var(--shadow);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 0 0 15px rgba(59, 130, 246, 0.15);
 }
 
 .contact-info-card h3 {
@@ -2730,42 +2760,42 @@ p {
   }
 }
 
-.pankrix-ai-home-section {
+.MIKASA-ai-home-section {
   padding-top: 72px;
   padding-bottom: 88px;
 }
 
-.pankrix-ai-home-grid {
+.MIKASA-ai-home-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
   gap: 32px;
   align-items: center;
 }
 
-.pankrix-ai-home-copy {
+.MIKASA-ai-home-copy {
   max-width: 760px;
 }
 
-.pankrix-ai-home-copy h2 {
+.MIKASA-ai-home-copy h2 {
   margin: 0;
   font-size: clamp(2rem, 5vw, 4.6rem);
   line-height: 0.98;
 }
 
-.pankrix-ai-home-copy > p:not(.section-intro) {
+.MIKASA-ai-home-copy > p:not(.section-intro) {
   margin: 1.1rem 0 0;
   color: var(--muted);
   font-size: 1.02rem;
 }
 
-.pankrix-ai-home-actions {
+.MIKASA-ai-home-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.78rem;
   margin-top: 1.4rem;
 }
 
-.pankrix-ai-home-card {
+.MIKASA-ai-home-card {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   gap: 20px;
@@ -2780,7 +2810,7 @@ p {
   box-shadow: var(--shadow);
 }
 
-.pankrix-ai-home-logo-wrap {
+.MIKASA-ai-home-logo-wrap {
   display: grid;
   place-items: center;
   width: clamp(96px, 16vw, 136px);
@@ -2791,34 +2821,34 @@ p {
   border-radius: var(--radius);
 }
 
-.pankrix-ai-home-logo-wrap img {
+.MIKASA-ai-home-logo-wrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.pankrix-ai-home-card-body {
+.MIKASA-ai-home-card-body {
   min-width: 0;
 }
 
-.pankrix-ai-home-card-body h3 {
+.MIKASA-ai-home-card-body h3 {
   margin: 0.75rem 0 0.45rem;
   font-size: 1.35rem;
 }
 
-.pankrix-ai-home-card-body p {
+.MIKASA-ai-home-card-body p {
   margin: 0;
   color: var(--muted);
 }
 
-.pankrix-ai-home-chips {
+.MIKASA-ai-home-chips {
   display: flex;
   flex-wrap: wrap;
   gap: 0.45rem;
   margin-top: 1rem;
 }
 
-.pankrix-ai-home-chips span {
+.MIKASA-ai-home-chips span {
   padding: 0.42rem 0.56rem;
   color: var(--cyan);
   font-size: 0.78rem;
@@ -2829,35 +2859,35 @@ p {
 }
 
 @media (max-width: 920px) {
-  .pankrix-ai-home-grid {
+  .MIKASA-ai-home-grid {
     grid-template-columns: 1fr;
   }
 
-  .pankrix-ai-home-card {
+  .MIKASA-ai-home-card {
     max-width: 640px;
   }
 }
 
 @media (max-width: 640px) {
-  .pankrix-ai-home-section {
+  .MIKASA-ai-home-section {
     padding-top: 56px;
   }
 
-  .pankrix-ai-home-card {
+  .MIKASA-ai-home-card {
     grid-template-columns: 1fr;
   }
 
-  .pankrix-ai-home-logo-wrap {
+  .MIKASA-ai-home-logo-wrap {
     width: 112px;
   }
 
-  .pankrix-ai-home-actions .button {
+  .MIKASA-ai-home-actions .button {
     width: 100%;
   }
 }
 
 /* ============================================================
-   PROJECT SECTION — TABBED CATEGORY LAYOUT
+   PROJECT SECTION  TABBED CATEGORY LAYOUT
    ============================================================ */
 
 /* Tab bar */
@@ -2916,7 +2946,7 @@ p {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
   min-height: 200px;
-}/* ── New Project Card ── */
+}/*  New Project Card  */
 .project-card-new {
   display: flex;
   flex-direction: column;
@@ -3170,7 +3200,7 @@ p {
   transform: translate(2px, -2px);
 }
 
-/* ── Project Empty State ── */
+/*  Project Empty State  */
 .project-empty-state {
   grid-column: 1 / -1;
   display: flex;
@@ -3211,7 +3241,7 @@ p {
   max-width: 480px;
 }
 
-/* ── Future Projects Panel ── */
+/*  Future Projects Panel  */
 .project-future-panel {
   grid-column: 1 / -1;
   background: rgba(255, 255, 255, 0.02);
@@ -3290,7 +3320,7 @@ p {
   font-size: 0.75rem;
 }
 
-/* Responsive — projects */
+/* Responsive  projects */
 @media (max-width: 860px) {
   .project-grid-new {
     grid-template-columns: 1fr;
@@ -3330,7 +3360,7 @@ p {
    PREMIUM UI/UX REDESIGN & INTERACTIVE ANIMATIONS
    ========================================================================== */
 
-/* ── Animated Background Glow Blobs ── */
+/*  Animated Background Glow Blobs  */
 .glow-bg {
   position: fixed;
   inset: 0;
@@ -3395,7 +3425,7 @@ p {
   }
 }
 
-/* ── Interactive Cursor Glow ── */
+/*  Interactive Cursor Glow  */
 .mouse-glow {
   position: fixed;
   top: 0;
@@ -3416,7 +3446,7 @@ p {
   opacity: 1;
 }
 
-/* ── Scroll Progress Indicator ── */
+/*  Scroll Progress Indicator  */
 .scroll-progress-container {
   position: fixed;
   top: 0;
@@ -3435,7 +3465,7 @@ p {
   transition: width 100ms ease-out;
 }
 
-/* ── Hero Scroll Down Widget ── */
+/*  Hero Scroll Down Widget  */
 .hero-scroll-indicator {
   display: inline-flex;
   align-items: center;
@@ -3492,7 +3522,7 @@ p {
   }
 }
 
-/* ── Card Shimmer & Premium Hover Effects ── */
+/*  Card Shimmer & Premium Hover Effects  */
 .skill-card,
 .project-card,
 .certificate-card,
@@ -3547,7 +3577,7 @@ p {
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), 0 0 24px rgba(56, 189, 248, 0.05) !important;
 }
 
-/* ── Timeline Journey Upgrades ── */
+/*  Timeline Journey Upgrades  */
 .timeline-item {
   transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
               border-color 320ms ease,
@@ -3574,7 +3604,7 @@ p {
   box-shadow: 0 0 0 6px rgba(56, 189, 248, 0.3) !important;
 }
 
-/* ── Form Inputs Focus Glow ── */
+/*  Form Inputs Focus Glow  */
 .form-group input,
 .form-group textarea {
   background: rgba(255, 255, 255, 0.02) !important;
@@ -3593,7 +3623,7 @@ p {
   transform: translateY(-1px) !important;
 }
 
-/* ── Rebuilt Certificate Card & Grid ── */
+/*  Rebuilt Certificate Card & Grid  */
 #certifications .certificate-card {
   display: flex;
   flex-direction: column;
@@ -3858,7 +3888,7 @@ p {
   box-shadow: 0 8px 18px rgba(37, 99, 235, 0.3);
 }
 
-/* ── Certificate Dialog (Modal) polish ── */
+/*  Certificate Dialog (Modal) polish  */
 .certificate-dialog {
   border: 1px solid rgba(56, 189, 248, 0.2) !important;
   background: var(--bg-soft) !important;
@@ -4123,7 +4153,7 @@ p {
 .certificate-card,
 .glass-card,
 .timeline-item,
-.pankrix-ai-home-card {
+.MIKASA-ai-home-card {
   transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateZ(0);
   transform-style: preserve-3d;
 }
@@ -4133,7 +4163,7 @@ p {
 .project-card-new::after,
 .certificate-card::after,
 .glass-card::after,
-.pankrix-ai-home-card::after {
+.MIKASA-ai-home-card::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -4149,7 +4179,7 @@ p {
 .project-card-new:hover::after,
 .certificate-card:hover::after,
 .glass-card:hover::after,
-.pankrix-ai-home-card:hover::after {
+.MIKASA-ai-home-card:hover::after {
   opacity: 1;
 }
 
@@ -4356,13 +4386,13 @@ p {
   .certificate-card,
   .glass-card,
   .timeline-item,
-  .pankrix-ai-home-card {
+  .MIKASA-ai-home-card {
     transform: none !important;
   }
 }
 
 /* ==========================================================================
-   DESIGN SYSTEM INTEGRATION — Glassmorphism & Shifting Section Glows
+   DESIGN SYSTEM INTEGRATION  Glassmorphism & Shifting Section Glows
    ========================================================================== */
 
 /* 1. Global Translucent Surface Overrides */
@@ -4445,7 +4475,7 @@ p {
 #certifications::before {
   background: radial-gradient(circle, rgba(139, 92, 246, 0.09) 0%, transparent 70%) !important;
 }
-#pankrix-ai-home-section::before, .pankrix-ai-home-section::before {
+#MIKASA-ai-home-section::before, .MIKASA-ai-home-section::before {
   background: radial-gradient(circle, rgba(124, 58, 237, 0.08) 0%, transparent 70%) !important;
 }
 #contact::before {
@@ -4766,7 +4796,7 @@ h3 {
 #certifications .certificate-card,
 .glass-card,
 .footer-panel,
-.pankrix-ai-home-card {
+.MIKASA-ai-home-card {
   border-radius: 16px !important;
 }
 
@@ -4798,7 +4828,7 @@ h3 {
 .project-tech-badge,
 .project-future-badge,
 #certifications .certificate-skills span,
-.pankrix-ai-home-chips span,
+.MIKASA-ai-home-chips span,
 .learning-badge {
   border-radius: 999px !important;
   background: rgba(255, 255, 255, 0.045) !important;
@@ -4866,18 +4896,18 @@ h3 {
   border-radius: 12px;
 }
 
-.pankrix-ai-home-section {
+.MIKASA-ai-home-section {
   padding-top: 86px;
 }
 
-.pankrix-ai-home-card {
+.MIKASA-ai-home-card {
   background:
     linear-gradient(145deg, rgba(16, 24, 40, 0.88), rgba(8, 13, 24, 0.74)) padding-box,
     linear-gradient(135deg, rgba(125, 211, 252, 0.28), rgba(52, 211, 153, 0.2), rgba(251, 191, 36, 0.14)) border-box !important;
   border: 1px solid transparent !important;
 }
 
-.pankrix-ai-home-logo-wrap {
+.MIKASA-ai-home-logo-wrap {
   border-radius: 18px;
 }
 
@@ -4962,7 +4992,7 @@ h3 {
   }
 
   .hero-actions .button,
-  .pankrix-ai-home-actions .button,
+  .MIKASA-ai-home-actions .button,
   .contact-submit-btn {
     width: 100%;
   }
@@ -4983,4 +5013,5 @@ h3 {
     display: none;
   }
 }
+
 

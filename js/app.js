@@ -76,91 +76,52 @@
   }
 
   function renderSkills() {
-    const coreContainer = $("#coreSkillsGrid");
-    const advancedContainer = $("#advancedSkillsGrid");
-    const learningContainer = $("#currentlyLearningGrid");
-    if (!coreContainer || !advancedContainer || !learningContainer || !Array.isArray(DATA.skills)) return;
+    if (!Array.isArray(DATA.skills)) return;
 
-    const coreCategories = new Set([
-      "Programming Languages",
-      "Data Science & Machine Learning",
-      "Data Analytics & Visualization",
-      "AI & Deep Learning"
-    ]);
-
-    const coreFragment = document.createDocumentFragment();
-    const advancedFragment = document.createDocumentFragment();
-    const learningItems = [];
-
-    DATA.skills.forEach((skill) => {
-      const card = createElement("article", "skill-card reveal");
-      const header = createElement("header");
-      const titleWrap = createElement("div");
-      titleWrap.append(createElement("h3", "", skill.category));
-      if (skill.description) titleWrap.append(createElement("p", "", skill.description));
-      header.append(titleWrap);
-      card.append(header);
-
-      const items = Array.isArray(skill.items) ? skill.items : [];
-      const visibleItems = items.filter((item) => typeof item === "object" && Number(item.proficiency) >= 10);
-      const hiddenItems = items.filter((item) => typeof item === "object" && Number(item.proficiency) < 10);
-
-      hiddenItems.forEach((item) => {
-        if (item?.name) learningItems.push(item.name);
-      });
-
-      if (visibleItems.length) {
-        const list = createElement("div", "skill-list");
-        visibleItems.forEach((item) => list.append(createProgressRow(item.name, item.proficiency)));
-        card.append(list);
-      } else {
-        card.append(createElement("p", "skill-empty", "This competency is actively being developed."));
-      }
-
-      if (coreCategories.has(skill.category)) {
-        coreFragment.appendChild(card);
-      } else {
-        advancedFragment.appendChild(card);
+    // Create a map of skill name to proficiency
+    const skillMap = new Map();
+    DATA.skills.forEach(category => {
+      if (Array.isArray(category.items)) {
+        category.items.forEach(item => {
+          if (typeof item === 'object' && item.name) {
+            skillMap.set(item.name.toLowerCase().trim(), item.proficiency);
+          } else if (typeof item === 'string') {
+            skillMap.set(item.toLowerCase().trim(), 10); // default
+          }
+        });
       }
     });
 
-    coreContainer.replaceChildren(coreFragment);
-    advancedContainer.replaceChildren(advancedFragment);
-
-    const uniqueLearning = Array.from(new Set(learningItems));
-    const learningFragment = document.createDocumentFragment();
-
-    if (uniqueLearning.length) {
-      uniqueLearning.forEach((name) => {
-        const badge = createElement("span", "learning-badge", name);
-        const icon = document.createElement("i");
-        icon.className = "fa-solid fa-cube";
-        badge.prepend(icon);
-        learningFragment.appendChild(badge);
-      });
-    } else {
-      learningFragment.appendChild(createElement("p", "learning-empty", "No currently learning skills to display."));
-    }
-
-    learningContainer.replaceChildren(learningFragment);
-  }
-
-  function createProgressRow(label, value) {
-    const row = createElement("div", "skill-row");
-    const top = createElement("div", "skill-row-top");
-    top.append(createElement("span", "", label));
-
-    const percentageLabel = createElement("span", "progress-value", "0%");
-    percentageLabel.dataset.target = String(value);
-    top.append(percentageLabel);
-
-    const track = createElement("div", "progress-track");
-    const fill = createElement("span", "progress-fill");
-    fill.dataset.progress = String(value);
-    fill.style.width = "0%";
-    track.append(fill);
-    row.append(top, track);
-    return row;
+    // Update existing DOM elements
+    const allSkillRows = $$(".skill-row");
+    allSkillRows.forEach(row => {
+      const nameEl = $(".skill-name", row);
+      const valEl = $(".progress-value", row);
+      const fillEl = $(".progress-fill", row);
+      
+      if (nameEl && fillEl) {
+        const name = nameEl.textContent.trim().toLowerCase();
+        let prof = skillMap.get(name);
+        
+        // Handle variations (e.g. "Data Structures & Algorithms" vs "Data Structures")
+        if (prof === undefined) {
+           for (const [key, val] of skillMap.entries()) {
+             if (name.includes(key) || key.includes(name)) {
+               prof = val;
+               break;
+             }
+           }
+        }
+        
+        if (prof !== undefined) {
+           fillEl.dataset.progress = String(prof);
+           if (valEl) {
+             valEl.dataset.target = String(prof);
+             valEl.textContent = prof + "%";
+           }
+        }
+      }
+    });
   }
 
   function renderFilters(containerSelector, categories, active, onSelect, showAll = true) {
@@ -737,6 +698,8 @@
     let ratio = 1;
     let particles = [];
     const pointer = { x: 0, y: 0, active: false };
+    let animationFrameId;
+    let isVisible = true;
 
     const resize = () => {
       ratio = Math.min(window.devicePixelRatio || 1, 2);
@@ -800,7 +763,9 @@
         }
       });
 
-      requestAnimationFrame(draw);
+      if (isVisible) {
+        animationFrameId = requestAnimationFrame(draw);
+      }
     };
 
     window.addEventListener("resize", resize, { passive: true });
@@ -818,7 +783,24 @@
     });
 
     resize();
-    draw();
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (!isVisible) {
+            isVisible = true;
+            draw();
+          }
+        } else {
+          isVisible = false;
+          if (animationFrameId) {
+            cancelAnimationFrame(animationFrameId);
+          }
+        }
+      });
+    }, { threshold: 0 });
+    
+    observer.observe(canvas);
   }
 
   function setupResumeActions() {
@@ -834,15 +816,12 @@
   }
 
   function downloadResume() {
-    const blob = new Blob([buildResumeText()], { type: "text/plain;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
     const anchor = document.createElement("a");
-    anchor.href = url;
-    anchor.download = "Sanchit_Goyal_Resume.txt";
+    anchor.href = "assets/resume/sanchit_goyal_resume.pdf";
+    anchor.download = "Sanchit_Goyal_Resume.pdf";
     document.body.append(anchor);
     anchor.click();
     anchor.remove();
-    URL.revokeObjectURL(url);
   }
 
   function buildResumeText() {
@@ -1000,6 +979,7 @@ That kind of workflow fits his current path: data handling, experimentation, and
       }
 
       // 1. Loading state
+      form.setAttribute("aria-busy", "true");
       submitBtn.classList.add("is-loading");
       submitBtn.disabled = true;
       const btnTextElement = $(".btn-text", submitBtn);
@@ -1041,6 +1021,9 @@ That kind of workflow fits his current path: data handling, experimentation, and
           alertBox.textContent = "Thank you for reaching out. Your message has been sent successfully. I will get back to you as soon as possible.";
           alertBox.className = "form-alert is-success";
           alertBox.style.display = "block";
+          alertBox.setAttribute("tabindex", "-1");
+          alertBox.focus();
+          form.removeAttribute("aria-busy");
 
           // Clear all fields
           form.reset();
@@ -1075,6 +1058,9 @@ That kind of workflow fits his current path: data handling, experimentation, and
         alertBox.textContent = "Something went wrong. Please try again later.";
         alertBox.className = "form-alert is-error";
         alertBox.style.display = "block";
+        alertBox.setAttribute("tabindex", "-1");
+        alertBox.focus();
+        form.removeAttribute("aria-busy");
       });
     });
 
@@ -1106,10 +1092,10 @@ That kind of workflow fits his current path: data handling, experimentation, and
         // Toggle active button states
         filterBtns.forEach((b) => {
           b.classList.remove("active");
-          b.setAttribute("aria-selected", "false");
+          b.setAttribute("aria-pressed", "false");
         });
         btn.classList.add("active");
-        btn.setAttribute("aria-selected", "true");
+        btn.setAttribute("aria-pressed", "true");
 
         // Filter badges
         badges.forEach((badge) => {
