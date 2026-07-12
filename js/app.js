@@ -8,7 +8,8 @@
 
   const state = {
     certificateFilter: "other",
-    projectFilter: "data-science"
+    projectFilter: "data-science",
+    developerFilter: "all"
   };
 
   document.documentElement.classList.add("js");
@@ -301,6 +302,323 @@
       </div>
     `;
     return el;
+  }
+
+  function renderDeveloperActivity() {
+    const filtersContainer = $("#developerFilters");
+    const platformsContainer = $("#developerPlatformGrid");
+    const logContainer = $("#developerProgressLog");
+    const activity = DATA.developerActivity || {};
+    const filters = Array.isArray(activity.filters) ? activity.filters : [{ id: "all", title: "All" }];
+
+    if (filtersContainer) {
+      const fragment = document.createDocumentFragment();
+      filters.forEach((filter) => {
+        const button = createElement("button", "developer-filter-btn", filter.title);
+        button.type = "button";
+        button.dataset.filter = filter.id;
+        const isActive = state.developerFilter === filter.id;
+        button.classList.toggle("is-active", isActive);
+        button.setAttribute("aria-pressed", String(isActive));
+        button.addEventListener("click", () => {
+          state.developerFilter = filter.id;
+          renderDeveloperActivity();
+        });
+        fragment.append(button);
+      });
+      filtersContainer.replaceChildren(fragment);
+    }
+
+    if (platformsContainer && Array.isArray(activity.platforms)) {
+      const fragment = document.createDocumentFragment();
+      const filteredPlatforms = activity.platforms.filter((platform) => {
+        if (state.developerFilter === "all") return true;
+        return Array.isArray(platform.categories) && platform.categories.includes(state.developerFilter);
+      });
+
+      filteredPlatforms.forEach((platform) => {
+        const card = externalLink(platform.url, "", "developer-platform-card reveal");
+        card.dataset.tone = platform.tone || "neutral";
+        card.setAttribute("aria-label", `Open ${platform.label} activity`);
+        card.innerHTML = `
+          <span class="developer-platform-icon" aria-hidden="true">
+            <i class="${escapeHTML(platform.icon || "fa-solid fa-link")}"></i>
+          </span>
+          <span class="developer-platform-body">
+            <span class="developer-platform-title">${escapeHTML(platform.label)}</span>
+            <span class="developer-platform-signal">${escapeHTML(platform.signal || "Public activity")}</span>
+            <span class="developer-platform-desc">${escapeHTML(platform.description || "")}</span>
+          </span>
+          <span class="developer-platform-arrow" aria-hidden="true">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </span>
+        `;
+        fragment.append(card);
+      });
+      platformsContainer.replaceChildren(fragment);
+    }
+
+    if (logContainer && Array.isArray(activity.logs)) {
+      const fragment = document.createDocumentFragment();
+      activity.logs.forEach((item) => {
+        const row = createElement("li", "developer-log-item reveal");
+        row.innerHTML = `
+          <span class="developer-log-node" aria-hidden="true"></span>
+          <div class="developer-log-content">
+            <span class="developer-log-platform">${escapeHTML(item.platform || "Platform")}</span>
+            <strong>${escapeHTML(item.status || "Progress update")}</strong>
+            <p>${escapeHTML(item.detail || "")}</p>
+          </div>
+          <span class="developer-log-cadence">${escapeHTML(item.cadence || "Active")}</span>
+        `;
+        fragment.append(row);
+      });
+      logContainer.replaceChildren(fragment);
+    }
+
+    observeReveals();
+  }
+
+  function setupCommandPalette() {
+    const dialog = $("#commandPalette");
+    const input = $("#commandSearch");
+    const results = $("#commandResults");
+    const empty = $("#commandEmpty");
+    if (!dialog || !input || !results) return;
+
+    const commands = buildCommandItems();
+
+    const closePalette = () => {
+      if (typeof dialog.close === "function") dialog.close();
+      else dialog.removeAttribute("open");
+    };
+
+    const openPalette = () => {
+      renderCommandResults(commands, "");
+      if (!dialog.open) {
+        if (typeof dialog.showModal === "function") dialog.showModal();
+        else dialog.setAttribute("open", "");
+      }
+      window.setTimeout(() => input.focus(), 40);
+    };
+
+    const runCommand = (command) => {
+      if (!command) return;
+      if (command.kind === "section") {
+        closePalette();
+        const target = document.querySelector(command.href);
+        if (target) {
+          target.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "start" });
+          history.pushState(null, "", command.href);
+        }
+        return;
+      }
+
+      if (command.kind === "external") {
+        window.open(command.href, "_blank", "noopener,noreferrer");
+        closePalette();
+        return;
+      }
+
+      if (command.kind === "download") {
+        downloadResume();
+        closePalette();
+        return;
+      }
+
+      if (command.kind === "copy-email") {
+        copyText(DATA.owner?.email || "contact.sanchitgoyal@gmail.com", "Email copied");
+        return;
+      }
+
+      if (command.kind === "share") {
+        sharePortfolio();
+        return;
+      }
+
+      if (command.kind === "assistant") {
+        closePalette();
+        window.dispatchEvent(new CustomEvent("pankrix-ai:open"));
+      }
+    };
+
+    const render = () => renderCommandResults(commands, input.value);
+
+    const renderCommandResults = (items, query) => {
+      const normalizedQuery = query.trim().toLowerCase();
+      const matches = items.filter((item) => {
+        if (!normalizedQuery) return true;
+        return item.search.includes(normalizedQuery);
+      }).slice(0, 12);
+
+      const fragment = document.createDocumentFragment();
+      matches.forEach((item) => {
+        const button = createElement("button", "command-result-item", "");
+        button.type = "button";
+        button.setAttribute("role", "option");
+        button.innerHTML = `
+          <span class="command-result-icon" aria-hidden="true"><i class="${escapeHTML(item.icon)}"></i></span>
+          <span class="command-result-copy">
+            <strong>${escapeHTML(item.title)}</strong>
+            <span>${escapeHTML(item.description)}</span>
+          </span>
+          <span class="command-result-type">${escapeHTML(item.type)}</span>
+        `;
+        button.addEventListener("click", () => runCommand(item));
+        fragment.append(button);
+      });
+
+      results.replaceChildren(fragment);
+      if (empty) empty.hidden = matches.length > 0;
+    };
+
+    $$("[data-open-command]").forEach((button) => button.addEventListener("click", openPalette));
+    $(".command-close", dialog)?.addEventListener("click", closePalette);
+    input.addEventListener("input", render);
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        $(".command-result-item", results)?.click();
+      }
+    });
+
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) closePalette();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      const isCommandKey = (event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k";
+      if (isCommandKey) {
+        event.preventDefault();
+        openPalette();
+      }
+      if (event.key === "Escape" && dialog.open) closePalette();
+    });
+  }
+
+  function buildCommandItems() {
+    const sectionCommands = [
+      ["Home", "#home", "Hero introduction", "fa-solid fa-house"],
+      ["About", "#about", "Read the professional profile", "fa-solid fa-user"],
+      ["Journey", "#journey", "View the learning roadmap", "fa-solid fa-route"],
+      ["Skills", "#skills", "Explore the technical stack", "fa-solid fa-layer-group"],
+      ["Projects", "#projects", "Review project work", "fa-solid fa-diagram-project"],
+      ["Developers", "#developers", "Track public developer activity", "fa-solid fa-signal"],
+      ["Certifications", "#certifications", "View credentials and milestones", "fa-solid fa-certificate"],
+      ["MIKASA AI", "#MIKASA-ai", "Open the portfolio AI assistant section", "fa-solid fa-robot"],
+      ["Contact", "#contact", "Send a message or find contact details", "fa-solid fa-paper-plane"]
+    ].map(([title, href, description, icon]) => createCommandItem({
+      title,
+      href,
+      description,
+      icon,
+      type: "Section",
+      kind: "section"
+    }));
+
+    const quickActions = [
+      createCommandItem({
+        title: "Download Resume",
+        description: "Save the latest resume PDF",
+        icon: "fa-solid fa-download",
+        type: "Action",
+        kind: "download"
+      }),
+      createCommandItem({
+        title: "Copy Email",
+        description: DATA.owner?.email || "contact.sanchitgoyal@gmail.com",
+        icon: "fa-solid fa-envelope",
+        type: "Action",
+        kind: "copy-email"
+      }),
+      createCommandItem({
+        title: "Share Portfolio",
+        description: "Share or copy this portfolio link",
+        icon: "fa-solid fa-share-nodes",
+        type: "Action",
+        kind: "share"
+      }),
+      createCommandItem({
+        title: "Chat with MIKASA AI",
+        description: "Open the portfolio intelligence assistant",
+        icon: "fa-solid fa-robot",
+        type: "Action",
+        kind: "assistant"
+      })
+    ];
+
+    const projectCommands = (DATA.projects || []).map((project) => createCommandItem({
+      title: project.title || "Project",
+      description: project.description || "Portfolio project",
+      href: "#projects",
+      icon: "fa-solid fa-diagram-project",
+      type: "Project",
+      kind: "section"
+    }));
+
+    const certificateCommands = (DATA.certifications || []).map((certificate) => createCommandItem({
+      title: certificate.name || "Certification",
+      description: certificate.issuer ? `${certificate.issuer} credential` : "Certification milestone",
+      href: "#certifications",
+      icon: "fa-solid fa-award",
+      type: "Certificate",
+      kind: "section"
+    }));
+
+    const platformCommands = (DATA.developerActivity?.platforms || []).map((platform) => createCommandItem({
+      title: platform.label || "Profile",
+      description: platform.signal || platform.description || "Developer platform",
+      href: platform.url,
+      icon: platform.icon || "fa-solid fa-link",
+      type: "Profile",
+      kind: "external"
+    }));
+
+    return [...quickActions, ...sectionCommands, ...projectCommands, ...certificateCommands, ...platformCommands];
+  }
+
+  function createCommandItem(item) {
+    const search = [item.title, item.description, item.type, item.href]
+      .filter(Boolean)
+      .join(" ")
+      .toLowerCase();
+    return { ...item, search };
+  }
+
+  function copyText(text, successMessage) {
+    const status = $("#commandEmpty");
+    const write = navigator.clipboard?.writeText
+      ? navigator.clipboard.writeText(text)
+      : Promise.reject(new Error("Clipboard unavailable"));
+
+    write
+      .then(() => {
+        if (status) {
+          status.hidden = false;
+          status.textContent = successMessage;
+        }
+      })
+      .catch(() => {
+        if (status) {
+          status.hidden = false;
+          status.textContent = text;
+        }
+      });
+  }
+
+  function sharePortfolio() {
+    const shareData = {
+      title: document.title,
+      text: "Sanchit Goyal | Data Science & ML Portfolio",
+      url: window.location.href.split("#")[0]
+    };
+
+    if (navigator.share) {
+      navigator.share(shareData).catch(() => copyText(shareData.url, "Portfolio link copied"));
+      return;
+    }
+
+    copyText(shareData.url, "Portfolio link copied");
   }
 
   function renderCertificates() {
@@ -817,7 +1135,7 @@
 
   function downloadResume() {
     const anchor = document.createElement("a");
-    anchor.href = "assets/resume/sanchit_goyal_resume.pdf";
+    anchor.href = "assets/resume/Sanchit_Goyal_Resume.pdf";
     anchor.download = "Sanchit_Goyal_Resume.pdf";
     document.body.append(anchor);
     anchor.click();
@@ -837,7 +1155,7 @@
 
     return `Sanchit Goyal
 Aspiring Data Scientist | Machine Learning Enthusiast | AI Research Enthusiast
-Email: ${DATA.owner?.email || "sanchitgoyal11092007@gmail.com"}
+Email: ${DATA.owner?.email || "contact.sanchitgoyal@gmail.com"}
 
 Professional Summary
 Building intelligent systems, exploring machine learning, and developing data-driven solutions through continuous learning, research, and practical innovation.
@@ -1173,6 +1491,7 @@ That kind of workflow fits his current path: data handling, experimentation, and
   renderSocialLinks();
   renderSkills();
   renderProjects();
+  renderDeveloperActivity();
   renderCertificates();
   setupNavigation();
   observeReveals();
@@ -1184,5 +1503,6 @@ That kind of workflow fits his current path: data handling, experimentation, and
   setupFooterYear();
   setupContactForm();
   setupToolsFiltering();
+  setupCommandPalette();
   setupScrollAndCursorGlow();
 })();

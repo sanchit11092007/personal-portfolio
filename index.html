@@ -26,13 +26,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/MIKASA-ai.css">
+  <link rel="stylesheet" href="css/features.css">
   <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Sanchit Goyal",
         "url": "https://sanchit11092007.github.io/personal-portfolio/",
-        "email": "mailto:sanchitgoyal11092007@gmail.com",
+        "email": "mailto:contact.sanchitgoyal@gmail.com",
         "jobTitle": ["Aspiring Data Scientist", "Machine Learning Enthusiast", "AI Research Enthusiast"],
         "sameAs": [
           "https://github.com/sanchit11092007",
@@ -59,6 +60,7 @@
   <script defer src="js/app.js"></script>
   <script defer src="js/ui.js"></script>
   <script defer src="js/chatbot.js"></script>
+  <script defer src="js/features.js"></script>
 </head>
 
 <body>
@@ -180,13 +182,19 @@
       </button>
       <div class="nav-links" id="navLinks" aria-label="Portfolio sections">
         <a href="#about">About</a>
-        <a href="#journey">Journey</a>
         <a href="#skills">Skills</a>
+        <a href="#journey">Journey</a>
         <a href="#projects">Projects</a>
-        <a href="#certifications">Certifications</a>
         <a href="#MIKASA-ai">MIKASA AI</a>
+        <a href="#developers">Developers</a>
+        <a href="#certifications">Certifications</a>
         <a href="#contact">Contact</a>
       </div>
+      <button class="command-trigger" type="button" data-open-command aria-label="Open portfolio command center">
+        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        <span>Explore</span>
+        <kbd>Ctrl K</kbd>
+      </button>
     </nav>
   </header>
 
@@ -234,79 +242,18 @@
             <span class="scroll-text">Scroll to explore</span>
           </div>
         </div>
-        <aside class="hero-system reveal" aria-label="Data Science and ML snapshot">
-          <div class="system-header">
-            <span class="system-dot"></span>
-            <span>Portfolio Intelligence Layer</span>
-          </div>
-          <dl class="system-metrics">
-            <div>
-              <dt>Focus</dt>
-              <dd>AI + Data Science</dd>
-            </div>
-            <div>
-              <dt>Direction</dt>
-              <dd>Research-minded engineering</dd>
-            </div>
-            <div>
-              <dt>Stack</dt>
-              <dd>Python, ML, analytics</dd>
-            </div>
-          </dl>
-        </aside>
+        <div class="hero-image-container reveal" style="display: flex; justify-content: center; align-items: center; position: relative;">
+          <img src="assets/profile-picture/profile-picture.jpeg" alt="Sanchit Goyal Profile" style="width: 100%; max-width: 380px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 40px rgba(56, 189, 248, 0.1); object-fit: cover; aspect-ratio: 4/5;">
+        </div>
       </div>
     </section>
 
-    <section class="section MIKASA-ai-home-section" id="MIKASA-ai" aria-labelledby="MIKASA-ai-home-title">
-      <div class="container MIKASA-ai-home-grid">
-        <div class="MIKASA-ai-home-copy reveal">
-          <span class="section-kicker">Meet MIKASA AI</span>
-          <h2 id="MIKASA-ai-home-title">MIKASA AI - Portfolio Intelligence Assistant</h2>
-          <p class="section-intro">
-            An intelligent Gemini-powered AI assistant that can answer questions about my portfolio, projects, skills, and background, or help with programming, data science, and career questions.
-          </p>
-          <p>
-            MIKASA AI is built with Google Gemini and runs entirely in the browser with no server required. It understands the full portfolio context, maintains conversation memory, and renders rich markdown responses with code highlighting.
-          </p>
-          <div class="MIKASA-ai-home-actions">
-            <button class="button button-primary" type="button" data-open-pankrix-ai>
-              <span>Chat with MIKASA AI</span>
-              <svg class="icon">
-                <use href="#icon-send"></use>
-              </svg>
-            </button>
-            <a class="button button-secondary" href="#projects">
-              <span>Explore Projects</span>
-              <svg class="icon">
-                <use href="#icon-arrow"></use>
-              </svg>
-            </a>
-          </div>
-        </div>
-        <div class="MIKASA-ai-home-card reveal" aria-label="MIKASA AI assistant preview">
-          <div class="MIKASA-ai-home-logo-wrap">
-            <img src="assets/images/mikasa-ai-logo.png" alt="MIKASA AI logo" width="128" height="128">
-          </div>
-          <div class="MIKASA-ai-home-card-body">
-            <span class="status-badge pulse-badge">Gemini powered</span>
-            <h3>Portfolio Intelligence Assistant</h3>
-            <p>
-              Portfolio assistant, technical mentor, and general AI in one. Powered by Google Gemini with streaming responses.
-            </p>
-            <div class="MIKASA-ai-home-chips" aria-label="MIKASA AI capabilities">
-              <span>Portfolio Q&amp;A</span>
-              <span>Projects</span>
-              <span>Skills</span>
-              <span>GitHub</span>
-              <span>Career Guidance</span>
-              <span>Code Help</span>
-              <span>ML &amp; AI</span>
-              <span>Recruiter Mode</span>
-            </div>
-          </div>
-        </div>
+    <!-- 🚀 Live Ticker Feature -->
+    <div class="live-ticker-container" aria-hidden="true">
+      <div class="live-ticker-wrapper">
+        <div class="live-ticker-list"></div>
       </div>
-    </section>
+    </div>
 
     <section class="section about-section" id="about" aria-labelledby="about-title">
       <div class="container">
@@ -399,50 +346,56 @@
             <p>Certifications Earned</p>
           </div>
         </div>
-      </div>
-    </section>
 
-    <section class="section timeline-section" id="journey" aria-labelledby="journey-title">
-      <div class="container">
-        <div class="section-heading centered reveal">
-          <span class="section-kicker">Journey</span>
-          <h2 id="journey-title">A focused roadmap from foundations to advanced AI development.</h2>
+        <!-- 🚀 Recruiter Scorecard Feature -->
+        <div class="scorecard-section reveal">
+          <div class="scorecard-header">
+            <h3>Recruiter Scorecard</h3>
+            <p>Quantitative breakdown of core engineering attributes</p>
+          </div>
+          <div class="scorecard-grid">
+            <div class="scorecard-card">
+              <div class="scorecard-svg-container">
+                <svg class="scorecard-svg" width="100" height="100">
+                  <circle class="scorecard-bg-circle" cx="50" cy="50" r="40"></circle>
+                  <circle class="scorecard-fill-circle" cx="50" cy="50" r="40" data-value="95"></circle>
+                </svg>
+                <div class="scorecard-value">0%</div>
+              </div>
+              <span class="scorecard-label">Learning Velocity</span>
+            </div>
+            <div class="scorecard-card">
+              <div class="scorecard-svg-container">
+                <svg class="scorecard-svg" width="100" height="100">
+                  <circle class="scorecard-bg-circle" cx="50" cy="50" r="40"></circle>
+                  <circle class="scorecard-fill-circle" cx="50" cy="50" r="40" data-value="90"></circle>
+                </svg>
+                <div class="scorecard-value">0%</div>
+              </div>
+              <span class="scorecard-label">Problem Solving</span>
+            </div>
+            <div class="scorecard-card">
+              <div class="scorecard-svg-container">
+                <svg class="scorecard-svg" width="100" height="100">
+                  <circle class="scorecard-bg-circle" cx="50" cy="50" r="40"></circle>
+                  <circle class="scorecard-fill-circle" cx="50" cy="50" r="40" data-value="88"></circle>
+                </svg>
+                <div class="scorecard-value">0%</div>
+              </div>
+              <span class="scorecard-label">Consistency</span>
+            </div>
+            <div class="scorecard-card">
+              <div class="scorecard-svg-container">
+                <svg class="scorecard-svg" width="100" height="100">
+                  <circle class="scorecard-bg-circle" cx="50" cy="50" r="40"></circle>
+                  <circle class="scorecard-fill-circle" cx="50" cy="50" r="40" data-value="92"></circle>
+                </svg>
+                <div class="scorecard-value">0%</div>
+              </div>
+              <span class="scorecard-label">AI & ML Foundations</span>
+            </div>
+          </div>
         </div>
-        <ol class="timeline" aria-label="Professional learning timeline">
-          <li class="timeline-item reveal">
-            <time>August 2025</time>
-            <h3>Joined Lovely Professional University</h3>
-            <p>Started B.Tech Computer Science Engineering with a specialization in Data Science and Machine Learning.
-            </p>
-          </li>
-          <li class="timeline-item reveal">
-            <time>August 2025 - October 2025</time>
-            <h3>Built programming and data foundations</h3>
-            <p>Developed the early base for programming logic, analytical thinking, and data science workflows.</p>
-          </li>
-          <li class="timeline-item reveal">
-            <time>October 2025 - December 2025</time>
-            <h3>Worked extensively with NumPy and Pandas</h3>
-            <p>Practiced array operations, tabular analysis, cleaning, transformations, and exploratory data work.</p>
-          </li>
-          <li class="timeline-item reveal">
-            <time>January 2026 - May 2026</time>
-            <h3>Strengthened practical AI foundations</h3>
-            <p>Reinforced programming, data science, and machine learning fundamentals through hands-on project work.
-            </p>
-          </li>
-          <li class="timeline-item reveal">
-            <time>Current Stage</time>
-            <h3>Advancing DSA and machine learning depth</h3>
-            <p>Exploring data structures and algorithms while actively learning machine learning and preparing for
-              advanced AI development.</p>
-          </li>
-          <li class="timeline-item reveal">
-            <time>Future Goal</time>
-            <h3>Data Scientist, Machine Learning/AI Research</h3>
-            <p>Move from strong foundations to applied intelligent systems, statistical research exploration, and production-minded ML work.</p>
-          </li>
-        </ol>
       </div>
     </section>
 
@@ -678,6 +631,23 @@
           </article>
         </div>
 
+        <!-- 🚀 AI Skill Radar Chart Feature -->
+        <div class="radar-section reveal">
+          <div class="radar-layout">
+            <div class="radar-chart-container">
+              <canvas id="radarChartCanvas" class="radar-chart-canvas" width="320" height="320"></canvas>
+            </div>
+            <div class="radar-info-panel">
+              <h3>Core Tech Spectrum</h3>
+              <p>An interactive, multi-dimensional view of my current proficiency vs. actual industry and recruiter demand across core domains.</p>
+              <div class="radar-toggle-container">
+                <button class="radar-toggle-btn active" data-view="proficiency">My Proficiency</button>
+                <button class="radar-toggle-btn" data-view="demand">Recruiter View</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Active Learning Panel - full-width, visually distinct -->
         <div class="learning-panel reveal">
           <div class="learning-panel-inner">
@@ -752,6 +722,50 @@
       </div>
     </section>
 
+    <section class="section timeline-section" id="journey" aria-labelledby="journey-title">
+      <div class="container">
+        <div class="section-heading centered reveal">
+          <span class="section-kicker">Journey</span>
+          <h2 id="journey-title">A focused roadmap from foundations to advanced AI development.</h2>
+        </div>
+        <ol class="timeline" aria-label="Professional learning timeline">
+          <li class="timeline-item reveal">
+            <time>August 2025</time>
+            <h3>Joined Lovely Professional University</h3>
+            <p>Started B.Tech Computer Science Engineering with a specialization in Data Science and Machine Learning.
+            </p>
+          </li>
+          <li class="timeline-item reveal">
+            <time>August 2025 - October 2025</time>
+            <h3>Built programming and data foundations</h3>
+            <p>Developed the early base for programming logic, analytical thinking, and data science workflows.</p>
+          </li>
+          <li class="timeline-item reveal">
+            <time>October 2025 - December 2025</time>
+            <h3>Worked extensively with NumPy and Pandas</h3>
+            <p>Practiced array operations, tabular analysis, cleaning, transformations, and exploratory data work.</p>
+          </li>
+          <li class="timeline-item reveal">
+            <time>January 2026 - May 2026</time>
+            <h3>Strengthened practical AI foundations</h3>
+            <p>Reinforced programming, data science, and machine learning fundamentals through hands-on project work.
+            </p>
+          </li>
+          <li class="timeline-item reveal">
+            <time>Current Stage</time>
+            <h3>Advancing DSA and machine learning depth</h3>
+            <p>Exploring data structures and algorithms while actively learning machine learning and preparing for
+              advanced AI development.</p>
+          </li>
+          <li class="timeline-item reveal">
+            <time>Future Goal</time>
+            <h3>Data Scientist, Machine Learning/AI Research</h3>
+            <p>Move from strong foundations to applied intelligent systems, statistical research exploration, and production-minded ML work.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
     <section class="section projects-section" id="projects" aria-labelledby="projects-title">
       <div class="container">
         <div class="section-heading reveal">
@@ -765,6 +779,97 @@
 
         <!-- Dynamic project grid -->
         <div class="project-grid-new" id="projectGrid" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="section MIKASA-ai-home-section" id="MIKASA-ai" aria-labelledby="MIKASA-ai-home-title">
+      <div class="container MIKASA-ai-home-grid">
+        <div class="MIKASA-ai-home-copy reveal">
+          <span class="section-kicker">Meet MIKASA AI</span>
+          <h2 id="MIKASA-ai-home-title">MIKASA AI - Portfolio Intelligence Assistant</h2>
+          <p class="section-intro">
+            An intelligent Gemini-powered AI assistant that can answer questions about my portfolio, projects, skills, and background, or help with programming, data science, and career questions.
+          </p>
+          <p>
+            MIKASA AI is built with Google Gemini and runs entirely in the browser with no server required. It understands the full portfolio context, maintains conversation memory, and renders rich markdown responses with code highlighting.
+          </p>
+          <div class="MIKASA-ai-home-actions">
+            <button class="button button-primary" type="button" data-open-pankrix-ai>
+              <span>Chat with MIKASA AI</span>
+              <svg class="icon">
+                <use href="#icon-send"></use>
+              </svg>
+            </button>
+            <a class="button button-secondary" href="#projects">
+              <span>Explore Projects</span>
+              <svg class="icon">
+                <use href="#icon-arrow"></use>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="MIKASA-ai-home-card reveal" aria-label="MIKASA AI assistant preview">
+          <div class="MIKASA-ai-home-logo-wrap">
+            <img src="assets/images/mikasa-ai-logo.png" alt="MIKASA AI logo" width="128" height="128">
+          </div>
+          <div class="MIKASA-ai-home-card-body">
+            <span class="status-badge pulse-badge">Gemini powered</span>
+            <h3>Portfolio Intelligence Assistant</h3>
+            <p>
+              Portfolio assistant, technical mentor, and general AI in one. Powered by Google Gemini with streaming responses.
+            </p>
+            <div class="MIKASA-ai-home-chips" aria-label="MIKASA AI capabilities">
+              <span>Portfolio Q&amp;A</span>
+              <span>Projects</span>
+              <span>Skills</span>
+              <span>GitHub</span>
+              <span>Career Guidance</span>
+              <span>Code Help</span>
+              <span>ML &amp; AI</span>
+              <span>Recruiter Mode</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section developers-section" id="developers" aria-labelledby="developers-title">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="section-kicker">Developer Activity</span>
+          <h2 id="developers-title">Live Developer Progress</h2>
+          <p class="section-intro">A public progress hub connecting LinkedIn, GitHub, Medium, DEV, Kaggle, coding platforms, and portfolio updates into one developer activity layer.</p>
+        </div>
+
+        <div class="developer-activity-shell reveal">
+          <div class="developer-activity-panel">
+            <div class="developer-activity-header">
+              <div>
+                <span class="developer-live-badge">
+                  <span class="developer-live-dot"></span>
+                  Public activity tracker
+                </span>
+                <h3>Platform Recording</h3>
+              </div>
+              <p>Open each platform to see the latest public activity, repositories, articles, coding practice, and learning updates.</p>
+            </div>
+            <div class="developer-filter-bar" id="developerFilters" aria-label="Filter developer platforms"></div>
+            <div class="developer-platform-grid" id="developerPlatformGrid" aria-label="Developer platform activity links"></div>
+          </div>
+
+          <aside class="developer-log-card" aria-labelledby="developer-log-title">
+            <div class="developer-log-header">
+              <span class="developer-log-icon" aria-hidden="true">
+                <i class="fa-solid fa-signal"></i>
+              </span>
+              <div>
+                <h3 id="developer-log-title">Progress Signals</h3>
+                <p>Tracked from public profiles and portfolio milestones.</p>
+              </div>
+            </div>
+            <ol class="developer-progress-log" id="developerProgressLog"></ol>
+          </aside>
+        </div>
       </div>
     </section>
 
@@ -800,7 +905,7 @@
                   </span>
                   <div>
                     <strong>Email</strong>
-                    <a href="mailto:connect.sanchitgoyal@gmail.com">connect.sanchitgoyal@gmail.com</a>
+                    <a href="mailto:contact.sanchitgoyal@gmail.com">contact.sanchitgoyal@gmail.com</a>
                   </div>
                 </li>
                 <li class="contact-info-item">
@@ -889,11 +994,12 @@
         <nav class="footer-panel footer-link-panel" aria-label="Quick links">
           <h3>Quick Links</h3>
           <a href="#about">About</a>
-          <a href="#journey">Journey</a>
           <a href="#skills">Skills</a>
+          <a href="#journey">Journey</a>
           <a href="#projects">Projects</a>
-          <a href="#certifications">Certifications</a>
           <a href="#MIKASA-ai">MIKASA AI</a>
+          <a href="#developers">Developers</a>
+          <a href="#certifications">Certifications</a>
           <a href="#contact">Contact</a>
         </nav>
         <section class="footer-panel footer-link-panel" aria-labelledby="footer-profiles-title">
@@ -902,7 +1008,7 @@
           <a href="https://www.linkedin.com/in/the-sanchit-goyal" target="_blank" rel="noreferrer noopener">LinkedIn</a>
           <a href="https://leetcode.com/u/sanchit11092007/" target="_blank" rel="noreferrer noopener">LeetCode</a>
           <a href="https://www.kaggle.com/sanchitgoyal2007" target="_blank" rel="noreferrer noopener">Kaggle</a>
-          <a href="mailto:sanchitgoyal11092007@gmail.com">Email</a>
+          <a href="mailto:contact.sanchitgoyal@gmail.com">Email</a>
           <button class="footer-link-button" type="button" data-download-resume>Resume</button>
         </section>
         <section class="footer-panel footer-focus-panel" aria-labelledby="footer-focus-title">
@@ -926,6 +1032,27 @@
       </div>
     </div>
   </footer>
+
+  <dialog class="command-palette" id="commandPalette" aria-labelledby="commandPaletteTitle">
+    <div class="command-shell">
+      <div class="command-search-row">
+        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        <label class="sr-only" for="commandSearch">Search portfolio actions</label>
+        <input type="search" id="commandSearch" placeholder="Search sections, projects, profiles, actions..." autocomplete="off">
+        <button class="icon-button command-close" type="button" aria-label="Close command center">
+          <svg class="icon" aria-hidden="true">
+            <use href="#icon-x"></use>
+          </svg>
+        </button>
+      </div>
+      <div class="command-meta-row">
+        <h2 id="commandPaletteTitle">Portfolio Command Center</h2>
+        <span>Navigate, share, download, or open profiles</span>
+      </div>
+      <div class="command-results" id="commandResults" role="listbox" aria-label="Portfolio commands"></div>
+      <p class="command-empty" id="commandEmpty" hidden>No matching action found.</p>
+    </div>
+  </dialog>
 
   <dialog class="certificate-dialog" id="certificateDialog" aria-labelledby="certificateDialogTitle">
     <button class="icon-button dialog-close" type="button" aria-label="Close certificate preview">

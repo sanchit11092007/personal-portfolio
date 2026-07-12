@@ -232,7 +232,7 @@ const portfolioData = {
     aspirations: "Sanchit aims to grow into roles where he can combine strong data foundations, machine learning, research curiosity, and practical engineering to build useful AI systems."
   },
   contact: {
-    email: "sanchitgoyal11092007@gmail.com",
+    email: "contact.sanchitgoyal@gmail.com",
     location: "India",
     phone: "Available on request",
     availability: "Open to internship opportunities, AI/ML collaborations, Data Science projects, research discussions, and meaningful technology conversations.",
@@ -382,6 +382,116 @@ window.PORTFOLIO_DATA = {
     }
   ],
   certifications: portfolioData.certifications.verified,
+  developerActivity: {
+    filters: [
+      { id: "all", title: "All" },
+      { id: "professional", title: "Professional" },
+      { id: "code", title: "Code" },
+      { id: "writing", title: "Writing" },
+      { id: "data", title: "Data" },
+      { id: "practice", title: "Practice" }
+    ],
+    platforms: [
+      {
+        label: "LinkedIn",
+        icon: "fa-brands fa-linkedin-in",
+        url: "https://www.linkedin.com/in/the-sanchit-goyal",
+        signal: "Professional updates",
+        description: "Career milestones, internship readiness, learning updates, and professional networking.",
+        tone: "blue",
+        categories: ["professional"]
+      },
+      {
+        label: "GitHub",
+        icon: "fa-brands fa-github",
+        url: "https://github.com/sanchit11092007",
+        signal: "Repository progress",
+        description: "Project repositories, source code, commits, and practical development work.",
+        tone: "cyan",
+        categories: ["code"]
+      },
+      {
+        label: "Medium",
+        icon: "fa-brands fa-medium",
+        url: "https://medium.com/@sanchitgoyal11092007",
+        signal: "Writing log",
+        description: "Technical writing, learning reflections, and long-form development notes.",
+        tone: "neutral",
+        categories: ["writing"]
+      },
+      {
+        label: "DEV Community",
+        icon: "fa-brands fa-dev",
+        url: "https://dev.to/sanchit_goyal",
+        signal: "Developer posts",
+        description: "Frontend, programming, AI, and data science notes shared with developer communities.",
+        tone: "green",
+        categories: ["writing", "code"]
+      },
+      {
+        label: "Kaggle",
+        icon: "fa-brands fa-kaggle",
+        url: "https://www.kaggle.com/sanchitgoyal2007",
+        signal: "Data science practice",
+        description: "Datasets, notebooks, analytics practice, and data science learning activity.",
+        tone: "cyan",
+        categories: ["data", "practice"]
+      },
+      {
+        label: "LeetCode",
+        icon: "fa-solid fa-code",
+        url: "https://leetcode.com/u/sanchit11092007/",
+        signal: "Problem solving",
+        description: "DSA practice and algorithmic problem-solving progress.",
+        tone: "amber",
+        categories: ["practice", "code"]
+      },
+      {
+        label: "HackerRank",
+        icon: "fa-brands fa-hackerrank",
+        url: "https://www.hackerrank.com/profile/Sanchit11092007",
+        signal: "Coding practice",
+        description: "Programming challenges, foundations, and skill-building exercises.",
+        tone: "green",
+        categories: ["practice", "code"]
+      },
+      {
+        label: "Codeforces",
+        icon: "fa-solid fa-terminal",
+        url: "https://codeforces.com/profile/sanchit11092007",
+        signal: "Competitive coding",
+        description: "Contest practice, algorithmic thinking, and problem-solving discipline.",
+        tone: "purple",
+        categories: ["practice", "code"]
+      }
+    ],
+    logs: [
+      {
+        platform: "GitHub",
+        status: "Project repositories",
+        detail: "Data cleaning and banking analysis projects document hands-on data science practice.",
+        cadence: "Active"
+      },
+      {
+        platform: "LinkedIn",
+        status: "Professional profile",
+        detail: "Public career profile for internships, collaborations, and professional updates.",
+        cadence: "Public"
+      },
+      {
+        platform: "Medium and DEV",
+        status: "Writing channels",
+        detail: "Technical writing spaces for learning notes, AI exploration, and developer reflections.",
+        cadence: "Growing"
+      },
+      {
+        platform: "Coding profiles",
+        status: "Problem solving",
+        detail: "LeetCode, HackerRank, and Codeforces collect DSA and programming practice signals.",
+        cadence: "In progress"
+      }
+    ]
+  },
   goals: portfolioData.goals,
   achievements: portfolioData.achievements,
   chatbot: {
