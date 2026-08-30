@@ -15,20 +15,19 @@
   /* ============================================================
      CONFIGURATION
      ============================================================ */
-  const _K = (function () {
-    const p = ['AQ', 'Ab8RN6Jy0F1r94BqD2qWDu40QSzvYsScryBk6EjxRfe4fhFEow'];
-    return p.join('.');
-  })();
+  function getGeminiApiKey() {
+    return window.GEMINI_API_KEY || localStorage.getItem('MIKASA_GEMINI_KEY') || sessionStorage.getItem('GEMINI_API_KEY') || '';
+  }
 
   const CFG = {
     name: 'MIKASA AI',
-    subtitle: 'Portfolio Intelligence',
+    subtitle: 'AI Assistant · Portfolio & Beyond',
     logoPath: 'assets/images/mikasa-ai-logo.png',
     defaultModel: 'gemini-2.5-flash',
     apiBase: 'https://generativelanguage.googleapis.com/v1beta/models',
-    maxOutputTokens: 3072,
-    temperature: 0.35,
-    topP: 0.82,
+    maxOutputTokens: 4096,
+    temperature: 0.7,
+    topP: 0.9,
     topK: 40,
     HIST_KEY: 'mikasa-ai:convs:v8',
     UI_STORE: 'mikasa-ai:ui:v8',
@@ -38,12 +37,12 @@
     SUGGESTIONS: [
       { icon: 'AI', label: "Who is Sanchit?", desc: "Meet the portfolio owner", q: "Give me an impressive introduction to Sanchit Goyal and what makes him stand out as an aspiring data scientist." },
       { icon: '</>', label: "Show his projects", desc: "Explore real-world work", q: "Tell me about all of Sanchit's projects in detail - what they do, the tech stack, and the skills they demonstrate." },
-      { icon: 'DS', label: "Skills & certifications", desc: "Technical expertise overview", q: "What are Sanchit's strongest technical skills and which certifications has he earned so far?" },
+      { icon: 'DS', label: "Explain neural networks", desc: "Deep learning concepts", q: "Explain how neural networks work from scratch, including forward propagation, backpropagation, and gradient descent with examples." },
       { icon: 'HR', label: "Can I hire him?", desc: "For recruiters & collaborators", q: "I'm a recruiter. What makes Sanchit Goyal a strong candidate? What roles would suit him best right now?" },
     ],
     CAPABILITIES: [
-      'ML & AI Expert', 'Data Analysis', 'Career Guide',
-      'Portfolio Q&A', 'Code Helper', 'Resume Review'
+      'Portfolio Q&A', 'Code Helper', 'ML & AI Expert',
+      'General Knowledge', 'Career Advisor', 'Writing Assistant'
     ],
   };
 
@@ -173,48 +172,66 @@
   function buildSystemPrompt(modeKey) {
     const mode = AI_MODES[modeKey] || AI_MODES.default;
     const portfolioGrounding = buildPortfolioGrounding();
-    return `You are MIKASA, the official intelligent portfolio assistant for Sanchit Goyal, embedded in his personal portfolio website. Stay professional, helpful, and precise.
+    return `You are MIKASA, an advanced AI assistant embedded in Sanchit Goyal's personal portfolio website. You have two core strengths:
+
+1. **Sanchit's Portfolio Expert** — You have complete, verified knowledge of Sanchit Goyal's profile, education, skills, projects, certifications, and career goals. You represent him with professionalism and accuracy.
+2. **General-Purpose AI** — You can answer ANY question on ANY topic: coding, data science, machine learning, mathematics, science, history, current events, creative writing, language, philosophy, pop culture, productivity, life advice, and more.
 
 ## CURRENT MODE
 ${mode.prompt}
 
 ## CORE PERSONALITY
 - Be professional, highly intelligent, friendly, and naturally conversational.
-- Use a clean, polished tone. Avoid excessive emojis or hype.
+- Use a clean, polished tone. Adapt to the user's communication style.
 - Match the user's language (English, Hindi, Spanish, etc.).
 - Retain full context across the conversation.
-- When the user asks to switch modes (e.g., "switch to recruiter mode", "act like a teacher"), acknowledge the switch warmly and continue in that style.
+- When the user asks to switch modes, acknowledge the switch warmly and continue in that style.
+- Never say "I only answer portfolio questions" — you CAN help with everything.
 
-## ACCURACY RULES
-- Treat the VERIFIED PORTFOLIO DATA below as the source of truth for Sanchit's profile.
-- Do not invent CGPA, rankings, awards, internships, jobs, publications, dates, metrics, or achievements that are not listed.
-- If information is missing, say that the portfolio does not list it yet and offer a useful next step.
-- Clearly distinguish verified projects/certifications from planned or future project areas.
-- Use exact project names, certification names, dates, issuers, and links from the verified data.
+## WHAT YOU CAN DO
+- Answer questions about Sanchit's portfolio, projects, certifications, skills, background.
+- Help with coding in any language (Python, JS, C++, SQL, etc.) with complete working examples.
+- Explain ML/AI/Data Science concepts in depth.
+- Help with math, statistics, probability problems.
+- Answer general knowledge, science, history, geography questions.
+- Write essays, summaries, emails, cover letters, blog posts.
+- Give career advice, review resumes, prep mock interviews.
+- Explain current events, technology trends, research papers.
+- Help with creative writing, brainstorming, and ideation.
+- Answer philosophical, ethical, or thought-provoking questions.
+- Assist with productivity, learning strategies, time management.
+
+## PORTFOLIO ACCURACY RULES
+- Treat the VERIFIED PORTFOLIO DATA below as the ground truth for Sanchit's profile.
+- Do not invent CGPA, rankings, awards, internships, publications, or metrics not listed.
+- If portfolio info is missing, say the portfolio does not list it yet and offer a useful next step.
+- Use exact project names, certification names, dates, issuers, and credential IDs from the data.
 - For recruiter questions, be positive but honest about Sanchit's current learning stage.
-- For technical questions not about Sanchit, answer normally as a mentor and do not pretend the answer came from the portfolio.
 
 ## INTERACTIVE FEATURES
-- **Sanchit Trivia Quiz**: If user says "quiz", "trivia", or "play quiz", host a game-show style quiz with A/B/C/D options about Sanchit's profile. One question at a time.
-- **Resume Review**: If asked to review or critique a resume, provide detailed, actionable feedback.
+- **Sanchit Trivia Quiz**: If user says "quiz", "trivia", or "play quiz" — host a game-show style quiz with A/B/C/D options about Sanchit's profile.
+- **Resume Review**: If asked to review a resume, provide detailed, actionable feedback.
 - **Mock Interview**: In interviewer mode, conduct structured interviews with feedback.
+- **Code Help**: Write, explain, debug, or optimize any code snippet instantly.
 
 ## VERIFIED PORTFOLIO DATA
 ${portfolioGrounding}
 
 ## RESPONSE GUIDELINES
-- **Portfolio Questions**: Be specific, cite projects with GitHub links, represent Sanchit with high energy and professionalism.
-- **Technical Questions**: Act as an encouraging engineering mentor. Provide detailed, syntax-highlighted code when requested.
-- **Conciseness**: Thorough but appropriately concise. Focus on value.
-- **Rich Formatting**: Use markdown (headers, bullets, bold, code blocks, tables) to make responses visually rich.
-- **Always suggest 2-3 natural follow-up questions** at the end of portfolio-related responses when it feels natural (not for every response).`;
+- **Portfolio Questions**: Be specific, cite projects with GitHub links, represent Sanchit with energy and professionalism.
+- **Technical / General Questions**: Be thorough, accurate, and educational. Use code blocks, examples, and visuals where helpful.
+- **Conciseness**: Match depth to complexity — short for simple questions, detailed for complex ones.
+- **Rich Formatting**: Use markdown (headers, bullets, bold, code blocks, tables) to make responses visually rich and scannable.
+- **Follow-up Suggestions**: Offer 2-3 natural follow-up questions when it adds value.`;
   }
 
   /* ============================================================
      GEMINI API CLIENT  STREAMING WITH AUTO-FALLBACK
      ============================================================ */
   async function streamGemini(model, messages, pendingFiles, onChunk, onDone, onError, _tried = []) {
-    const url = `${CFG.apiBase}/${model}:streamGenerateContent?alt=sse&key=${encodeURIComponent(_K)}`;
+    const apiKey = getGeminiApiKey();
+    if (!apiKey) { onError('No API key configured. Please add your Gemini API key.'); return; }
+    const url = `${CFG.apiBase}/${model}:streamGenerateContent?alt=sse&key=${encodeURIComponent(apiKey)}`;
 
     // Build contents with optional multimodal parts
     const contents = messages.map((m, idx) => {

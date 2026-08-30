@@ -142,6 +142,42 @@ const portfolioData = {
   certifications: {
     verified: [
       {
+        category: "ml-ai",
+        name: "Introduction to Generative AI",
+        issuer: "Google Cloud",
+        issueDate: "2026",
+        credentialId: "X8IGXFSIKCGZ",
+        description: "Foundational certification authorized by Google Cloud covering Generative AI principles, Large Language Model architectures, prompt fundamentals, and Google Cloud generative AI ecosystem tools.",
+        skills: ["Generative AI", "Large Language Models", "Google Cloud", "AI Fundamentals", "Deep Learning"],
+        image: "assets/images/cert-google-intro-gen-ai.png",
+        pdf: "assets/certificates/Introduction to Generative AI.pdf",
+        verificationUrl: "https://coursera.org/verify/X8IGXFSIKCGZ"
+      },
+      {
+        category: "ml-ai",
+        name: "AI for Research and Insights",
+        issuer: "Google",
+        issueDate: "2026",
+        credentialId: "O4IIEUUU8B0F",
+        description: "Google Career Certificate credential focused on utilizing AI models and advanced prompt engineering to accelerate research, synthesize complex information, and extract actionable insights.",
+        skills: ["AI Research", "Research Insights", "Data Analysis", "Prompt Engineering", "Machine Learning"],
+        image: "assets/images/cert-google-ai-research.png",
+        pdf: "assets/certificates/Coursera O4IIEUUU8B0F.pdf",
+        verificationUrl: "https://coursera.org/verify/O4IIEUUU8B0F"
+      },
+      {
+        category: "data-science",
+        name: "Introduction to Data Analytics",
+        issuer: "Meta",
+        issueDate: "2026",
+        credentialId: "6820N7SCCT5N",
+        description: "Professional certification authorized by Meta covering core data analytics principles, data collection and cleaning pipelines, exploratory data analysis, and data-informed decision making.",
+        skills: ["Data Analytics", "Exploratory Data Analysis", "Data Storytelling", "Business Intelligence", "Decision Analytics"],
+        image: "assets/images/cert-meta-data-analytics.png",
+        pdf: "assets/certificates/Coursera 6820N7SCCT5N.pdf",
+        verificationUrl: "https://coursera.org/verify/6820N7SCCT5N"
+      },
+      {
         category: "other",
         name: "Generative AI Foundation",
         issuer: "upGrad",
@@ -170,36 +206,6 @@ const portfolioData = {
         skills: ["Web Scraping", "Python", "BeautifulSoup", "Data Collection", "HTML Parsing", "Data Extraction"],
         image: "assets/images/cert-web-scraping.png",
         verificationUrl: "https://www.upgrad.com/"
-      },
-      {
-        category: "other",
-        name: "Ultimate Job Ready Data Science Course",
-        issuer: "Code with Harry",
-        issueDate: "2026",
-        description: "Completed comprehensive training in Data Science, including Python, machine learning, data cleaning, exploratory data analysis, Pandas, NumPy, and predictive modeling.",
-        skills: ["Data Science", "Python", "Machine Learning", "Data Analysis", "Pandas", "NumPy"],
-        image: "assets/images/cert-cwh-data-science.png",
-        verificationUrl: "https://www.codewithharry.com/"
-      },
-      {
-        category: "other",
-        name: "Python Bootcamp Course",
-        issuer: "Code with Harry",
-        issueDate: "2025",
-        description: "Completed intense Python programming bootcamp covering standard syntax, algorithms, object-oriented programming, data structures, and software design principles.",
-        skills: ["Python Programming", "Algorithms", "Object-Oriented Programming", "Data Structures"],
-        image: "assets/images/cert-cwh-python.png",
-        verificationUrl: "https://www.codewithharry.com/"
-      },
-      {
-        category: "other",
-        name: "Web - Development Course",
-        issuer: "Code with Harry",
-        issueDate: "2026",
-        description: "Completed full course in web development, covering HTML5, CSS3, JavaScript ES6+, responsive web layouts, frontend system architectures, and modern UI practices.",
-        skills: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Frontend Development"],
-        image: "assets/images/cert-cwh-web-dev.png",
-        verificationUrl: "https://www.codewithharry.com/"
       }
     ],
     note: "I don't currently have information about that. Feel free to explore the portfolio sections for more details.",

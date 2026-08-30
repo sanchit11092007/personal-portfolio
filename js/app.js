@@ -7,7 +7,7 @@
   const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
 
   const state = {
-    certificateFilter: "other",
+    certificateFilter: "ml-ai",
     projectFilter: "data-science",
     developerFilter: "all"
   };
