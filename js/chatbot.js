@@ -226,101 +226,384 @@ ${portfolioGrounding}
   }
 
   /* ============================================================
-     GEMINI API CLIENT  STREAMING WITH AUTO-FALLBACK
+     GEMINI API CLIENT & KNOWLEDGE ENGINE
      ============================================================ */
+  function getLocalResponse(query, modeKey) {
+    const q = (query || '').toLowerCase().trim();
+    const data = window.PORTFOLIO_DATA || {};
+    const legacy = window.portfolioData || {};
+
+    // Mode check
+    const mode = AI_MODES[modeKey] || AI_MODES.default;
+
+    // 1. Sanchit Intro / About / Background
+    if (q.includes('who is') || q.includes('about sanchit') || q.includes('introduce') || q.includes('bio') || q.includes('profile') || q.includes('meet the portfolio')) {
+      return `### 👋 Meet Sanchit Goyal
+
+**Sanchit Goyal** is an aspiring **Data Scientist**, **Machine Learning Enthusiast**, and **AI Research Enthusiast** currently pursuing his **B.Tech in Computer Science Engineering (Data Science & ML)** at **Lovely Professional University (LPU)** (enrolled August 2025).
+
+#### 🎯 Core Focus & Philosophy
+- **Data-Driven Problem Solving**: Translating messy datasets into clean, explainable, and actionable insights.
+- **Machine Learning Foundations**: Developing robust predictive workflows, feature pipelines, and model evaluation metrics.
+- **AI Research Curiosity**: Exploring transformer architectures, Generative AI, computer vision, and academic papers.
+- **Continuous Learning**: Active on **LeetCode**, **Kaggle**, **GitHub**, **HackerRank**, and **Codeforces**.
+
+📍 **Location**: India  
+📬 **Email**: [contact.sanchitgoyal@gmail.com](mailto:contact.sanchitgoyal@gmail.com)  
+🔗 **LinkedIn**: [the-sanchit-goyal](https://www.linkedin.com/in/the-sanchit-goyal) | **GitHub**: [sanchit11092007](https://github.com/sanchit11092007)`;
+    }
+
+    // 2. Projects
+    if (q.includes('project') || q.includes('work') || q.includes('portfolio work') || q.includes('repository') || q.includes('github')) {
+      return `### 🚀 Sanchit's Featured Projects
+
+Here are Sanchit's verified hands-on projects:
+
+---
+
+#### 1. 🧹 Pure Python Data Cleaning Recommendation Engine
+- **Category**: Data Science & Python
+- **Description**: An automated rule-based recommendation engine that evaluates raw datasets and produces targeted data-cleaning roadmaps (handling null values, outliers, duplicate detection, type normalization).
+- **Tech Stack**: \`Python\`, \`Pure Python Architecture\`, \`Rule Engines\`, \`Automation\`
+- **Key Modules**:
+  - Null value detection & strategy recommendation
+  - Outlier detection via IQR & Statistical thresholding
+  - Deduplication & type mismatch flagging
+- **Links**: [GitHub Repository](https://github.com/sanchit11092007/Pure-Python-Data-Cleaning-Recommendation-Engine)
+
+---
+
+#### 2. 📊 Credit Banking Customer Analysis
+- **Category**: Exploratory Data Analysis & Financial Analytics
+- **Description**: An end-to-end exploratory data analysis workflow uncovering key customer behavioral patterns, financial distributions, and credit risk indicators.
+- **Tech Stack**: \`Python\`, \`Pandas\`, \`NumPy\`, \`Matplotlib\`, \`Seaborn\`
+- **Key Modules**:
+  - Demographic & income segment distribution analysis
+  - Credit score vs. default correlation matrices
+  - Visual dashboards & actionable business takeaways
+- **Links**: [GitHub Repository](https://github.com/sanchit11092007/Credit-Banking-Customer-Analysis)`;
+    }
+
+    // 3. Skills & Technologies
+    if (q.includes('skill') || q.includes('stack') || q.includes('python') || q.includes('sql') || q.includes('tool') || q.includes('technolog')) {
+      return `### 🛠️ Technical Skills & Tooling
+
+Sanchit's tech stack is structured into four core pillars:
+
+| Domain | Key Tools & Technologies |
+| :--- | :--- |
+| **Programming Languages** | **Python** (Advanced/Core), **SQL**, JavaScript, C++, Java, R |
+| **Data Science & Analytics** | **Pandas**, **NumPy**, **Matplotlib**, **Seaborn**, Plotly, SciPy, Power BI, Statistics, EDA |
+| **Machine Learning & AI** | **Scikit-Learn**, **PyTorch**, **TensorFlow**, Keras, XGBoost, LightGBM, CatBoost, NLP, GenAI |
+| **Tools & Platforms** | **Git**, **GitHub**, **Docker**, Linux, Jupyter, Google Colab, VS Code, MySQL, FastAPI, Streamlit |
+
+💡 *Currently focusing on Data Structures & Algorithms, Deep Learning architectures, and scalable ML pipelines.*`;
+    }
+
+    // 4. Certifications
+    if (q.includes('certif') || q.includes('course') || q.includes('google') || q.includes('meta') || q.includes('upgrad') || q.includes('credential')) {
+      return `### 📜 Verified Professional Certifications
+
+Sanchit has earned 6 verified industry certifications:
+
+1. **Introduction to Generative AI** — *Google Cloud* (Coursera)  
+   - **Credential ID**: \`X8IGXFSIKCGZ\`  
+   - [Verify Credential](https://coursera.org/verify/X8IGXFSIKCGZ)
+2. **AI for Research and Insights** — *Google* (Coursera)  
+   - **Credential ID**: \`O4IIEUUU8B0F\`  
+   - [Verify Credential](https://coursera.org/verify/O4IIEUUU8B0F)
+3. **Introduction to Data Analytics** — *Meta* (Coursera)  
+   - **Credential ID**: \`6820N7SCCT5N\`  
+   - [Verify Credential](https://coursera.org/verify/6820N7SCCT5N)
+4. **Generative AI Foundations** — *upGrad* (2025)
+5. **Power BI for Business Intelligence** — *upGrad* (2025)
+6. **Web Scraping with Python** — *upGrad* (2026)`;
+    }
+
+    // 5. Recruiter / Hiring / Opportunities
+    if (q.includes('hire') || q.includes('recruiter') || q.includes('intern') || q.includes('job') || q.includes('candidate') || q.includes('opportunity')) {
+      return `### 💼 Recruiter Quick Brief
+
+**Candidate**: Sanchit Goyal  
+**Degree**: B.Tech CSE (Data Science & ML) at Lovely Professional University  
+**Target Roles**: Data Science Intern, ML Engineering Intern, AI Research Intern  
+**Availability**: Open for Summer / Fall Internships, Research Collaborations, and Freelance projects.
+
+#### Why Sanchit is a Strong Candidate:
+- **Strong Foundations**: Hands-on with data preprocessing, exploratory data analysis, statistical tests, and machine learning models.
+- **High Learning Velocity**: Completed 6 industry certifications (Google Cloud, Meta, upGrad) and continuously ships documented GitHub projects.
+- **Problem-Solving Discipline**: Active problem solver on LeetCode and Codeforces.
+- **Ready to Connect**: Reach out directly at [contact.sanchitgoyal@gmail.com](mailto:contact.sanchitgoyal@gmail.com) or download his resume from the top banner.`;
+    }
+
+    // 6. Neural networks / Machine learning concept explanation
+    if (q.includes('neural network') || q.includes('how neural network') || q.includes('deep learning')) {
+      return `### 🧠 How Neural Networks Work (From Scratch)
+
+Artificial Neural Networks (ANNs) are computational models inspired by biological neural networks in the human brain.
+
+\`\`\`
+[Input Layer] ──(Weights + Bias)──> [Hidden Layers] ──(Activation)──> [Output Layer]
+      x                 W · x + b               f(z)                    y_pred
+\`\`\`
+
+#### 1. The Core Components
+- **Inputs ($x$)**: Features from your data (e.g., pixel intensities, tabular values).
+- **Weights ($W$) & Biases ($b$)**: Learnable parameters representing the strength of connections.
+- **Linear Combination**: $z = \\sum (w_i \\cdot x_i) + b$
+- **Activation Function ($f$)**: Introduces non-linearity (e.g., ReLU, Sigmoid, Softmax) allowing the network to learn complex patterns:
+  $a = \\text{ReLU}(z) = \\max(0, z)$
+
+#### 2. Forward Propagation
+Data flows forward through each layer:
+1. Layer 1 calculates $z^{[1]} = W^{[1]} x + b^{[1]}$ and activations $a^{[1]} = f(z^{[1]})$.
+2. Subsequent layers repeat until generating the final prediction $y_{pred}$.
+
+#### 3. Loss Function & Optimization
+- A **Loss Function** (e.g., Cross-Entropy, Mean Squared Error) measures how far the prediction is from the actual truth ($y$).
+- **Backpropagation**: Uses the **Chain Rule of Calculus** to compute partial derivatives.
+- **Gradient Descent**: Updates parameters in the opposite direction of the gradient:
+  $W \\leftarrow W - \\alpha \\frac{\\partial L}{\\partial W}$
+
+Would you like an implementation example in **PyTorch** or **Pure Python**?`;
+    }
+
+    // 7. Trivia / Quiz
+    if (q.includes('quiz') || q.includes('trivia') || q.includes('game')) {
+      return `### 🎯 Sanchit Goyal Trivia Challenge!
+
+**Question 1:** Which university is Sanchit currently attending for his B.Tech in CSE (Data Science & ML)?
+
+- **A)** IIT Delhi
+- **B)** Lovely Professional University (LPU)
+- **C)** Stanford University
+- **D)** BITS Pilani
+
+*Type your answer (e.g. "B") to see if you're correct!*`;
+    }
+
+    if (q === 'b' || q === 'option b' || q.includes('lovely professional university') || q.includes('lpu')) {
+      return `🎉 **Correct!** Sanchit is pursuing his B.Tech in Computer Science Engineering (Data Science & ML) at **Lovely Professional University (LPU)**.
+
+**Question 2:** Which organization issued Sanchit's certification in *Introduction to Generative AI*?
+
+- **A)** Meta
+- **B)** AWS
+- **C)** Google Cloud
+- **D)** Microsoft`;
+    }
+
+    if (q === 'c' || q === 'option c' || q.includes('google cloud')) {
+      return `🎉 **Spot on!** Sanchit earned his **Introduction to Generative AI** certification from **Google Cloud** on Coursera (Credential ID: \`X8IGXFSIKCGZ\`).
+
+**Question 3:** What is the core feature of Sanchit's *Pure Python Data Cleaning Recommendation Engine*?
+
+- **A)** Uses heavy deep learning models
+- **B)** Rule-based dataset analysis with zero external dependencies
+- **C)** A web scraper for social media
+- **D)** A mobile app for expense tracking`;
+    }
+
+    // 8. General AI / Coding / Technical Fallback
+    return `### Hello! I'm MIKASA, your AI Assistant. 🤖
+
+I can help you with **anything** — whether it's about Sanchit's portfolio or general technical questions:
+
+**📁 About Sanchit Goyal:**
+- 👨‍💻 **Background & Education** (LPU - B.Tech CSE Data Science & ML)
+- 🚀 **Projects** (Data Cleaning Engine, Credit Banking Analysis)
+- 🛠️ **Technical Skills** (Python, SQL, Scikit-learn, Pandas, PyTorch)
+- 📜 **Certifications** (Google Cloud, Meta, upGrad)
+- 💼 **Recruiter Readiness & Contact** ([contact.sanchitgoyal@gmail.com](mailto:contact.sanchitgoyal@gmail.com))
+
+**🌐 General Intelligence:**
+- 💻 Code in Python, JavaScript, SQL, C++, Java
+- 📊 Machine Learning, Deep Learning, Statistics & EDA
+- 📝 Essays, cover letters, career guidance, mock interviews
+- 🔬 Science, mathematics, general knowledge
+
+**What would you like to explore?**`;
+  }
+
+  async function streamLocalKnowledge(messages, onChunk, onDone) {
+    const lastUserMsg = [...messages].reverse().find(m => m.role === 'user') || { content: '' };
+    const response = getLocalResponse(lastUserMsg.content, window._pankrixMode || 'default');
+
+    // Simulate natural streaming chunks
+    const words = response.split(/(\s+)/);
+    let full = '';
+    let isFirst = true;
+
+    for (let i = 0; i < words.length; i++) {
+      const part = words[i];
+      full += part;
+      onChunk(part, full, isFirst);
+      isFirst = false;
+      // Micro-pause for realistic streaming feel
+      if (i % 6 === 0) {
+        await new Promise(r => setTimeout(r, 18));
+      }
+    }
+    onDone(full);
+  }
+
   async function streamGemini(model, messages, pendingFiles, onChunk, onDone, onError, _tried = []) {
     const apiKey = getGeminiApiKey();
-    if (!apiKey) { onError('No API key configured. Please add your Gemini API key.'); return; }
-    const url = `${CFG.apiBase}/${model}:streamGenerateContent?alt=sse&key=${encodeURIComponent(apiKey)}`;
 
-    // Build contents with optional multimodal parts
-    const contents = messages.map((m, idx) => {
-      const isLast = idx === messages.length - 1;
-      let parts = [{ text: m.content || '' }];
-
-      // Attach files to the last user message
-      if (isLast && m.role === 'user' && pendingFiles && pendingFiles.length > 0) {
-        parts = [...pendingFiles.map(f => ({
-          inlineData: { mimeType: f.mimeType, data: f.data }
-        })), { text: m.content || 'Please analyze the attached file(s).' }];
-      }
-
-      return {
-        role: m.role === 'assistant' ? 'model' : 'user',
-        parts
-      };
-    });
-
-    let body;
-    try {
-      body = JSON.stringify({
-        contents,
-        system_instruction: { parts: [{ text: buildSystemPrompt(window._pankrixMode || 'default') }] },
-        generationConfig: {
-          temperature: CFG.temperature,
-          maxOutputTokens: CFG.maxOutputTokens,
-          topP: CFG.topP,
-          topK: CFG.topK,
-        },
-        safetySettings: [
-          { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_ONLY_HIGH' },
-          { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_ONLY_HIGH' },
-          { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold: 'BLOCK_ONLY_HIGH' },
-          { category: 'HARM_CATEGORY_DANGEROUS_CONTENT', threshold: 'BLOCK_ONLY_HIGH' },
-        ],
-      });
-    } catch (e) { onError('Failed to build request: ' + e.message); return; }
-
-    try {
-      const res = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body,
-      });
-
-      if (!res.ok) {
-        let errMsg = `API error (${res.status})`;
-        try { const d = await res.json(); errMsg = d?.error?.message || errMsg; } catch { }
-        const recoverable = res.status === 404 || res.status === 429 || errMsg.toLowerCase().includes('quota') || errMsg.toLowerCase().includes('not found');
-        if (recoverable && CFG.FALLBACK_MODELS) {
-          const tried = [..._tried, model];
-          const next = CFG.FALLBACK_MODELS.find(m => !tried.includes(m));
-          if (next) { console.log(`[MIKASA] Switching from ${model} -> ${next}`); return streamGemini(next, messages, pendingFiles, onChunk, onDone, onError, tried); }
-        }
-        onError(errMsg); return;
-      }
-
-      const reader = res.body.getReader();
-      const decoder = new TextDecoder();
-      let buffer = '', fullText = '', firstChunk = true;
-
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        buffer += decoder.decode(value, { stream: true });
-        const lines = buffer.split('\n');
-        buffer = lines.pop() || '';
-
-        for (const line of lines) {
-          if (!line.startsWith('data: ')) continue;
-          const data = line.slice(6).trim();
-          if (!data || data === '[DONE]') continue;
-          try {
-            const parsed = JSON.parse(data);
-            const chunk = parsed?.candidates?.[0]?.content?.parts?.[0]?.text || '';
-            if (chunk) {
-              fullText += chunk;
-              onChunk(chunk, fullText, firstChunk);
-              firstChunk = false;
+    // 1. Try serverless backend proxy (/api/chat) if available
+    if (!apiKey) {
+      try {
+        const proxyRes = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            model,
+            contents: messages.map((m, idx) => {
+              const isLast = idx === messages.length - 1;
+              let parts = [{ text: m.content || '' }];
+              if (isLast && m.role === 'user' && pendingFiles && pendingFiles.length > 0) {
+                parts = [...pendingFiles.map(f => ({
+                  inlineData: { mimeType: f.mimeType, data: f.data }
+                })), { text: m.content || 'Please analyze the attached file(s).' }];
+              }
+              return { role: m.role === 'assistant' ? 'model' : 'user', parts };
+            }),
+            system_instruction: { parts: [{ text: buildSystemPrompt(window._pankrixMode || 'default') }] },
+            generationConfig: {
+              temperature: CFG.temperature,
+              maxOutputTokens: CFG.maxOutputTokens,
+              topP: CFG.topP,
+              topK: CFG.topK,
             }
-          } catch (_) { }
+          })
+        });
+
+        if (proxyRes.ok) {
+          const reader = proxyRes.body.getReader();
+          const decoder = new TextDecoder();
+          let buffer = '', fullText = '', firstChunk = true;
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            buffer += decoder.decode(value, { stream: true });
+            const lines = buffer.split('\n');
+            buffer = lines.pop() || '';
+            for (const line of lines) {
+              if (!line.startsWith('data: ')) continue;
+              const data = line.slice(6).trim();
+              if (!data || data === '[DONE]') continue;
+              try {
+                const parsed = JSON.parse(data);
+                const chunk = parsed?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+                if (chunk) {
+                  fullText += chunk;
+                  onChunk(chunk, fullText, firstChunk);
+                  firstChunk = false;
+                }
+              } catch (_) {}
+            }
+          }
+          if (fullText) {
+            onDone(fullText);
+            return;
+          }
         }
+      } catch (_) {
+        // Fall through to local knowledge engine
       }
-      onDone(fullText || 'I apologize, I received an empty response. Please try again.');
-    } catch (err) {
-      const msg = err.name === 'AbortError' ? 'Request cancelled.' : (err.message || 'Network error. Please check your connection.');
-      onError(msg);
     }
+
+    // 2. Direct Gemini API call if key is configured
+    if (apiKey) {
+      const url = `${CFG.apiBase}/${model}:streamGenerateContent?alt=sse&key=${encodeURIComponent(apiKey)}`;
+
+      const contents = messages.map((m, idx) => {
+        const isLast = idx === messages.length - 1;
+        let parts = [{ text: m.content || '' }];
+        if (isLast && m.role === 'user' && pendingFiles && pendingFiles.length > 0) {
+          parts = [...pendingFiles.map(f => ({
+            inlineData: { mimeType: f.mimeType, data: f.data }
+          })), { text: m.content || 'Please analyze the attached file(s).' }];
+        }
+        return { role: m.role === 'assistant' ? 'model' : 'user', parts };
+      });
+
+      let body;
+      try {
+        body = JSON.stringify({
+          contents,
+          system_instruction: { parts: [{ text: buildSystemPrompt(window._pankrixMode || 'default') }] },
+          generationConfig: {
+            temperature: CFG.temperature,
+            maxOutputTokens: CFG.maxOutputTokens,
+            topP: CFG.topP,
+            topK: CFG.topK,
+          },
+          safetySettings: [
+            { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_ONLY_HIGH' },
+            { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_ONLY_HIGH' },
+            { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold: 'BLOCK_ONLY_HIGH' },
+            { category: 'HARM_CATEGORY_DANGEROUS_CONTENT', threshold: 'BLOCK_ONLY_HIGH' },
+          ],
+        });
+      } catch (e) { onError('Failed to build request: ' + e.message); return; }
+
+      try {
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body,
+        });
+
+        if (!res.ok) {
+          let errMsg = `API error (${res.status})`;
+          try { const d = await res.json(); errMsg = d?.error?.message || errMsg; } catch { }
+          const recoverable = res.status === 404 || res.status === 429 || errMsg.toLowerCase().includes('quota') || errMsg.toLowerCase().includes('not found');
+          if (recoverable && CFG.FALLBACK_MODELS) {
+            const tried = [..._tried, model];
+            const next = CFG.FALLBACK_MODELS.find(m => !tried.includes(m));
+            if (next) { console.log(`[MIKASA] Switching from ${model} -> ${next}`); return streamGemini(next, messages, pendingFiles, onChunk, onDone, onError, tried); }
+          }
+          // Fall back to local knowledge rather than failing
+          return streamLocalKnowledge(messages, onChunk, onDone);
+        }
+
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = '', fullText = '', firstChunk = true;
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split('\n');
+          buffer = lines.pop() || '';
+
+          for (const line of lines) {
+            if (!line.startsWith('data: ')) continue;
+            const data = line.slice(6).trim();
+            if (!data || data === '[DONE]') continue;
+            try {
+              const parsed = JSON.parse(data);
+              const chunk = parsed?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+              if (chunk) {
+                fullText += chunk;
+                onChunk(chunk, fullText, firstChunk);
+                firstChunk = false;
+              }
+            } catch (_) { }
+          }
+        }
+        onDone(fullText || 'I apologize, I received an empty response. Please try again.');
+        return;
+      } catch (err) {
+        // Fall back to local knowledge engine on network failure
+        return streamLocalKnowledge(messages, onChunk, onDone);
+      }
+    }
+
+    // 3. Fallback: Intelligent local knowledge engine
+    return streamLocalKnowledge(messages, onChunk, onDone);
   }
 
   /* ============================================================
