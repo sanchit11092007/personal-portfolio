@@ -128,6 +128,36 @@ const portfolioData = {
         techStack: ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn", "Data Visualization", "Exploratory Data Analysis"],
         image: "assets/images/project-banking-analysis.png",
         codeUrl: "https://github.com/sanchit11092007/Credit-Banking-Analysis"
+      },
+      {
+        category: "ai-ml",
+        title: "Agent OTG — SIH 2026",
+        description: "A 100% on-premise AI assistant with smart routing, RAG document search, and local file generation (PDF, Word, Excel, PPT). It features a same-hotspot receiver system where all AI processing stays on the main PC.",
+        features: [
+          "Smart AI routing",
+          "RAG document search",
+          "Local file generation",
+          "Same-hotspot receiver system",
+          "100% on-premise AI processing"
+        ],
+        techStack: ["Python", "Node", "Ollama", "RAG", "LLM", "Powershell"],
+        image: "assets/hero-ai-lab.png",
+        codeUrl: "https://github.com/sanchit11092007/agent-otg-sih2026"
+      },
+      {
+        category: "data-science",
+        title: "FiniX — UPI Fraud-Ring Tracker",
+        description: "A reproducible risk-intelligence system for a UPI competition dataset. It cleans independent sources, preserves cross-source inconsistencies as analytical signals, calculates transaction networks, and provides a Streamlit investigation dashboard.",
+        features: [
+          "Deterministic data cleaning & validation",
+          "Guarded chargeback-to-transaction linkage",
+          "Transaction network calculation",
+          "Streamlit investigation dashboard",
+          "Gemini-powered investigation copilot"
+        ],
+        techStack: ["Python", "Streamlit", "Data Analysis", "Gemini API", "Network Graph", "Data Cleaning"],
+        image: "assets/hero-ai-lab.png",
+        codeUrl: "https://github.com/sanchit11092007/finix-upi-fraud-datathon"
       }
     ],
     plannedAreas: [

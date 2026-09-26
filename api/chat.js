@@ -17,7 +17,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { model = 'gemini-2.5-flash', contents, system_instruction, generationConfig, safetySettings } = req.body || {};
+    const { model = 'gemini-2.5-flash', contents, systemInstruction, system_instruction, generationConfig, safetySettings } = req.body || {};
 
     const targetUrl = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:streamGenerateContent?alt=sse&key=${encodeURIComponent(apiKey)}`;
 
@@ -26,7 +26,7 @@ export default async function handler(req, res) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         contents,
-        system_instruction,
+        systemInstruction: systemInstruction || system_instruction,
         generationConfig,
         safetySettings
       })
