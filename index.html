@@ -257,12 +257,14 @@
 
   <main id="main">
     <section class="hero section" id="home" aria-labelledby="hero-title">
+      <div class="hero-grid-overlay" aria-hidden="true"></div>
       <div class="container hero-grid">
         <div class="hero-copy reveal">
           <div class="eyebrow-row">
-            <span class="status-badge">Open to Internships</span>
-            <span class="signal-text">AI systems, ML foundations, and data-driven engineering</span>
+            <span class="status-badge"><i class="fa-solid fa-circle" aria-hidden="true"></i> Open to Internships</span>
+            <span class="signal-text">Data intelligence / research systems / applied ML</span>
           </div>
+          <p class="hero-system-label"><span></span> Sanchit Goyal / Data Science Portfolio</p>
           <h1 id="hero-title">Sanchit Goyal</h1>
           <p class="hero-role">
             <span>Aspiring Data Scientist</span>
@@ -299,9 +301,33 @@
             <span class="scroll-text">Scroll to explore</span>
           </div>
         </div>
-        <div class="hero-image-container reveal" style="display: flex; justify-content: center; align-items: center; position: relative;">
-          <img src="assets/profile-picture/profile-picture.jpeg" alt="Sanchit Goyal Profile" style="width: 100%; max-width: 380px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 40px rgba(56, 189, 248, 0.1); object-fit: cover; aspect-ratio: 4/5;">
+        <div class="hero-image-container reveal">
+          <div class="profile-orbit profile-orbit-a" aria-hidden="true"></div>
+          <div class="profile-orbit profile-orbit-b" aria-hidden="true"></div>
+          <div class="profile-stage">
+            <div class="profile-stage-top"><span>SUBJECT_001&nbsp;//</span><span>DATA / AI</span></div>
+            <img src="assets/profile-picture/profile-picture.jpeg" alt="Sanchit Goyal Profile" width="760" height="950" fetchpriority="high">
+            <div class="profile-stage-scan" aria-hidden="true"></div>
+            <div class="profile-stage-footer"><span><i class="fa-solid fa-fingerprint" aria-hidden="true"></i> Research-minded builder</span><span>IND / 2026</span></div>
+          </div>
+          <article class="hero-insight hero-insight--focus">
+            <span class="hero-insight-label"><i class="fa-solid fa-wave-square" aria-hidden="true"></i> CURRENT VECTOR</span>
+            <strong>ML foundations</strong>
+            <p>Model evaluation · data workflows · applied research</p>
+          </article>
+          <article class="hero-insight hero-insight--signal">
+            <span class="hero-insight-label">SIGNAL MAP</span>
+            <div class="signal-bars" aria-label="Areas of active learning">
+              <span style="--level: 72%">Data</span><span style="--level: 65%">ML</span><span style="--level: 53%">Code</span>
+            </div>
+          </article>
         </div>
+      </div>
+      <div class="container hero-telemetry reveal" aria-label="Portfolio focus areas">
+        <div><span>01</span><p>DATA<br><b>ANALYSIS</b></p></div>
+        <div><span>02</span><p>INTELLIGENT<br><b>SYSTEMS</b></p></div>
+        <div><span>03</span><p>RESEARCH<br><b>EXPERIMENTS</b></p></div>
+        <div class="telemetry-pulse"><i class="fa-solid fa-satellite-dish" aria-hidden="true"></i><span>PORTFOLIO SIGNAL ACTIVE</span></div>
       </div>
     </section>
 
