@@ -29,9 +29,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/MIKASA-ai.css">
-  <link rel="stylesheet" href="css/features.css">
+  <link rel="stylesheet" href="css/style.css?v=20261015.3">
+  <link rel="stylesheet" href="css/MIKASA-ai.css?v=20261015.3">
+  <link rel="stylesheet" href="css/features.css?v=20261015.3">
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -114,11 +114,11 @@
       ]
     }
   </script>
-  <script defer src="js/portfolioData.js"></script>
-  <script defer src="js/app.js"></script>
-  <script defer src="js/ui.js"></script>
-  <script defer src="js/chatbot.js"></script>
-  <script defer src="js/features.js"></script>
+  <script defer src="js/portfolioData.js?v=20261015.3"></script>
+  <script defer src="js/app.js?v=20261015.3"></script>
+  <script defer src="js/ui.js?v=20261015.3"></script>
+  <script defer src="js/chatbot.js?v=20261015.3"></script>
+  <script defer src="js/features.js?v=20261015.3"></script>
 </head>
 
 <body>
@@ -305,7 +305,7 @@
           <div class="profile-orbit profile-orbit-a" aria-hidden="true"></div>
           <div class="profile-orbit profile-orbit-b" aria-hidden="true"></div>
           <div class="profile-stage">
-            <div class="profile-stage-top"><span>SUBJECT_001&nbsp;//</span><span>DATA / AI</span></div>
+            <div class="profile-stage-top"><span>SUBJECT_001</span><span>DATA / AI</span></div>
             <img src="assets/profile-picture/profile-picture.jpeg" alt="Sanchit Goyal Profile" width="760" height="950" fetchpriority="high">
             <div class="profile-stage-scan" aria-hidden="true"></div>
             <div class="profile-stage-footer"><span><i class="fa-solid fa-fingerprint" aria-hidden="true"></i> Research-minded builder</span><span>IND / 2026</span></div>
@@ -335,11 +335,10 @@
       <div class="container">
         <div class="section-heading reveal about-heading">
           <span class="section-kicker">About</span>
-          <h2 id="about-title">Building The Future With Data & AI</h2>
+          <h2 id="about-title">Turning raw signals into useful decisions.</h2>
           <p class="section-intro">
-            A recruiter-ready profile focused on Data Science, Machine Learning, AI Research, and analytics-driven
-            problem solving. This section emphasizes measurable intelligence, analytical depth, and a continuous
-            growth mindset.
+            A data-science profile built around rigorous analysis, practical machine learning, and research-minded
+            problem solving—without inflated claims or decorative metrics.
           </p>
         </div>
         <div class="about-grid">
@@ -426,11 +425,11 @@
         <!-- 🚀 Recruiter Scorecard Feature -->
         <div class="scorecard-section reveal">
           <div class="scorecard-header">
-            <h3>Recruiter Scorecard</h3>
-            <p>Quantitative breakdown of core engineering attributes</p>
+            <h3>Learning Focus Map</h3>
+            <p>Current practice areas, not an external benchmark or proficiency claim.</p>
           </div>
           <div class="scorecard-grid">
-            <div class="scorecard-card">
+            <div class="scorecard-card" data-status="Active practice">
               <div class="scorecard-svg-container">
                 <svg class="scorecard-svg" width="100" height="100">
                   <circle class="scorecard-bg-circle" cx="50" cy="50" r="40"></circle>
@@ -440,7 +439,7 @@
               </div>
               <span class="scorecard-label">Learning Velocity</span>
             </div>
-            <div class="scorecard-card">
+            <div class="scorecard-card" data-status="Structured practice">
               <div class="scorecard-svg-container">
                 <svg class="scorecard-svg" width="100" height="100">
                   <circle class="scorecard-bg-circle" cx="50" cy="50" r="40"></circle>
@@ -450,7 +449,7 @@
               </div>
               <span class="scorecard-label">Problem Solving</span>
             </div>
-            <div class="scorecard-card">
+            <div class="scorecard-card" data-status="Consistent work">
               <div class="scorecard-svg-container">
                 <svg class="scorecard-svg" width="100" height="100">
                   <circle class="scorecard-bg-circle" cx="50" cy="50" r="40"></circle>
@@ -460,7 +459,7 @@
               </div>
               <span class="scorecard-label">Consistency</span>
             </div>
-            <div class="scorecard-card">
+            <div class="scorecard-card" data-status="Foundation building">
               <div class="scorecard-svg-container">
                 <svg class="scorecard-svg" width="100" height="100">
                   <circle class="scorecard-bg-circle" cx="50" cy="50" r="40"></circle>
@@ -479,7 +478,7 @@
       <div class="container">
         <div class="section-heading reveal skills-heading">
           <span class="section-kicker">Technical Skills</span>
-          <h2 id="skills-title">My Tech Stack</h2>
+          <h2 id="skills-title">The data intelligence stack.</h2>
           <p class="section-intro">
             A growing toolkit for building intelligent, data-driven solutions through Data Science, Machine Learning, and
             Artificial Intelligence.
@@ -715,10 +714,10 @@
             </div>
             <div class="radar-info-panel">
               <h3>Core Tech Spectrum</h3>
-              <p>An interactive, multi-dimensional view of my current proficiency vs. actual industry and recruiter demand across core domains.</p>
+              <p>A directional view of current learning focus and the capabilities being built through hands-on work.</p>
               <div class="radar-toggle-container">
-                <button class="radar-toggle-btn active" data-view="proficiency">My Proficiency</button>
-                <button class="radar-toggle-btn" data-view="demand">Recruiter View</button>
+                <button class="radar-toggle-btn active" data-view="proficiency">Current Focus</button>
+                <button class="radar-toggle-btn" data-view="demand">Growth Direction</button>
               </div>
             </div>
           </div>
@@ -802,7 +801,7 @@
       <div class="container">
         <div class="section-heading centered reveal">
           <span class="section-kicker">Journey</span>
-          <h2 id="journey-title">A focused roadmap from foundations to advanced AI development.</h2>
+          <h2 id="journey-title">Research trajectory, one experiment at a time.</h2>
         </div>
         <ol class="timeline" aria-label="Professional learning timeline">
 
@@ -873,8 +872,8 @@
       <div class="container">
         <div class="section-heading reveal">
           <span class="section-kicker">Projects</span>
-          <h2 id="projects-title">Projects</h2>
-          <p class="section-intro">A growing collection of data science, AI, and software projects built throughout my learning journey  from data cleaning pipelines to banking analytics.</p>
+          <h2 id="projects-title">Applied intelligence lab.</h2>
+          <p class="section-intro">Selected work across data quality, exploratory analysis, risk intelligence, and local-first AI systems.</p>
         </div>
 
         <!-- Project Category Tabs -->
@@ -940,8 +939,8 @@
       <div class="container">
         <div class="section-heading reveal">
           <span class="section-kicker">Developer Activity</span>
-          <h2 id="developers-title">Live Developer Progress</h2>
-          <p class="section-intro">A public progress hub connecting LinkedIn, GitHub, Medium, DEV, Kaggle, coding platforms, and portfolio updates into one developer activity layer.</p>
+          <h2 id="developers-title">Public research trail.</h2>
+          <p class="section-intro">Repositories, technical writing, data platforms, and problem-solving profiles—organised as a living record of practice.</p>
         </div>
 
         <div class="developer-activity-shell reveal">
@@ -980,8 +979,8 @@
       <div class="container">
         <div class="section-heading reveal">
           <span class="section-kicker">Certifications</span>
-          <h2 id="certifications-title">Certifications & Milestones</h2>
-          <p class="section-intro">Professional credentials and active learning tracks validating my technical expertise.</p>
+          <h2 id="certifications-title">Verified learning record.</h2>
+          <p class="section-intro">Credentials and learning milestones that support the work shown in this portfolio.</p>
         </div>
         <div class="filter-bar" id="certificateFilters" aria-label="Certification filters"></div>
         <div class="certificate-grid" id="certificateGrid" aria-live="polite"></div>
@@ -992,8 +991,8 @@
       <div class="container">
         <div class="section-heading centered reveal">
           <span class="section-kicker">Contact</span>
-          <h2 id="contact-title">Let's Connect</h2>
-          <p class="section-intro">Have a project, internship opportunity, or questions? Send a message below.</p>
+          <h2 id="contact-title">Start a thoughtful conversation.</h2>
+          <p class="section-intro">For internships, data projects, research discussions, or an interesting problem worth exploring.</p>
         </div>
         
         <div class="contact-layout reveal">

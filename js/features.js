@@ -32,22 +32,11 @@
           const offset = circumference - (targetValue / 100) * circumference;
           circle.style.strokeDashoffset = `${offset}`;
 
-          // Animate text counter
+          // Show a qualitative focus signal rather than a fabricated score.
           const card = circle.closest(".scorecard-card");
           const counterEl = $(".scorecard-value", card);
           if (counterEl) {
-            let start = 0;
-            const duration = 1500; // ms
-            const stepTime = Math.abs(Math.floor(duration / targetValue));
-            
-            const timer = setInterval(() => {
-              start++;
-              counterEl.textContent = `${start}%`;
-              if (start >= targetValue) {
-                clearInterval(timer);
-                counterEl.textContent = `${targetValue}%`;
-              }
-            }, stepTime);
+            counterEl.textContent = card.dataset.status || "In practice";
           }
 
           observer.unobserve(circle);

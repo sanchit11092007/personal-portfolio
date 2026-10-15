@@ -116,13 +116,19 @@
         
         if (prof !== undefined) {
            fillEl.dataset.progress = String(prof);
-           if (valEl) {
-             valEl.dataset.target = String(prof);
-             valEl.textContent = prof + "%";
-           }
+          if (valEl) {
+            valEl.dataset.target = String(prof);
+            valEl.textContent = learningStage(prof);
+          }
         }
       }
     });
+  }
+
+  function learningStage(value) {
+    if (value >= 40) return "Applied";
+    if (value >= 15) return "Practicing";
+    return "Exploring";
   }
 
   function renderFilters(containerSelector, categories, active, onSelect, showAll = true) {
@@ -885,14 +891,14 @@
       const target = Number(fill.dataset.progress || 0);
       fill.dataset.animated = "true";
 
+      const visibleTarget = Math.max(16, target);
       if (prefersReducedMotion) {
-        fill.style.width = `${target}%`;
-        label.textContent = `${target}%`;
+        fill.style.width = `${visibleTarget}%`;
+        label.textContent = learningStage(target);
         return;
       }
 
-      // Reset label to 0 before animating
-      label.textContent = "0%";
+      label.textContent = "Loading";
 
       const duration = 1450;
       const start = performance.now();
@@ -900,8 +906,8 @@
       const tick = (now) => {
         const progress = Math.min((now - start) / duration, 1);
         const eased = easeOutCubic(progress);
-        fill.style.width = `${target * eased}%`;
-        label.textContent = `${Math.round(target * eased)}%`;
+        fill.style.width = `${visibleTarget * eased}%`;
+        if (progress === 1) label.textContent = learningStage(target);
         if (progress < 1) requestAnimationFrame(tick);
       };
 
@@ -1482,7 +1488,7 @@ That kind of workflow fits his current path: data handling, experimentation, and
   // Reset all static progress labels to "0%" so they animate correctly when revealed
   document.querySelectorAll(".skill-row .progress-fill[data-progress]").forEach((fill) => {
     const label = fill.closest(".skill-row")?.querySelector(".progress-value");
-    if (label) label.textContent = "0%";
+    if (label) label.textContent = "Loading";
   });
 
   renderSocialLinks();
