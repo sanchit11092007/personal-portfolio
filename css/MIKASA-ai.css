@@ -1,223 +1,79 @@
-/* Minimal Clean AI Chatbot CSS */
-#mikasa-chatbot-container {
-  font-family: 'Inter', sans-serif;
-}
+#mikasa-chatbot-container { font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+#mikasa-fab, #mikasa-panel button { font: inherit; }
+#mikasa-fab[hidden], #mikasa-panel[hidden] { display: none; }
 
 #mikasa-fab {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: 56px;
-  height: 56px;
-  background: linear-gradient(135deg, #0ea5e9, #7c3aed);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 24px;
-  cursor: pointer;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
-  z-index: 9999;
-  transition: transform 0.2s;
+  position: fixed; right: 26px; bottom: 26px; z-index: 1000; width: 62px; height: 62px;
+  display: grid; place-items: center; color: #eafaff; background: linear-gradient(135deg, #0284c7, #4f46e5 58%, #a855f7);
+  border: 1px solid rgba(255,255,255,.32); border-radius: 21px; box-shadow: 0 18px 50px rgba(37,99,235,.42), inset 0 1px rgba(255,255,255,.25);
+  cursor: pointer; transition: transform .22s ease, box-shadow .22s ease;
 }
-#mikasa-fab:hover {
-  transform: scale(1.1);
-}
-
-#mikasa-fab[hidden],
-#mikasa-panel[hidden] {
-  display: none;
-}
+#mikasa-fab:hover { transform: translateY(-4px) scale(1.04); box-shadow: 0 24px 60px rgba(37,99,235,.55); }
+#mikasa-fab i { position: relative; z-index: 1; font-size: 1.3rem; }
+.mikasa-fab-orbit { position:absolute; width: 28px; height: 28px; border: 1px solid rgba(255,255,255,.55); border-radius: 50%; transform: rotate(35deg) scaleX(1.75); }
+.mikasa-fab-badge { position:absolute; right:-7px; top:-7px; padding: 3px 5px; color:#07111f; background:#b8f8ee; border-radius:6px; font-size:.55rem; font-weight:900; letter-spacing:.08em; }
 
 #mikasa-panel {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: 380px;
-  height: 600px;
-  max-height: 80vh;
-  background: #0f172a;
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 16px;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
-  z-index: 9999;
-  overflow: hidden;
+  position: fixed; right: 24px; bottom: 24px; z-index: 1001; width: min(940px, calc(100vw - 32px)); height: min(680px, calc(100vh - 48px));
+  display: grid; grid-template-columns: 230px minmax(0, 1fr); overflow: hidden; color:#e7f0ff;
+  background: linear-gradient(135deg, rgba(8,15,32,.98), rgba(15,23,52,.98)); border:1px solid rgba(148,163,184,.24); border-radius:26px;
+  box-shadow: 0 34px 100px rgba(0,0,0,.62), 0 0 0 1px rgba(56,189,248,.05) inset; animation:mikasa-enter .28s cubic-bezier(.2,.8,.2,1);
 }
+@keyframes mikasa-enter { from { opacity:0; transform:translateY(16px) scale(.98); } to { opacity:1; transform:none; } }
+.mikasa-rail { display:flex; flex-direction:column; padding:20px 14px 16px; background:linear-gradient(180deg,rgba(16,29,57,.96),rgba(9,15,31,.92)); border-right:1px solid rgba(148,163,184,.13); }
+.mikasa-brand { display:flex; align-items:center; gap:10px; padding:0 7px 22px; }
+.mikasa-brand-mark,.mikasa-avatar { display:grid; place-items:center; background:linear-gradient(135deg,#22d3ee,#4f46e5 65%,#a855f7); font-weight:900; box-shadow:0 7px 20px rgba(34,211,238,.2); }
+.mikasa-brand-mark { width:35px; height:35px; border-radius:12px; }
+.mikasa-brand strong { display:block; font-size:.83rem; letter-spacing:.16em; }
+.mikasa-brand small { display:block; margin-top:3px; color:#8ea1c5; font-size:.63rem; }
+.mikasa-rail-action { width:100%; display:flex; align-items:center; gap:9px; padding:10px 11px; color:#dff6ff; background:rgba(56,189,248,.09); border:1px solid rgba(56,189,248,.2); border-radius:10px; cursor:pointer; font-size:.76rem; font-weight:700; text-align:left; }
+.mikasa-rail-action:hover { background:rgba(56,189,248,.16); }
+.mikasa-rail-section { margin-top:25px; padding:0 7px; }
+.mikasa-rail-section > span { color:#64748b; font-size:.6rem; font-weight:800; letter-spacing:.14em; }
+.mikasa-rail-section p { display:flex; gap:7px; margin:14px 0; color:#9fb0ce; font-size:.7rem; line-height:1.35; }
+.mikasa-rail-section i { color:#56d8f0; }
+.mikasa-rail-footer { margin-top:auto; padding:15px 7px 0; border-top:1px solid rgba(148,163,184,.12); }
+.mikasa-rail-footer span { display:block; margin-bottom:8px; color:#7385a7; font-size:.63rem; }
+.mikasa-rail-footer button { padding:0; color:#a9bce0; background:transparent; border:0; cursor:pointer; font-size:.68rem; }
+.mikasa-rail-footer button:hover { color:#fff; }
 
-.mikasa-header {
-  padding: 16px;
-  background: #1e293b;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: white;
-  font-weight: 600;
-}
+.mikasa-main { min-width:0; display:grid; grid-template-rows:auto auto minmax(0,1fr) auto auto; background:radial-gradient(circle at 80% 0,rgba(79,70,229,.15),transparent 32%),#0a1224; }
+.mikasa-topbar { display:flex; align-items:center; justify-content:space-between; padding:20px 24px 15px; border-bottom:1px solid rgba(148,163,184,.13); }
+.mikasa-eyebrow { color:#64d9ed; font-size:.6rem; font-weight:900; letter-spacing:.16em; }
+.mikasa-topbar h2 { margin:4px 0 0; color:#f0f7ff; font-size:1.08rem; letter-spacing:-.02em; }
+.mikasa-status { display:flex; align-items:center; gap:7px; color:#91a4c7; font-size:.68rem; }
+#mikasa-indicator { width:7px; height:7px; border-radius:50%; background:#4ade80; box-shadow:0 0 0 4px rgba(74,222,128,.12); }
+#mikasa-indicator[data-state="error"] { background:#fb7185; box-shadow:0 0 0 4px rgba(251,113,133,.12); }
+#mikasa-close { width:29px; height:29px; margin-left:6px; color:#9cafcf; background:rgba(148,163,184,.08); border:1px solid rgba(148,163,184,.14); border-radius:8px; cursor:pointer; }
+#mikasa-close:hover { color:#fff; background:rgba(148,163,184,.17); }
+.mikasa-context { display:flex; align-items:center; gap:8px; margin:14px 24px 0; padding:8px 10px; color:#9db1d2; background:rgba(56,189,248,.055); border:1px solid rgba(56,189,248,.11); border-radius:9px; font-size:.68rem; }
+.mikasa-context i { color:#63e1f5; }
+.mikasa-messages { min-height:0; overflow-y:auto; padding:23px 24px 10px; scrollbar-color:#334155 transparent; }
+.mikasa-message { display:flex; gap:10px; max-width:92%; margin-bottom:19px; }
+.mikasa-message--user { flex-direction:row-reverse; margin-left:auto; }
+.mikasa-avatar { flex:0 0 auto; width:28px; height:28px; border-radius:9px; color:#ecfeff; font-size:.65rem; }
+.mikasa-message--user .mikasa-avatar { color:#cdd6f7; background:linear-gradient(135deg,#334155,#475569); box-shadow:none; }
+.mikasa-message-body { min-width:0; }
+.mikasa-message-content { padding:11px 13px; color:#dce8fb; background:rgba(30,41,69,.62); border:1px solid rgba(148,163,184,.14); border-radius:4px 14px 14px; font-size:.78rem; line-height:1.6; white-space:pre-wrap; overflow-wrap:anywhere; }
+.mikasa-message--user .mikasa-message-content { color:#fff; background:linear-gradient(135deg,#1d4ed8,#4f46e5); border-color:rgba(147,197,253,.2); border-radius:14px 4px 14px 14px; }
+.mikasa-message-time { display:block; margin:5px 3px 0; color:#64748b; font-size:.59rem; }
+.mikasa-message--user .mikasa-message-time { text-align:right; }
+.mikasa-suggestions { display:flex; flex-wrap:wrap; gap:7px; padding:7px 24px 14px; }
+.mikasa-suggestions button { padding:7px 9px; color:#a9c5e8; background:rgba(30,58,105,.25); border:1px solid rgba(96,165,250,.18); border-radius:999px; cursor:pointer; font-size:.65rem; transition:.18s ease; }
+.mikasa-suggestions button:hover { color:#e7f7ff; background:rgba(30,64,175,.38); border-color:rgba(103,232,249,.45); }
+.mikasa-composer { margin:0 18px 18px; padding:10px 11px 8px; background:rgba(15,28,53,.92); border:1px solid rgba(100,116,139,.32); border-radius:15px; box-shadow:0 10px 28px rgba(0,0,0,.18); }
+.mikasa-composer:focus-within { border-color:rgba(56,189,248,.66); box-shadow:0 0 0 3px rgba(56,189,248,.09),0 10px 28px rgba(0,0,0,.18); }
+#mikasa-input { display:block; width:100%; min-height:28px; max-height:120px; padding:2px 3px; color:#eff6ff; background:transparent; border:0; outline:0; resize:none; font:inherit; font-size:.8rem; line-height:1.45; }
+#mikasa-input::placeholder { color:#65789c; }
+.mikasa-composer-actions { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:7px; }
+.mikasa-composer-actions > span { color:#7185a8; font-size:.61rem; } .mikasa-composer-actions > span i { color:#4ade80; }
+.mikasa-composer-actions > div { display:flex; gap:7px; }
+#mikasa-send,.mikasa-stop { height:28px; border:0; border-radius:8px; cursor:pointer; font-size:.68rem; font-weight:700; }
+#mikasa-send { width:31px; color:#fff; background:linear-gradient(135deg,#0ea5e9,#4f46e5); } #mikasa-send:hover { filter:brightness(1.15); } #mikasa-send:disabled { opacity:.55; cursor:wait; }
+.mikasa-stop { padding:0 10px; color:#fda4af; background:rgba(244,63,94,.11); border:1px solid rgba(251,113,133,.25); }
 
-.mikasa-header > div {
-  display: grid;
-  gap: 2px;
+@media (max-width:650px) {
+  #mikasa-panel { right:12px; bottom:12px; width:calc(100vw - 24px); height:min(720px,calc(100vh - 24px)); display:block; border-radius:20px; }
+  .mikasa-rail { display:none; } .mikasa-topbar { padding:17px 17px 13px; } .mikasa-context { margin:11px 17px 0; } .mikasa-messages { padding:18px 17px 8px; } .mikasa-suggestions { padding:7px 17px 11px; } .mikasa-composer { margin:0 12px 12px; }
 }
-
-.mikasa-header span {
-  color: #94a3b8;
-  font-size: 0.75rem;
-  font-weight: 400;
-}
-
-#mikasa-close {
-  background: transparent;
-  border: none;
-  color: #94a3b8;
-  cursor: pointer;
-  font-size: 16px;
-}
-#mikasa-close:hover {
-  color: white;
-}
-
-.mikasa-messages {
-  flex: 1;
-  overflow-y: auto;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.mikasa-messages::-webkit-scrollbar { width: 6px; }
-.mikasa-messages::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
-
-.mikasa-msg {
-  display: flex;
-  flex-direction: column;
-  max-width: 85%;
-}
-
-.mikasa-msg-user {
-  align-self: flex-end;
-}
-.mikasa-msg-user .mikasa-msg-content {
-  background: linear-gradient(135deg, #0ea5e9, #3b82f6);
-  color: white;
-  border-radius: 16px 16px 0 16px;
-}
-
-.mikasa-msg-model {
-  align-self: flex-start;
-}
-.mikasa-msg-model .mikasa-msg-content {
-  background: #1e293b;
-  color: #e2e8f0;
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 16px 16px 16px 0;
-}
-
-.mikasa-msg-content {
-  padding: 10px 14px;
-  font-size: 14px;
-  line-height: 1.5;
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-}
-.mikasa-msg-content pre {
-  background: #0f172a;
-  padding: 8px;
-  border-radius: 8px;
-  overflow-x: auto;
-  margin: 8px 0;
-}
-.mikasa-msg-content code {
-  font-family: monospace;
-  background: rgba(0,0,0,0.2);
-  padding: 2px 4px;
-  border-radius: 4px;
-}
-.mikasa-msg-content a {
-  color: #38bdf8;
-  text-decoration: underline;
-}
-.mikasa-msg-content h1, .mikasa-msg-content h2, .mikasa-msg-content h3 {
-  margin: 8px 0;
-  font-size: 1.1em;
-}
-
-.mikasa-input-area {
-  padding: 12px;
-  background: #1e293b;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  display: flex;
-  gap: 8px;
-}
-
-#mikasa-input {
-  flex: 1;
-  background: #0f172a;
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 8px;
-  padding: 10px;
-  color: white;
-  font-family: inherit;
-  resize: none;
-  height: 44px;
-  outline: none;
-}
-#mikasa-input:focus {
-  border-color: #38bdf8;
-}
-
-#mikasa-send {
-  width: 44px;
-  height: 44px;
-  background: #3b82f6;
-  border: none;
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
-  display: grid;
-  place-items: center;
-}
-#mikasa-send:hover {
-  background: #2563eb;
-}
-
-#mikasa-send:disabled {
-  cursor: wait;
-  opacity: 0.65;
-}
-
-#mikasa-stop {
-  width: 44px;
-  height: 44px;
-  color: white;
-  background: #475569;
-  border: 0;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-#mikasa-clear {
-  align-self: flex-end;
-  padding: 0 16px 12px;
-  color: #94a3b8;
-  background: transparent;
-  border: 0;
-  font-size: 0.78rem;
-  cursor: pointer;
-}
-
-#mikasa-clear:hover { color: #e2e8f0; }
-
-@media (max-width: 480px) {
-  #mikasa-panel {
-    width: 100%;
-    height: 100%;
-    max-height: 100vh;
-    bottom: 0;
-    right: 0;
-    border-radius: 0;
-  }
-}
+@media (prefers-reduced-motion:reduce) { #mikasa-panel,#mikasa-fab { animation:none; transition:none; } }
