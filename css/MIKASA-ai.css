@@ -25,6 +25,11 @@
   transform: scale(1.1);
 }
 
+#mikasa-fab[hidden],
+#mikasa-panel[hidden] {
+  display: none;
+}
+
 #mikasa-panel {
   position: fixed;
   bottom: 24px;
@@ -51,6 +56,17 @@
   align-items: center;
   color: white;
   font-weight: 600;
+}
+
+.mikasa-header > div {
+  display: grid;
+  gap: 2px;
+}
+
+.mikasa-header span {
+  color: #94a3b8;
+  font-size: 0.75rem;
+  font-weight: 400;
 }
 
 #mikasa-close {
@@ -104,6 +120,8 @@
   padding: 10px 14px;
   font-size: 14px;
   line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 .mikasa-msg-content pre {
   background: #0f172a;
@@ -165,6 +183,33 @@
 #mikasa-send:hover {
   background: #2563eb;
 }
+
+#mikasa-send:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+#mikasa-stop {
+  width: 44px;
+  height: 44px;
+  color: white;
+  background: #475569;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#mikasa-clear {
+  align-self: flex-end;
+  padding: 0 16px 12px;
+  color: #94a3b8;
+  background: transparent;
+  border: 0;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+#mikasa-clear:hover { color: #e2e8f0; }
 
 @media (max-width: 480px) {
   #mikasa-panel {

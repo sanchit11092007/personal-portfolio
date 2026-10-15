@@ -1,72 +1,35 @@
-<div align="center">
+# Sanchit Goyal — Portfolio
 
-# 🚀 Personal Portfolio Website
+A responsive portfolio for Sanchit Goyal, an aspiring Data Scientist and Machine Learning enthusiast. It is built with semantic HTML, CSS, and vanilla JavaScript—there is no React or Tailwind build step.
 
-[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen?style=for-the-badge&logo=vercel)](https://sanchit11092007.github.io/personal-portfolio/)
-[![Built with React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
+## Highlights
 
-A modern, high-performance personal portfolio built to showcase projects, skills, and professional experience with smooth animations and a clean user interface.
+- Accessible, responsive portfolio with projects, skills, certifications, developer activity, and social profiles.
+- Search-ready metadata, canonical URL, JSON-LD `Person` profile, `robots.txt`, and sitemap.
+- MIKASA AI: a Gemini-powered, streaming portfolio assistant with conversation controls and protected server-side credentials.
+- Performance-aware interactions: lazy project imagery, bounded canvas effects, paused background work, passive event listeners, and reduced-motion support.
 
-</div>
+## Run locally
 
----
+Open `index.html` with a local static server. The visual portfolio will work without configuration. The MIKASA endpoint requires a serverless host because browser-only static hosting cannot protect an API key.
 
-## 🧭 Table of Contents
+## Deploy MIKASA securely
 
-- [About The Project](#-about-the-project)
-- [Tech Stack](#-tech-stack)
-- [Key Features](#-key-features)
-- [Project Structure](#-project-structure)
-- [Getting Started](#-getting-started)
-- [Deployment](#-deployment)
-- [Contributing](#-contributing)
-- [License](#-license)
+The repository includes a Vercel serverless function at `api/chat.js`.
 
----
+1. Import this GitHub repository into Vercel.
+2. In Vercel Project Settings → Environment Variables, add `GEMINI_API_KEY` using the private key from Google AI Studio. Do not put it in JavaScript, HTML, or a committed `.env` file.
+3. Deploy. Vercel serves the portfolio and `/api/chat` from the same domain, so the assistant works with no client-side key setup.
+4. In GitHub Pages settings, set the Vercel URL as the website URL if the assistant must be live there; GitHub Pages alone cannot run the `/api/chat` server function.
 
-## 💡 About The Project
+Use `.env.example` only as a variable-name reference. If a key was ever committed or pasted into a public file, rotate it immediately in Google AI Studio.
 
-This repository contains the source code for my personal portfolio website. The goal of this project is to create a fast, accessible, and visually striking platform to highlight my journey in computer science, software engineering, and data science. 
+## Quality checks
 
-The interface emphasizes clean typography, fluid motion design, and fully responsive layouts across all device sizes.
+```bash
+npm run check
+```
 
----
+## Search visibility
 
-## ⚙️ Tech Stack
-
-This project is built using modern web development tools:
-
-* **Core Framework:** [React](https://reactjs.org/) (Component-based architecture)
-* **Styling:** [Tailwind CSS](https://tailwindcss.com/) (Utility-first CSS styling)
-* **Animations:** [Framer Motion](https://www.framer.com/motion/) & [GSAP](https://greensock.com/gsap/) (Advanced UI motion and transitions)
-* **Icons:** [Lucide Icons](https://lucide.dev/) (Clean and consistent iconography)
-* **Hosting:** [GitHub Pages](https://pages.github.com/) (Fast static site deployment)
-
----
-
-## ✨ Key Features
-
-* **Dynamic Hero Section:** Engaging introductory layout with animated text and quick-action links.
-* **Interactive Project Showcase:** Filterable cards displaying key projects with links to source code and live demos.
-* **Skills Matrix:** Categorized breakdown of programming languages, frameworks, and tools.
-* **Smooth Scrolling & Transitions:** Page transitions powered by Framer Motion for a native app feel.
-* **Fully Responsive:** Optimized layouts for mobile phones, tablets, and desktop screens.
-
----
-
-## 📁 Project Structure
-
-```text
-personal-portfolio/
-├── public/               # Static assets (images, icons, favicon)
-├── src/
-│   ├── components/       # Reusable UI components (Navbar, Footer, ProjectCard)
-│   ├── data/             # Portfolio content data (projects, skills, experience)
-│   ├── styles/           # Global styles and Tailwind configurations
-│   ├── App.jsx           # Main application root component
-│   └── main.jsx          # Application entry point
-├── package.json          # Project dependencies and scripts
-├── tailwind.config.js    # Tailwind CSS custom styling configuration
-└── README.md             # Project documentation
+The site already includes a sitemap, crawl rules, canonical metadata, structured profile data, and links to professional profiles. Search ranking and indexing are controlled by search engines and cannot be guaranteed by code alone. Submit the deployed canonical URL in Google Search Console and keep the profile, GitHub, and LinkedIn names and links consistent.

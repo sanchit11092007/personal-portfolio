@@ -1,0 +1,10 @@
+# Secrets and local deployment configuration
+.env
+.env.local
+.env.*.local
+
+# Local tooling
+node_modules/
+.vercel/
+dist/
+coverage/

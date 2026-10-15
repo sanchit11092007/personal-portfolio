@@ -1020,7 +1020,7 @@
     let isVisible = true;
 
     const resize = () => {
-      ratio = Math.min(window.devicePixelRatio || 1, 2);
+      ratio = Math.min(window.devicePixelRatio || 1, 1.5);
       width = window.innerWidth;
       height = window.innerHeight;
       canvas.width = Math.floor(width * ratio);
@@ -1028,7 +1028,7 @@
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
       ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-      const count = Math.min(45, Math.max(15, Math.floor(width / 36)));
+      const count = Math.min(28, Math.max(10, Math.floor(width / 60)));
       particles = Array.from({ length: count }, () => ({
         x: Math.random() * width,
         y: Math.random() * height,
@@ -1086,7 +1086,11 @@
       }
     };
 
-    window.addEventListener("resize", resize, { passive: true });
+    let resizeFrame;
+    window.addEventListener("resize", () => {
+      cancelAnimationFrame(resizeFrame);
+      resizeFrame = requestAnimationFrame(resize);
+    }, { passive: true });
     window.addEventListener(
       "pointermove",
       (event) => {
@@ -1102,23 +1106,11 @@
 
     resize();
     
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          if (!isVisible) {
-            isVisible = true;
-            draw();
-          }
-        } else {
-          isVisible = false;
-          if (animationFrameId) {
-            cancelAnimationFrame(animationFrameId);
-          }
-        }
-      });
-    }, { threshold: 0 });
-    
-    observer.observe(canvas);
+    document.addEventListener("visibilitychange", () => {
+      isVisible = !document.hidden;
+      if (isVisible) draw();
+      else cancelAnimationFrame(animationFrameId);
+    });
   }
 
   function setupResumeActions() {
@@ -1470,15 +1462,20 @@ That kind of workflow fits his current path: data handling, experimentation, and
         mouseGlow.classList.remove("active");
       });
 
+      let animationFrame;
       const tick = () => {
         if (isGlowActive) {
           currentX += (targetX - currentX) * 0.08;
           currentY += (targetY - currentY) * 0.08;
           mouseGlow.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
         }
-        requestAnimationFrame(tick);
+        animationFrame = requestAnimationFrame(tick);
       };
       tick();
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) cancelAnimationFrame(animationFrame);
+        else if (isGlowActive) tick();
+      });
     }
   }
 
