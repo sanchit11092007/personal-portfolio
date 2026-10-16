@@ -33,7 +33,7 @@
     body.className = "mikasa-message-body";
     const content = document.createElement("div");
     content.className = "mikasa-message-content";
-    content.textContent = text;
+    content.textContent = (text || "").trim();
     const metadata = document.createElement("span");
     metadata.className = "mikasa-message-time";
     metadata.textContent = role === "user" ? `You · ${timeNow()}` : `MIKASA · ${timeNow()}`;
