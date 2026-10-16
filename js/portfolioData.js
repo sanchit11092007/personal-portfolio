@@ -348,7 +348,8 @@ const portfolioData = {
     "Why Data Science?",
     "What are his career goals?",
     "How can I contact him?",
-    "What is his experience with Python and SQL?"
+    "What is his experience with Python and SQL?",
+    "Tell me about his data cleaning recommendation engine."
   ]
 };
 
