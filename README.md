@@ -33,3 +33,10 @@ npm run check
 ## Search visibility
 
 The site already includes a sitemap, crawl rules, canonical metadata, structured profile data, and links to professional profiles. Search ranking and indexing are controlled by search engines and cannot be guaranteed by code alone. Submit the deployed canonical URL in Google Search Console and keep the profile, GitHub, and LinkedIn names and links consistent.
+
+### Tech Stack
+
+- **Frontend**: Semantic HTML5, Modern Vanilla CSS, Vanilla JavaScript (ES6+)
+- **AI Assistant**: Google Gemini API via Vercel Edge Serverless Function
+- **Typography**: Outfit & Inter (Google Fonts)
+- **Icons**: Font Awesome 6 & Custom SVG Sprites
