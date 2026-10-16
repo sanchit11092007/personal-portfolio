@@ -40,3 +40,9 @@ The site already includes a sitemap, crawl rules, canonical metadata, structured
 - **AI Assistant**: Google Gemini API via Vercel Edge Serverless Function
 - **Typography**: Outfit & Inter (Google Fonts)
 - **Icons**: Font Awesome 6 & Custom SVG Sprites
+
+### Features Overview
+
+- **Learning Focus Map**: Visual dials showing current learning velocity and focus areas
+- **Technical Skills Matrix**: Completion percentage indicators for core data science competencies
+- **Interactive AI Assistant (MIKASA)**: Conversational assistant answering portfolio questions
