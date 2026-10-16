@@ -5783,3 +5783,5 @@ html { scroll-behavior: smooth; }
 .hero-telemetry > div:hover { background: rgba(14, 34, 58, 0.5); transition: background 200ms ease; }
 
 .skill-card:hover { border-color: rgba(103, 232, 249, 0.35); box-shadow: 0 14px 32px rgba(0, 0, 0, 0.25); transform: translateY(-2px); transition: transform 250ms ease, border-color 250ms ease; }
+
+.skill-row:hover .skill-name { color: #f0f9ff; transition: color 150ms ease; }
