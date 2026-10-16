@@ -8,5 +8,15 @@
   },
   "scripts": {
     "check": "node --check js/app.js && node --check js/chatbot.js && node --check js/features.js && node --check js/ui.js && node --check api/chat.js"
-  }
+  },
+  "description": "Personal portfolio for Sanchit Goyal, Aspiring Data Scientist and ML Enthusiast.",
+  "keywords": [
+    "portfolio",
+    "data-science",
+    "machine-learning",
+    "ai",
+    "gemini"
+  ],
+  "author": "Sanchit Goyal",
+  "license": "MIT"
 }
