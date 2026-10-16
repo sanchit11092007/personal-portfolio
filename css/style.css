@@ -5815,3 +5815,5 @@ html { scroll-behavior: smooth; }
 .form-group input:hover, .form-group textarea:hover { border-color: rgba(103, 232, 249, 0.3); }
 
 .footer-panel a:hover { color: #e0f2fe; text-shadow: 0 0 12px rgba(103, 232, 249, 0.4); }
+
+.command-palette-backdrop { backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
