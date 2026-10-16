@@ -5760,3 +5760,6 @@ body { background:#07111f; background-image:radial-gradient(circle at 100% 0,rgb
 
 /* Smooth scrolling */
 html { scroll-behavior: smooth; }
+
+/* Focus visibility */
+:focus-visible { outline: 2px solid var(--lab-cyan); outline-offset: 3px; }
