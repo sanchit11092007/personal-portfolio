@@ -32,11 +32,24 @@
           const offset = circumference - (targetValue / 100) * circumference;
           circle.style.strokeDashoffset = `${offset}`;
 
-          // Show a qualitative focus signal rather than a fabricated score.
+          // Animate numeric percentage inside the circle
           const card = circle.closest(".scorecard-card");
           const counterEl = $(".scorecard-value", card);
+          const statusEl = $(".scorecard-status", card);
+          if (statusEl && card.dataset.status) {
+            statusEl.textContent = card.dataset.status;
+          }
           if (counterEl) {
-            counterEl.textContent = card.dataset.status || "In practice";
+            const duration = 1200;
+            const startTime = performance.now();
+            const step = (now) => {
+              const progress = Math.min((now - startTime) / duration, 1);
+              const eased = 1 - Math.pow(1 - progress, 3);
+              const current = Math.round(targetValue * eased);
+              counterEl.textContent = `${current}%`;
+              if (progress < 1) requestAnimationFrame(step);
+            };
+            requestAnimationFrame(step);
           }
 
           observer.unobserve(circle);
