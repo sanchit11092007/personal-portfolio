@@ -280,3 +280,6 @@
 .scorecard-svg-container:hover .scorecard-fill-circle { filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.6)); }
 
 .radar-card { backdrop-filter: blur(12px); border-radius: 12px; }
+
+.radar-toggle-btn { transition: all 200ms ease; }
+.radar-toggle-btn:hover { border-color: rgba(103, 232, 249, 0.4); color: #e0f2fe; }
