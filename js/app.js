@@ -4,7 +4,7 @@
   const DATA = window.PORTFOLIO_DATA || {};
   // Cache performance check
   const isLowPower = false;
-  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const prefersReducedMotion = new URLSearchParams(window.location.search).has("reduce-motion");
   const $ = (selector, scope = document) => scope.querySelector(selector);
   const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
 
@@ -1447,20 +1447,26 @@ That kind of workflow fits his current path: data handling, experimentation, and
   }
 
   function setupScrollAndCursorGlow() {
-    // 1. Scroll Progress Bar
+    // 1. Throttled Scroll Progress Bar
     const scrollBar = $("#scrollBar");
     if (scrollBar) {
+      let scrollFrame = null;
       const updateScrollProgress = () => {
-        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const progress = totalHeight > 0 ? (window.scrollY / totalHeight) * 100 : 0;
-        scrollBar.style.width = `${progress}%`;
+        if (!scrollFrame) {
+          scrollFrame = requestAnimationFrame(() => {
+            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = totalHeight > 0 ? (window.scrollY / totalHeight) * 100 : 0;
+            scrollBar.style.width = `${progress}%`;
+            scrollFrame = null;
+          });
+        }
       };
       window.addEventListener("scroll", updateScrollProgress, { passive: true });
       window.addEventListener("resize", updateScrollProgress, { passive: true });
       updateScrollProgress();
     }
 
-    // 2. Mouse Glow Follower with Easing
+    // 2. High-performance Mouse Glow Follower (only animates while moving)
     const mouseGlow = $("#mouseGlow");
     if (mouseGlow && !prefersReducedMotion) {
       let targetX = 0;
@@ -1468,6 +1474,23 @@ That kind of workflow fits his current path: data handling, experimentation, and
       let currentX = 0;
       let currentY = 0;
       let isGlowActive = false;
+      let isAnimating = false;
+
+      const updatePosition = () => {
+        if (!isGlowActive) {
+          isAnimating = false;
+          return;
+        }
+        currentX += (targetX - currentX) * 0.12;
+        currentY += (targetY - currentY) * 0.12;
+        mouseGlow.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+
+        if (Math.abs(targetX - currentX) > 0.4 || Math.abs(targetY - currentY) > 0.4) {
+          requestAnimationFrame(updatePosition);
+        } else {
+          isAnimating = false;
+        }
+      };
 
       window.addEventListener("pointermove", (e) => {
         targetX = e.clientX;
@@ -1476,28 +1499,25 @@ That kind of workflow fits his current path: data handling, experimentation, and
           isGlowActive = true;
           mouseGlow.classList.add("active");
         }
+        if (!isAnimating) {
+          isAnimating = true;
+          requestAnimationFrame(updatePosition);
+        }
       }, { passive: true });
 
       document.addEventListener("pointerleave", () => {
         isGlowActive = false;
+        isAnimating = false;
         mouseGlow.classList.remove("active");
       });
-
-      let animationFrame;
-      const tick = () => {
-        if (isGlowActive) {
-          currentX += (targetX - currentX) * 0.08;
-          currentY += (targetY - currentY) * 0.08;
-          mouseGlow.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
-        }
-        animationFrame = requestAnimationFrame(tick);
-      };
-      tick();
-      document.addEventListener("visibilitychange", () => {
-        if (document.hidden) cancelAnimationFrame(animationFrame);
-        else if (isGlowActive) tick();
-      });
     }
+
+    // 3. Connect quick MIKASA AI launch buttons
+    $$("[data-open-mikasa]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        window.dispatchEvent(new CustomEvent("pankrix-ai:open"));
+      });
+    });
   }
 
   // Reset all static progress labels to "0%" so they animate correctly when revealed
