@@ -274,3 +274,5 @@
 
 /* Scorecard container enhancements */
 .scorecard-section { backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+
+.scorecard-card:hover { transform: translateY(-4px); transition: transform 240ms ease; }
