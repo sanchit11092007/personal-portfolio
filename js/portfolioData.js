@@ -26,7 +26,8 @@ const portfolioData = {
       "Project-based learning",
       "Research curiosity",
       "Problem solving",
-      "Continuous improvement"
+      "Continuous improvement",
+      "Data-driven experimentation"
     ],
     interests: [
       "Artificial Intelligence",
