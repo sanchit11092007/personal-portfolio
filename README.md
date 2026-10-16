@@ -46,3 +46,9 @@ The site already includes a sitemap, crawl rules, canonical metadata, structured
 - **Learning Focus Map**: Visual dials showing current learning velocity and focus areas
 - **Technical Skills Matrix**: Completion percentage indicators for core data science competencies
 - **Interactive AI Assistant (MIKASA)**: Conversational assistant answering portfolio questions
+
+### Performance & Accessibility
+
+- Meets WCAG AA contrast standards
+- Respects `prefers-reduced-motion` user preferences
+- Keyboard navigable with focus rings and Escape key dialog dismissals
