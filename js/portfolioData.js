@@ -107,7 +107,8 @@ const portfolioData = {
           "Duplicate data detection",
           "Outlier identification support",
           "Rule-based recommendation generation",
-          "Pure Python implementation"
+          "Pure Python implementation",
+          "Automated missing value imputation heuristics"
         ],
         techStack: ["Python", "Data Cleaning", "Data Preprocessing", "Data Analysis", "Recommendation Logic", "CSV Processing"],
         image: "assets/images/project-data-cleaning.png",
