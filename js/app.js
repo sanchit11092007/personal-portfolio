@@ -107,18 +107,23 @@
         // Handle variations (e.g. "Data Structures & Algorithms" vs "Data Structures")
         if (prof === undefined) {
            for (const [key, val] of skillMap.entries()) {
-             if (name.includes(key) || key.includes(name)) {
+             if (key.length >= 3 && (name.includes(key) || key.includes(name))) {
                prof = val;
                break;
              }
            }
         }
         
+        // If not in map, preserve existing data-progress from index.html
+        if (prof === undefined && fillEl.dataset.progress) {
+          prof = Number(fillEl.dataset.progress);
+        }
+        
         if (prof !== undefined) {
            fillEl.dataset.progress = String(prof);
           if (valEl) {
             valEl.dataset.target = String(prof);
-            valEl.textContent = learningStage(prof);
+            valEl.textContent = `${prof}%`;
           }
         }
       }
@@ -126,9 +131,7 @@
   }
 
   function learningStage(value) {
-    if (value >= 40) return "Applied";
-    if (value >= 15) return "Practicing";
-    return "Exploring";
+    return `${value}%`;
   }
 
   function renderFilters(containerSelector, categories, active, onSelect, showAll = true) {
@@ -894,20 +897,21 @@
       const visibleTarget = Math.max(16, target);
       if (prefersReducedMotion) {
         fill.style.width = `${visibleTarget}%`;
-        label.textContent = learningStage(target);
+        label.textContent = `${target}%`;
         return;
       }
 
-      label.textContent = "Loading";
+      label.textContent = "0%";
 
-      const duration = 1450;
+      const duration = 1250;
       const start = performance.now();
 
       const tick = (now) => {
         const progress = Math.min((now - start) / duration, 1);
         const eased = easeOutCubic(progress);
         fill.style.width = `${visibleTarget * eased}%`;
-        if (progress === 1) label.textContent = learningStage(target);
+        const currentVal = Math.round(target * eased);
+        label.textContent = `${currentVal}%`;
         if (progress < 1) requestAnimationFrame(tick);
       };
 
@@ -1488,7 +1492,7 @@ That kind of workflow fits his current path: data handling, experimentation, and
   // Reset all static progress labels to "0%" so they animate correctly when revealed
   document.querySelectorAll(".skill-row .progress-fill[data-progress]").forEach((fill) => {
     const label = fill.closest(".skill-row")?.querySelector(".progress-value");
-    if (label) label.textContent = "Loading";
+    if (label) label.textContent = "0%";
   });
 
   renderSocialLinks();
