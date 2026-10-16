@@ -5817,3 +5817,5 @@ html { scroll-behavior: smooth; }
 .footer-panel a:hover { color: #e0f2fe; text-shadow: 0 0 12px rgba(103, 232, 249, 0.4); }
 
 .command-palette-backdrop { backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+
+.command-item:hover, .command-item.is-selected { background: rgba(14, 165, 233, 0.15); border-left: 2px solid var(--lab-cyan); }
