@@ -80,3 +80,5 @@
 
 /* Chat message bubble refinement */
 .chat-message { line-height: 1.6; word-break: break-word; }
+
+.chat-message-bot { border: 1px solid rgba(94, 234, 212, 0.15); box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); }
