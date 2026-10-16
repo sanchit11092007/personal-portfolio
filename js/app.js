@@ -933,6 +933,7 @@
     const counters = $$(".stat-number");
     if (!counters.length) return;
 
+    // High precision easing counter animation
     const animateCounter = (element) => {
       const target = Number(element.dataset.count || 0);
       const suffix = element.dataset.suffix || "";
