@@ -271,3 +271,6 @@
   font-family: 'Courier New', Courier, monospace;
   font-size: 0.9rem;
 }
+
+/* Scorecard container enhancements */
+.scorecard-section { backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
