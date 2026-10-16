@@ -5811,3 +5811,5 @@ html { scroll-behavior: smooth; }
 .developer-platform-card:hover { transform: translateY(-3px); box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22); transition: all 200ms ease; }
 
 .contact-info-card:hover, .contact-status-card:hover { border-color: rgba(103, 232, 249, 0.35); transition: border-color 200ms ease; }
+
+.form-group input:hover, .form-group textarea:hover { border-color: rgba(103, 232, 249, 0.3); }
