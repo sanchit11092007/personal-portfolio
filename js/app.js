@@ -822,6 +822,14 @@
 
 
 
+  // Keyboard escape handler for modals
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      const dialog = $("dialog[open]");
+      if (dialog) dialog.close();
+    }
+  });
+
   function setupNavigation() {
     const toggle = $(".nav-toggle");
     const navLinks = $("#navLinks");
