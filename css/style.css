@@ -5757,3 +5757,6 @@ body { background:#07111f; background-image:radial-gradient(circle at 100% 0,rgb
 /* Sections must remain visible when visitors arrive through a shared anchor URL. */
 .reveal,.reveal.is-visible { opacity:1; transform:none; transition:transform 180ms ease,border-color 180ms ease,box-shadow 180ms ease; }
 .scorecard-value { width:auto; color:#67e8f9; font-family:Outfit,Inter,sans-serif; font-size:1.35rem; font-weight:800; line-height:1; text-align:center; text-shadow:0 0 16px rgba(103,232,249,.4); }
+
+/* Smooth scrolling */
+html { scroll-behavior: smooth; }
