@@ -93,3 +93,14 @@
 .mikasa-avatar { font-weight: 800; letter-spacing: -0.02em; }
 
 .mikasa-message-time { font-size: 0.68rem; opacity: 0.75; }
+
+/* Markdown Typography within MIKASA message bubbles */
+.mikasa-message-content p { margin: 0 0 8px; }
+.mikasa-message-content p:last-child { margin-bottom: 0; }
+.mikasa-message-content strong { color: #f0f9ff; font-weight: 700; }
+.mikasa-message-content a { color: #38bdf8; text-decoration: underline; text-underline-offset: 3px; font-weight: 600; transition: color 150ms ease; }
+.mikasa-message-content a:hover { color: #7dd3fc; }
+.mikasa-message-content .mikasa-list { margin: 6px 0 8px 16px; padding: 0; list-style-type: disc; }
+.mikasa-message-content .mikasa-list li { margin-bottom: 4px; line-height: 1.5; }
+.mikasa-message-content .mikasa-code { background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.25); padding: 1px 6px; border-radius: 4px; font-family: ui-monospace, monospace; font-size: 0.88em; color: #bae6fd; }
+
