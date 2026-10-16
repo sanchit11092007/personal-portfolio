@@ -82,3 +82,5 @@
 .chat-message { line-height: 1.6; word-break: break-word; }
 
 .chat-message-bot { border: 1px solid rgba(94, 234, 212, 0.15); box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); }
+
+.chat-chip:hover { border-color: rgba(94, 234, 212, 0.45); transform: translateY(-1px); transition: all 180ms ease; }
