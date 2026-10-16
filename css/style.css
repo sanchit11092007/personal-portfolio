@@ -5771,3 +5771,5 @@ html { scroll-behavior: smooth; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(103, 232, 249, 0.45); }
 
 .hero-actions .button-primary:hover { box-shadow: 0 16px 36px rgba(14, 165, 233, 0.35); transform: translateY(-2px); }
+
+.hero-actions .button-secondary:hover { background: rgba(15, 38, 65, 0.65); border-color: rgba(103, 232, 249, 0.45); transform: translateY(-2px); }
