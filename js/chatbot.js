@@ -40,7 +40,7 @@
     body.append(content, metadata);
     message.append(avatar, body);
     messages.append(message);
-    messages.scrollTop = messages.scrollHeight;
+    messages.scrollTo({ top: messages.scrollHeight, behavior: "smooth" });
     return content;
   }
 
