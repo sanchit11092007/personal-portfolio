@@ -39,7 +39,8 @@ const portfolioData = {
       "Research",
       "Problem Solving",
       "Hackathons",
-      "Open Source"
+      "Open Source",
+      "Applied AI Research"
     ]
   },
   education: {
