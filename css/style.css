@@ -5809,3 +5809,5 @@ html { scroll-behavior: smooth; }
 .filter-button:hover:not(.is-active) { color: #e0f2fe; background: rgba(14, 165, 233, 0.08); }
 
 .developer-platform-card:hover { transform: translateY(-3px); box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22); transition: all 200ms ease; }
+
+.contact-info-card:hover, .contact-status-card:hover { border-color: rgba(103, 232, 249, 0.35); transition: border-color 200ms ease; }
