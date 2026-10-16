@@ -365,7 +365,7 @@ window.PORTFOLIO_DATA = {
       description: "Core code fluency for data analysis, portfolio interfaces, and algorithm practice.",
       items: portfolioData.skills.programming.map((name, index) => ({
         name,
-        proficiency: [55, 45, 35, 25, 15, 5][index] || 10
+        proficiency: [85, 80, 75, 70, 75, 70][index] || 75
       }))
     },
     {
@@ -376,7 +376,7 @@ window.PORTFOLIO_DATA = {
         ...portfolioData.skills.machineLearning.slice(0, 4)
       ].map((name, index) => ({
         name,
-        proficiency: [60, 60, 35, 30, 45, 40, 20, 25, 25, 15, 12][index] || 10
+        proficiency: [85, 85, 80, 80, 75, 75, 75, 85, 85, 75, 80][index] || 75
       }))
     },
     {
@@ -384,7 +384,7 @@ window.PORTFOLIO_DATA = {
       description: "Emerging AI topics Sanchit is actively learning through research and projects.",
       items: portfolioData.skills.machineLearning.map((name, index) => ({
         name,
-        proficiency: [15, 18, 12, 12, 15, 20, 15][index] || 10
+        proficiency: [80, 80, 75, 70, 75, 70, 75][index] || 75
       }))
     },
     {
@@ -392,7 +392,7 @@ window.PORTFOLIO_DATA = {
       description: "Practical tools used for coding, notebooks, collaboration, and visual work.",
       items: portfolioData.skills.tools.map((name, index) => ({
         name,
-        proficiency: [45, 45, 45, 35, 35, 25, 20, 15][index] || 10
+        proficiency: [85, 85, 80, 85, 80, 75, 70, 70][index] || 75
       }))
     }
   ],
