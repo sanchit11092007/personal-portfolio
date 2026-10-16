@@ -91,3 +91,5 @@
 .chat-messages-container::-webkit-scrollbar-thumb { background: rgba(94, 234, 212, 0.2); border-radius: 3px; }
 
 .mikasa-avatar { font-weight: 800; letter-spacing: -0.02em; }
+
+.mikasa-message-time { font-size: 0.68rem; opacity: 0.75; }
