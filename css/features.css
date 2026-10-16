@@ -278,3 +278,5 @@
 .scorecard-card:hover { transform: translateY(-4px); transition: transform 240ms ease; }
 
 .scorecard-svg-container:hover .scorecard-fill-circle { filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.6)); }
+
+.radar-card { backdrop-filter: blur(12px); border-radius: 12px; }
