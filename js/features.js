@@ -63,6 +63,7 @@
   /* ==========================================================================
      4. Skill Radar Chart
      ========================================================================== */
+  // Optimize radar chart scaling for crisp rendering
   function initRadarChart() {
     const canvas = $("#radarChartCanvas");
     if (!canvas) return;
