@@ -61,3 +61,10 @@ css/           # Core styles, features, and MIKASA AI styles
 js/            # Application logic, data models, and features
 api/           # Serverless endpoint for AI chat assistant
 ```
+
+### Verification & Release Notes (v1.1.0)
+
+- Fully addressed Learning Focus Map SVG circle text wrapping by displaying percentage in center and status badge underneath.
+- Updated all technical skill indicators to completion percentages (60%-85%) with smooth count-up animation.
+- Refined hero section layout, centered grid columns, and restored clean bullet role separators.
+- Successfully verified responsive behavior across desktop, tablet, and mobile viewports.
