@@ -2,6 +2,8 @@
   "use strict";
 
   const DATA = window.PORTFOLIO_DATA || {};
+  // Cache performance check
+  const isLowPower = false;
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const $ = (selector, scope = document) => scope.querySelector(selector);
   const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
