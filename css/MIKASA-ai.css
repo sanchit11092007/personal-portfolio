@@ -77,3 +77,6 @@
   .mikasa-rail { display:none; } .mikasa-topbar { padding:17px 17px 13px; } .mikasa-context { margin:11px 17px 0; } .mikasa-messages { padding:18px 17px 8px; } .mikasa-suggestions { padding:7px 17px 11px; } .mikasa-composer { margin:0 12px 12px; }
 }
 @media (prefers-reduced-motion:reduce) { #mikasa-panel,#mikasa-fab { animation:none; transition:none; } }
+
+/* Chat message bubble refinement */
+.chat-message { line-height: 1.6; word-break: break-word; }
