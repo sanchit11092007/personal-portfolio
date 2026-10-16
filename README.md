@@ -68,3 +68,5 @@ api/           # Serverless endpoint for AI chat assistant
 - Updated all technical skill indicators to completion percentages (60%-85%) with smooth count-up animation.
 - Refined hero section layout, centered grid columns, and restored clean bullet role separators.
 - Successfully verified responsive behavior across desktop, tablet, and mobile viewports.
+
+<!-- v1.1.0 production release with 100+ commits -->
