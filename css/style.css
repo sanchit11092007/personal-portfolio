@@ -5785,3 +5785,5 @@ html { scroll-behavior: smooth; }
 .skill-card:hover { border-color: rgba(103, 232, 249, 0.35); box-shadow: 0 14px 32px rgba(0, 0, 0, 0.25); transform: translateY(-2px); transition: transform 250ms ease, border-color 250ms ease; }
 
 .skill-row:hover .skill-name { color: #f0f9ff; transition: color 150ms ease; }
+
+.skill-row:hover .progress-fill { filter: brightness(1.15); box-shadow: 0 0 10px rgba(94, 234, 212, 0.4); }
