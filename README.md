@@ -52,3 +52,12 @@ The site already includes a sitemap, crawl rules, canonical metadata, structured
 - Meets WCAG AA contrast standards
 - Respects `prefers-reduced-motion` user preferences
 - Keyboard navigable with focus rings and Escape key dialog dismissals
+
+### Project Structure
+
+```
+assets/        # Profile imagery, icons, and resume PDF
+css/           # Core styles, features, and MIKASA AI styles
+js/            # Application logic, data models, and features
+api/           # Serverless endpoint for AI chat assistant
+```
