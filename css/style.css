@@ -5823,3 +5823,5 @@ html { scroll-behavior: smooth; }
 .command-trigger:hover { border-color: rgba(103, 232, 249, 0.45); box-shadow: 0 0 16px rgba(14, 165, 233, 0.2); }
 
 @media (prefers-reduced-motion: reduce) { * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+
+.hero-headline { letter-spacing: -0.01em; }
